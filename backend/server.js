@@ -5,9 +5,12 @@ const PORT = 5000
 
 
 
-app.get("/home",(res, req)=>{})
+app.get("/",(req,res)=>{
+    res.send('this is backend ')
+
+})
 
 
 app.listen(PORT, ()=>{
-console.log('you are connected to port'+ PORT);
+console.log('you are connected to port '+ PORT);
 })

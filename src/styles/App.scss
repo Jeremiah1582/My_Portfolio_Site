@@ -1,0 +1,51 @@
+@import "~bootstrap/scss/bootstrap";
+
+.App {
+  text-align: center;
+  background-color: whitesmoke;
+}
+#navContainer{
+width: 100%;  
+display: flex;
+justify-content: flex-end;
+background-color: rgba(240, 255, 255, 0.474) ;
+
+  #navBar{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1%;
+
+    :Link{
+      text-decoration: none;
+    }
+  }
+}
+
+
+#imgContainerProfile{
+height: 200px;
+width: 100%;
+display: flex;
+justify-content: center;
+
+  .profilePic{
+    height: 175px;
+    width: 175px;
+    border: solid black thin;
+    border-radius: 50%;
+    background-color: rgb(128, 128, 128);
+  }
+}
+
+
+.section{
+  min-height: 200px;
+  height: 40%;
+  min-width: 340px;
+  width: 100%;
+  background-color: rgb(255, 249, 243);  //test
+  :nth-child(2){
+    background-color: rgba(218, 218, 218, 0.734);
+  }
+}
