@@ -1,11 +1,20 @@
 @import "~bootstrap/scss/bootstrap";
+// variables--------------------
+$section_height: 250px;
+$section_width: 100%;
+$backgroundIndex: 0;
+$foregroundIndex: 2;
+$middlegroundIndex: 1;
 
+
+// --------------------
 .App {
   text-align: center;
   background-color: whitesmoke;
 }
 #navContainer{
 width: 100%;  
+z-index: $foregroundIndex;
 display: flex;
 justify-content: flex-end;
 background-color: rgba(240, 255, 255, 0.474) ;
@@ -15,7 +24,7 @@ background-color: rgba(240, 255, 255, 0.474) ;
     display: flex;
     justify-content: space-evenly;
     padding: 1%;
-
+    z-index: $foregroundIndex;
     :Link{
       text-decoration: none;
     }
@@ -24,28 +33,77 @@ background-color: rgba(240, 255, 255, 0.474) ;
 
 
 #imgContainerProfile{
-height: 200px;
-width: 100%;
-display: flex;
-justify-content: center;
+height: $section_height;
+width: $section_width;
+// display: flex;
+// justify-content: center;
+
+.backgroundImage{ 
+  
+  width: $section_width;
+  height: $section_height;
+  z-index: $backgroundIndex;
+  image-resolution:inherit;
+  clip-path: ellipse(76% 68% at 50% 15%);
+   position: fixed;
+  background-size:cover;
+  background-repeat: no-repeat;
+ 
+  animation: drop_down 3s;
+  animation-fill-mode: forwards;
+
+  @keyframes drop_down {
+  from { top: -400px;}
+  to {top: 0px;
+  background-image: url("../images/the-matterhorn-as-seen-from-the-lauterbrunnen-valley-digitally-stitched-by-dominic-kamp.jpg");
+    }
+  }
+}
 
   .profilePic{
     height: 175px;
     width: 175px;
-    border: solid black thin;
     border-radius: 50%;
-    background-color: rgb(128, 128, 128);
+    // background-color: rgb(128, 128, 128);
+    box-shadow: 2px 2px 4px #3f3f3f83 ;
+    
+    z-index: $middlegroundIndex;
+    position: absolute;
+    top: 51px;
+    left: 50%;
+    transform: translate(-50%);
+    &:hover{
+      height: 195px;
+      width: 195px;
+      cursor: pointer;
+      transition-duration: 1s;
+      
+    }
   }
 }
-
+.addDelay{
+  animation-delay:2s
+}
 
 .section{
   min-height: 200px;
   height: 40%;
   min-width: 340px;
   width: 100%;
-  background-color: rgb(255, 249, 243);  //test
-  :nth-child(2){
+  // background-color: rgb(255, 249, 243);  //test
+  :nth-child(even){
     background-color: rgba(218, 218, 218, 0.734);
   }
 }
+
+.infoSec{
+  padding: 5px;
+   :nth-child(odd){
+    background-color: rgb(255, 255, 255);
+   }
+  }
+
+  Footer{
+  
+    bottom: 0px;
+  }
