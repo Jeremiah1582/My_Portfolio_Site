@@ -1,4 +1,4 @@
-@import "~bootstrap/scss/bootstrap";
+
 // variables--------------------
 $section_height: 250px;
 $section_width: 100%;
@@ -25,10 +25,15 @@ background-color: rgba(240, 255, 255, 0.474) ;
     justify-content: space-evenly;
     padding: 1%;
     z-index: $foregroundIndex;
-    :Link{
+   .navLink{
       text-decoration: none;
+      :hover{
+        color: #ffff;
+      } 
+       
     }
   }
+  
 }
 
 
@@ -42,7 +47,7 @@ width: $section_width;
   
   width: $section_width;
   height: $section_height;
-  z-index: $backgroundIndex;
+  // z-index: $backgroundIndex;
   image-resolution:inherit;
   clip-path: ellipse(76% 68% at 50% 15%);
    position: fixed;
@@ -77,12 +82,8 @@ width: $section_width;
       width: 195px;
       cursor: pointer;
       transition-duration: 1s;
-      
     }
   }
-}
-.addDelay{
-  animation-delay:2s
 }
 
 .section{
@@ -90,9 +91,26 @@ width: $section_width;
   height: 40%;
   min-width: 340px;
   width: 100%;
+  margin-bottom: 10px;
+ 
   // background-color: rgb(255, 249, 243);  //test
   :nth-child(even){
-    background-color: rgba(218, 218, 218, 0.734);
+    background-color: rgba(218, 218, 218, 0.946);
+  }
+}
+.aboutSection{
+  z-index: $foregroundIndex;
+  min-height: 200px;
+  height: 40%;
+  min-width: 340px;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 10px solid black;
+  h1{
+
+  }
+  p{
+
   }
 }
 
@@ -107,3 +125,5 @@ width: $section_width;
   
     bottom: 0px;
   }
+  
+  @import "~bootstrap/scss/bootstrap";

@@ -12,11 +12,11 @@ function Nav() {
   <div id="navContainer">
   <span></span>
   <nav id="navBar">
-    <Link to="/">Profile</Link>
-    <Link to="/CVPage">CV </Link>
-    <Link to="/ExperiencePage"> Experience</Link>
-    <Link to="/CodeStackPage"> Code Stack </Link>
-    <Link to="/CMSPage"> Edit Profile</Link> {/*must be signed in to edit profile */}
+    <Link className="navLink" to="/">Profile</Link>
+    <Link className="navLink" to="/CVPage">CV </Link>
+    <Link className="navLink" to="/ExperiencePage"> Experience</Link>
+    <Link className="navLink" to="/CodeStackPage"> Code Stack </Link>
+    <Link className="navLink" to="/CMSPage"> Edit Profile</Link> {/*must be signed in to edit profile */}
   </nav>
     <Outlet />
   </div>
