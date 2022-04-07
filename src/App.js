@@ -9,7 +9,6 @@ import CMSPage from "./comps/CMS";
 import {BrowserRouter,
   Routes,
   Route,
-  Link
 } from "react-router-dom";
 
 

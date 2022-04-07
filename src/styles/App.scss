@@ -1,10 +1,15 @@
 
 // variables--------------------
+$textC:pink;
 $section_height: 250px;
-$section_width: 100%;
+$section_width: 393px;
 $backgroundIndex: 0;
 $foregroundIndex: 2;
 $middlegroundIndex: 1;
+$difColor: rgb(9, 199, 126);
+$nthChildOddColor:  rgb(255, 255, 255);
+$nthChildOddColorOpacity:  rgba(255, 255, 255, 0.892);
+$nthChildEvenColor: rgba(218, 218, 218, 0.946);
 
 
 // --------------------
@@ -17,7 +22,7 @@ width: 100%;
 z-index: $foregroundIndex;
 display: flex;
 justify-content: flex-end;
-background-color: rgba(240, 255, 255, 0.474) ;
+background-color: rgba(72, 72, 72, 0.659) ;
 
   #navBar{
     width: 100%;
@@ -27,13 +32,22 @@ background-color: rgba(240, 255, 255, 0.474) ;
     z-index: $foregroundIndex;
    .navLink{
       text-decoration: none;
-      :hover{
-        color: #ffff;
-      } 
-       
+      color: #ffff;
+      &:hover{
+        color: $difColor;
+      }
     }
   }
   
+}
+
+#flexContainer{
+display: flex;
+justify-content: space-evenly;
+flex-wrap: wrap;
+width: 100%;
+min-width: 393px;
+
 }
 
 
@@ -45,7 +59,7 @@ width: $section_width;
 
 .backgroundImage{ 
   
-  width: $section_width;
+  width: 100%;
   height: $section_height;
   // z-index: $backgroundIndex;
   image-resolution:inherit;
@@ -69,9 +83,8 @@ width: $section_width;
     height: 175px;
     width: 175px;
     border-radius: 50%;
-    // background-color: rgb(128, 128, 128);
+    background-color: rgb(128, 128, 128);
     box-shadow: 2px 2px 4px #3f3f3f83 ;
-    
     z-index: $middlegroundIndex;
     position: absolute;
     top: 51px;
@@ -88,25 +101,27 @@ width: $section_width;
 
 .section{
   min-height: 200px;
-  height: 40%;
+  height: max-content;
   min-width: 340px;
-  width: 100%;
-  margin-bottom: 10px;
- 
-  // background-color: rgb(255, 249, 243);  //test
+  width: $section_width;
+  margin-bottom: 70px;
+  
+}
+.list{
   :nth-child(even){
-    background-color: rgba(218, 218, 218, 0.946);
+    background-color:$nthChildEvenColor;
   }
 }
-.aboutSection{
+.aboutSectionContainer{
   z-index: $foregroundIndex;
   min-height: 200px;
   height: 40%;
   min-width: 340px;
-  width: 100%;
   margin-bottom: 10px;
-  border-radius: 10px solid black;
-  h1{
+  border-radius: 5px ;
+  background-color: $nthChildOddColorOpacity;
+
+  h5{
 
   }
   p{
@@ -117,13 +132,15 @@ width: $section_width;
 .infoSec{
   padding: 5px;
    :nth-child(odd){
-    background-color: rgb(255, 255, 255);
+    background-color: $nthChildOddColor;
    }
   }
 
-  Footer{
-  
-    bottom: 0px;
+  .footer{
+  bottom: 0px;
+   width: 100%;
+   min-height: 140px;
+   height: 200px
   }
-  
+
   @import "~bootstrap/scss/bootstrap";

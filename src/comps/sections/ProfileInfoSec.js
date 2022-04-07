@@ -5,7 +5,7 @@ function ProfileInfoSec() {
   return (
     <div className="infoSec">
 
-<ListGroup className="section">
+<ListGroup className="section list">
   <ListGroup.Item className="listItem">Jeremiah Brown</ListGroup.Item>
   <ListGroup.Item className="listItem">Engineer</ListGroup.Item>
   <ListGroup.Item className="listItem">+49 178 2822 679</ListGroup.Item>
