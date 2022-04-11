@@ -3,22 +3,22 @@ const Schema = mongoose.Schema;
 
 const newUser= new Schema({
   accountType: {
-        type: String
+      type:String
   },
   firstName: {
-      type: String
+      type:String
   },
   lastName:{
-      type: String
+      type:String
   }, 
   email:{
       type:String
-  }, 
+  },
   mobile: {
       type:String
   }, 
   location:{
-        type:String
+      type:String
     },
   github:{
       type:String
@@ -30,7 +30,7 @@ const newUser= new Schema({
       type:String
     }, 
   instagram:{
-        type:String
+      type:String
     },
   otherSocials:{
         type:String
