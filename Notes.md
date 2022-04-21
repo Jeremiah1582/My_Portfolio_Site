@@ -5,3 +5,6 @@ Next Steps! need to make the site completely dynamic :
 - nothing is hard coded not even the section 
 - implement database use CRUD
   -->
+
+<!-- next Steps -->
+<!-- 21.04.2022-- CRUD  -->

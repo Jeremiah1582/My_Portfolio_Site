@@ -1,9 +1,15 @@
+const User = require('../models/userModel')
+
 exports.registerNewUser=(req,res)=>{
     console.log(req.body);
    const {
        email,
        password 
    } = req.body;
+}
+
+exports.readUser = (req,res)=>{
+    // Access datacbase information 
 }
 
 exports.logIn = (req,res)=>{
