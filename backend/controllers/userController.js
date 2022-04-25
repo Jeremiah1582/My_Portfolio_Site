@@ -10,18 +10,18 @@ exports.registerNewUser=(req,res)=>{
 
 exports.readUser = (req,res)=>{
     // Access database information 
- User.find({})
+
+ User.findOne({email:"jeremiah.1582@googlemail.com"})
     .then((err,doc)=>{
-        if (err) {
+      if (err) {
+             console.log("user is ", User);
             console.log("there was an error retrieving document from database")
         }else{
             console.log("found document successfully in database ",doc);
-            res.json(doc)
+            const msg = {msg:"this is a message from back"}
+            res.status(200).json(msg)
         }        
-    })
-   
- res.json(req, "this is the Read User function in Controller");
-
+    })  
 }
 
 exports.logIn = (req,res)=>{
