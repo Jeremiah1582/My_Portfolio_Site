@@ -31,7 +31,7 @@ const newUser= new Schema({
     }, 
   instagram:{
       type:String
-    },
+    }, 
   otherSocials:{
         type:String
     }, 
@@ -48,6 +48,9 @@ const newUser= new Schema({
       type: Date,
       date: Date.now
   },
+  aboutUser: {
+      type:String
+    },
   workExperience:[{
       startDate: {type:Date},
       endDate: {type:Date},

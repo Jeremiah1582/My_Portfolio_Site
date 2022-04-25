@@ -24,6 +24,8 @@ mongoose
     .connect( MONGO_LINK + DB_NAME)
     .then(()=>{
         console.log("Mongoose connected to database")
+        // console.log(MONGO_LINK + DB_NAME);
+        
     })
     .catch(err=>console.log('lost connection '));
 

@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './tests/reportWebVitals';
-
+import UserProvider from "./context/userContext"
 import './styles/App.scss';
 import './styles/index.css';
 
 
 ReactDOM.render(
-  
-    <App/>,
-    
+  <UserProvider>
+    <App/>
+  </UserProvider>,
   document.getElementById('root')
 );
 

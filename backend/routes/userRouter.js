@@ -3,6 +3,7 @@ const userController =require("../controllers/userController")
 
 
 router.post("/logIn", userController.logIn )
+router.get("/readUser", userController.readUser )
 router.post("/registerNewUser", userController.registerNewUser )
 router.post("/editUserInfo", userController.editUserInfo )
 router.post("/deleteUser", userController.deleteUser )

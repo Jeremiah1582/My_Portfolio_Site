@@ -9,7 +9,19 @@ exports.registerNewUser=(req,res)=>{
 }
 
 exports.readUser = (req,res)=>{
-    // Access datacbase information 
+    // Access database information 
+ User.find({})
+    .then((err,doc)=>{
+        if (err) {
+            console.log("there was an error retrieving document from database")
+        }else{
+            console.log("found document successfully in database ",doc);
+            res.json(doc)
+        }        
+    })
+   
+ res.json(req, "this is the Read User function in Controller");
+
 }
 
 exports.logIn = (req,res)=>{
