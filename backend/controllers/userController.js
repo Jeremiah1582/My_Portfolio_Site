@@ -6,20 +6,20 @@ exports.registerNewUser=(req,res)=>{
        email,
        password 
    } = req.body;
+
+//    user.save()
 }
 
 exports.readUser = (req,res)=>{
     // Access database information 
 
- User.findOne({email:"jeremiah.1582@googlemail.com"})
+User.findOne({email:"jeremiah.1582@googlemail.com"})
     .then((err,doc)=>{
-      if (err) {
-             console.log("user is ", User);
-            console.log("there was an error retrieving document from database")
+      if (err!=="") {
+            console.log("there was an error retrieving document from database", err)
         }else{
             console.log("found document successfully in database ",doc);
-            const msg = {msg:"this is a message from back"}
-            res.status(200).json(msg)
+            res.status(200).json({msg:"this is a message from back",doc})
         }        
     })  
 }

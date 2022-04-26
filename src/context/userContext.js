@@ -41,8 +41,9 @@ const [user, setUser] = useState(userState)
 
       axios
         .get("http://localhost:5001/user/readUser")
-        .then(data=>{
-          console.log(data, "this is the data from UserContext");
+        .then(doc=>{
+          const{data}=doc
+          console.log(data.data, "this is the data from UserContext");
             setUser({
                 _id:data._id,
                 accountType: data.accoutType,
@@ -60,7 +61,7 @@ const [user, setUser] = useState(userState)
                 profilePic: data.profilePic,
                 password: data.password,
                 signupDate: data.signupDate,
-                aboutUser: "this is the about section fo this user", 
+                aboutUser: data.aboutUser, 
                 workExperience:[
                     {
                     startDate: data.startDate,

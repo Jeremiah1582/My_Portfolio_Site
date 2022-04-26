@@ -26,10 +26,7 @@ const MONGO_LINK = process.env.MONGO_LINK;
 mongoose
     .connect( MONGO_LINK + DB_NAME)
     .then(()=>{
-        console.log("Mongoose connected to database")
-        // console.log(MONGO_LINK + DB_NAME);
-        
-    
+        console.log("Mongoose connected to database", ) 
     })
     .catch(err=>console.log('lost connection '));
 
