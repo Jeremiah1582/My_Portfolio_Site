@@ -15,7 +15,7 @@ exports.readUser = (req,res)=>{
 
 User.findOne({email:"jeremiah.1582@googlemail.com"})
     .then((err,doc)=>{
-      if (err!=="") {
+      if (err){
             console.log("there was an error retrieving document from database", err)
         }else{
             console.log("found document successfully in database ",doc);
@@ -23,6 +23,7 @@ User.findOne({email:"jeremiah.1582@googlemail.com"})
         }        
     })  
 }
+
 
 exports.logIn = (req,res)=>{
     // login
