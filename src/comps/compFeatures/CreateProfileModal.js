@@ -1,15 +1,10 @@
 import React, {useState} from 'react'
  import {Modal, Button} from "react-bootstrap"
 
-function CreateProfileModal({prop}) {   
+function CreateProfileModal({show,handleClose, handleShow}) {   
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  if(prop){
-    setShow(true)
-    console.log(show);
-  }
+ 
+
 
    if(show===true){
   return (

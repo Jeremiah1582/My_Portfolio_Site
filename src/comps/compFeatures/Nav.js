@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Modal, Button} from "react-bootstrap"
 import {
   Outlet,
   Link
@@ -6,9 +7,7 @@ import {
 
 
 
-function Nav() {
-
-
+function Nav({handleClose, handleShow}) {
   return (
     
   <div id="navContainer">
@@ -19,7 +18,8 @@ function Nav() {
     <Link className="navLink" to="/ExperiencePage"> Experience</Link>
     <Link className="navLink" to="/CodeStackPage"> Code Stack </Link>
     <Link className="navLink" to="/CMSPage"> Edit Profile</Link> {/*must be signed in to edit profile */}
-    <Link className="navLink" to="#"> Create Profile </Link> 
+    <Link className="navLink" to="#" onClick={handleShow}> Create Profile </Link> 
+    
   </nav>
     
     <Outlet />

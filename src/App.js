@@ -16,11 +16,15 @@ import {BrowserRouter,
 
 
 function App() {
-const [showModal, setShowModal] = useState(false)
+const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => {setShow(true)
+  console.log('clcked handle show')};
+
   return (
   <BrowserRouter>
     <div className="App">
-      <Nav/>
+      <Nav handleClose={handleClose} handleShow={handleShow}/>
 
 <Routes>
   <Route exact path="/" element={<ProfilePage/> } />
@@ -30,7 +34,7 @@ const [showModal, setShowModal] = useState(false)
   <Route  path="/CMSPage" element={<CMSPage/> } />
   
 </Routes>
-<CreateProfileModal />
+<CreateProfileModal show={show} handleClose={handleClose} handleShow={handleShow} />
   
       
     
