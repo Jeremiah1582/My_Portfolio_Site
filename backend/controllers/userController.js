@@ -19,11 +19,10 @@ User.findOne({email:"jeremiah.1582@googlemail.com"})
             console.log("there was an error retrieving document from database", err)
         }else{
             console.log("found document successfully in database ",doc);
-            res.status(200).json({msg:"this is a message from back",doc})
+            res.status(200).json({msg:"this is a message from back!",data:doc})
         }        
     })  
 }
-
 
 exports.logIn = (req,res)=>{
     // login

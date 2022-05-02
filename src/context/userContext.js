@@ -77,7 +77,7 @@ const [user, setUser] = useState(userState)
 
   return (
 
-<UserContext.Provider value="">
+<UserContext.Provider value={user}>
 {children}
 </UserContext.Provider>
   )

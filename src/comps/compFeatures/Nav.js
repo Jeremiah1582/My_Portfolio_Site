@@ -3,18 +3,11 @@ import {
   Outlet,
   Link
 } from "react-router-dom";
-import ProfilePage from "../ProfilePage"
 
 
 
 function Nav() {
-const [showModal, setShowModal] = useState(false)
 
-const handleModal = ()=>{
-  if(showModal === false){
-     setShowModal(true)
-  }
-  }
 
   return (
     
@@ -26,7 +19,7 @@ const handleModal = ()=>{
     <Link className="navLink" to="/ExperiencePage"> Experience</Link>
     <Link className="navLink" to="/CodeStackPage"> Code Stack </Link>
     <Link className="navLink" to="/CMSPage"> Edit Profile</Link> {/*must be signed in to edit profile */}
-    <div className="navLink" onClick={handleModal} > Create Profile</div>
+    <Link className="navLink" to="#"> Create Profile </Link> 
   </nav>
     
     <Outlet />
