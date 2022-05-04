@@ -5,7 +5,7 @@ export const UserContext = createContext()
  export default function UserProvider({children}) {
 
 // States----------------------------
-const userState = {
+const emptyUserState = {
   _id:'',
   accountType: "",
   firstName: "",
@@ -33,8 +33,9 @@ const userState = {
     },
   ]
 }
+
 // setting Hooks-------------------------
-const [user, setUser] = useState(userState)
+const [user, setUser] = useState(emptyUserState)
 
 // userEffect----------------------------
  useEffect(() => {
@@ -43,41 +44,41 @@ const [user, setUser] = useState(userState)
         .get("http://localhost:5001/user/readUser")
         .then(doc=>{
           const{data}=doc
-          console.log(data.data, "this is the data from UserContext");
+          console.log(data, "this is the data from UserContext");
             setUser({
-                _id:data._id,
-                accountType: data.accoutType,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                email: data.email,
-                mobile: data.mobile,
-                location: data.location,
-                github: data.github,
-                linkedin: data.linkedin,
-                facebook: data.facebook,
-                instagram: data.instagram,
-                otherSocials: data.otherSocials,
-                otherWebsites: data.otherWebsites,
-                profilePic: data.profilePic,
-                password: data.password,
-                signupDate: data.signupDate,
-                aboutUser: data.aboutUser, 
+                _id:data.result._id,
+                accountType: data.result.accoutType,
+                firstName: data.result.firstName,
+                lastName: data.result.lastName,
+                email: data.result.email,
+                mobile: data.result.mobile,
+                location: data.result.location,
+                github: data.result.github,
+                linkedin: data.result.linkedin,
+                facebook: data.result.facebook,
+                instagram: data.result.instagram,
+                otherSocials: data.result.otherSocials,
+                otherWebsites: data.result.otherWebsites,
+                profilePic: data.result.profilePic,
+                password: data.result.password,
+                signupDate: data.result.signupDate,
+                aboutUser: data.result.aboutUser, 
                 workExperience:[
                     {
-                    startDate: data.startDate,
-                    endDate:data.endDate,
-                    companyName:data.companyName,
-                    position: data.position,
-                    responsibilities: data.responsibilities
+                    startDate: data.result.startDate,
+                    endDate:data.result.endDate,
+                    companyName:data.result.companyName,
+                    position: data.result.position,
+                    responsibilities: data.result.responsibilities
                     },
                 ] 
                         })
         })
     }, [])
-
+console.log(user, "this is the user context state ");
   return (
 
-<UserContext.Provider value={user}>
+<UserContext.Provider value={{emptyUserState, user}}>
 {children}
 </UserContext.Provider>
   )
