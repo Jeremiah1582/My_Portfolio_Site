@@ -13,7 +13,8 @@ function ProfileInfoSec() {
   <ListGroup.Item className="listItem">{user.title}</ListGroup.Item>
   <ListGroup.Item className="listItem">{user.mobile}</ListGroup.Item>
   <ListGroup.Item className="listItem">{user.email}</ListGroup.Item>
-  <ListGroup.Item className="listItem">{user.github}</ListGroup.Item>
+  <ListGroup.Item className="listItem"><a href={user.github}>{user.github}</a></ListGroup.Item>
+  <ListGroup.Item className="listItem"><a href={user.linkedin}> Linkedin profile</a></ListGroup.Item>
 </ListGroup>
     
     </div>
