@@ -9,11 +9,14 @@ const [newUser, setNewUser] = useState(emptyUserState)
 console.log(emptyUserState);
 
 const handleInput=(e)=>{
+  e.preventDefault()
   console.log(e.target.name, e.target.value);
-  setNewUser({...newUser,[e.target.name]: e.target.vale  })
+  console.log(newUser);
+  setNewUser({...newUser,[e.target.name]: e.target.value  })
 }
- const submitNewUser =()=>{
-   console.log(newUser);
+ const submitNewUser =(e)=>{
+  e.preventDefault()
+   console.log("the newUser state is L:16 ",newUser);
 axios
   .post("http://localhost:5001/user/registerNewUser", newUser)
   .then(result=>{
@@ -40,7 +43,7 @@ axios
           <Modal.Title>Create Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form>
+        <Form onSubmit={submitNewUser}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control 
@@ -68,13 +71,16 @@ axios
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
+
+           <Button type="submit" variant="primary" >
+            Create Profile
+          </Button>
+
         </Form>         
         </Modal.Body>    
         <Modal.Footer>
         
-          <Button submit={submitNewUser} variant="primary" onClick={handleClose}>
-            Create Profile
-          </Button>
+         
         </Modal.Footer>
       </Modal>
     </div>

@@ -5,16 +5,17 @@ exports.registerNewUser=(req,res)=>{
    const {
        email,
        password 
-   } = req.body;
+   } = req.body; 
 
-   if (email && password!=="") {
-          User.save((err,doc)=>{ 
+   if (email && password!==""){
+       const newUser= new User(req.body)
+        new User.save((err,doc)=>{ 
        if (err){
            console.log('there was an error L:13 usercontroller', err);
            throw err
         //    console.log(err);
        }else{
-           res.json({msg:"user saved to data base. userController L:16"})
+           res.status(200).json({msg:"froom backend saved function. userController L:16"})
        } 
     })
    }
@@ -29,7 +30,7 @@ exports.readUser = (req,res)=>{
                 console.log("there was an error retrieving document from database")
             }else if (result){
                 console.log("found document successfully in database ",result);
-                res.status(200).json({"msg":"this is a message from back!", result})
+                res.status(200).json({"msg":"from back readUser function!", result})
             } else{
                 console.log("no err & no doc from the database");
             }       

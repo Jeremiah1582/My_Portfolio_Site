@@ -75,7 +75,6 @@ const [user, setUser] = useState(emptyUserState)
                         })
         })
     }, [])
-console.log(user, "this is the user context state ");
   return (
 
 <UserContext.Provider value={{emptyUserState, user}}>
