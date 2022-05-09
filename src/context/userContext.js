@@ -36,6 +36,7 @@ const emptyUserState = {
 
 // setting Hooks-------------------------
 const [user, setUser] = useState(emptyUserState)
+const [msg,setMsg] = useState('')
 
 // userEffect----------------------------
  useEffect(() => {
@@ -45,7 +46,8 @@ const [user, setUser] = useState(emptyUserState)
         .then(doc=>{
           const{data}=doc
           console.log(data, "this is the data from UserContext");
-            setUser({
+          setMsg(data.msg)
+          setUser({
                 _id:data.result._id,
                 accountType: data.result.accoutType,
                 firstName: data.result.firstName,
@@ -76,6 +78,7 @@ const [user, setUser] = useState(emptyUserState)
                         })
         })
     }, [])
+  
   return (
 
 <UserContext.Provider value={{emptyUserState, user}}>

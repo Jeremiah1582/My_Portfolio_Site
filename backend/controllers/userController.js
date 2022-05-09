@@ -9,12 +9,13 @@ exports.registerNewUser=(req,res)=>{
 
    if (req.body){
        const newUser= new User(req.body)
-        new User.save((err,doc)=>{ 
+        newUser.save((err,doc)=>{ 
        if (err){
            console.log('there was an error L:13 usercontroller', err);
            throw err;
         //    console.log(err);
        }else if (doc){
+           console.log("L:18 controller",doc);
            res.status(200).json({msg:"New User Saved- msg froom backend saved function. userController L:16"})
        } else{
            res.status().json({msg:"there was a problem in the registerNewUser in the userController L:20"})

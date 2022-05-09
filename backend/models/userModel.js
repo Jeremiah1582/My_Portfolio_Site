@@ -51,18 +51,12 @@ const UserSchema= new Schema({
   },
   signupDate:{
       type: Date,
-      date: Date.now
+      default: Date.now()
   },
   aboutUser: {
       type:String
-    },
-  workExperience:[{
-      startDate: {type:Date},
-      endDate: {type:Date},
-      companyName: {type: String},
-      position: {type:String},
-      responsibilities: {type:String},
-  }]
+    }
+    
 
 })
 

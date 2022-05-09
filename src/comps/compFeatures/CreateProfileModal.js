@@ -6,7 +6,7 @@ import {UserContext } from "../../context/userContext"
 function CreateProfileModal({show,handleClose, handleShow}) {  
 const {emptyUserState, user} = useContext(UserContext)
 const [newUser, setNewUser] = useState(emptyUserState) 
-console.log(emptyUserState);
+
 
 const handleInput=(e)=>{
   e.preventDefault()
@@ -14,18 +14,16 @@ const handleInput=(e)=>{
   console.log(newUser);
   setNewUser({...newUser,[e.target.name]: e.target.value  })
 }
+
  const submitNewUser =(e)=>{
   e.preventDefault()
-   console.log("the newUser state is L:16 ",newUser);
-axios
-  .POST("http://localhost:5001/user/registerNewUser", newUser)
-  .then(result=>{
-    console.log(result);
-    setNewUser({
-      email:"",
-      password:""
-    })
+   console.log("the newUser state is L:20 ",newUser);
 
+axios
+  .post("http://localhost:5001/user/registerNewUser", newUser)
+  .then((result)=>{
+    console.log('L:23 frontend. The result of the post method is=',result);
+    setNewUser({emptyUserState})
   })
  }
 
