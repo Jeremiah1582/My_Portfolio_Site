@@ -4,7 +4,7 @@ import axios from "axios"
 import {UserContext } from "../../context/userContext"
 
 function CreateProfileModal({show,handleClose, handleShow}) {  
-const {emptyUserState, value} = useContext(UserContext)
+const {emptyUserState, user} = useContext(UserContext)
 const [newUser, setNewUser] = useState(emptyUserState) 
 console.log(emptyUserState);
 
@@ -18,7 +18,7 @@ const handleInput=(e)=>{
   e.preventDefault()
    console.log("the newUser state is L:16 ",newUser);
 axios
-  .post("http://localhost:5001/user/registerNewUser", newUser)
+  .POST("http://localhost:5001/user/registerNewUser", newUser)
   .then(result=>{
     console.log(result);
     setNewUser({

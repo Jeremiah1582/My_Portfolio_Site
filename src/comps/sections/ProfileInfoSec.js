@@ -1,16 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { ListGroup } from "react-bootstrap";
+import {UserContext} from "../../context/userContext"
 
 function ProfileInfoSec() {
+  const {user} = useContext(UserContext)
+  console.log(user);
   return (
     <div className="infoSec">
 
 <ListGroup className="section list">
-  <ListGroup.Item className="listItem">Jeremiah Brown</ListGroup.Item>
-  <ListGroup.Item className="listItem">Engineer</ListGroup.Item>
-  <ListGroup.Item className="listItem">+49 178 2822 679</ListGroup.Item>
-  <ListGroup.Item className="listItem">jeremiah.1582@googlemail.com</ListGroup.Item>
-  <ListGroup.Item className="listItem">https://github.com/Jeremiah1582</ListGroup.Item>
+  <ListGroup.Item className="listItem">{`${user.firstName} ${user.lastName}`}</ListGroup.Item>
+  <ListGroup.Item className="listItem">{user.title}</ListGroup.Item>
+  <ListGroup.Item className="listItem">{user.mobile}</ListGroup.Item>
+  <ListGroup.Item className="listItem">{user.email}</ListGroup.Item>
+  <ListGroup.Item className="listItem">{user.github}</ListGroup.Item>
 </ListGroup>
     
     </div>

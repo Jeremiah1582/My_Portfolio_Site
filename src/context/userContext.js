@@ -6,10 +6,10 @@ export const UserContext = createContext()
 
 // States----------------------------
 const emptyUserState = {
-  _id:'',
   accountType: "",
   firstName: "",
   lastName: "",
+  title: "",
   email: "",
   mobile: "",
   location: "",
@@ -50,6 +50,7 @@ const [user, setUser] = useState(emptyUserState)
                 accountType: data.result.accoutType,
                 firstName: data.result.firstName,
                 lastName: data.result.lastName,
+                title: data.result.title,
                 email: data.result.email,
                 mobile: data.result.mobile,
                 location: data.result.location,
