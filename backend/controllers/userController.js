@@ -46,7 +46,7 @@ exports.logIn = (req,res)=>{
 }
 
 exports.editUserInfo = (req,res)=>{
-console.log('hello');
+console.log('hello edit user information' );
     // Change, edit and update user information 
 }
 

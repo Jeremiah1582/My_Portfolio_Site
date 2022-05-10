@@ -31,7 +31,7 @@ const [show, setShow] = useState(false);
   <Route  path="/CodeStackPage" element={<CodeStackPage/> } />
   <Route  path="/ExperiencePage" element={<ExperiencePage/> } />
   <Route  path="/CVPage" element={<CVPage/> } />
-  <Route  path="/EditPage" element={<EditPage/> } />
+  <Route  path="/editUserInfo" element={<EditPage/> } />
   
 </Routes>
 <CreateProfileModal show={show} handleClose={handleClose} handleShow={handleShow} />
