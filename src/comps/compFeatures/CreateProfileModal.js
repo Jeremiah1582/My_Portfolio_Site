@@ -5,7 +5,7 @@ import {UserContext } from "../../context/userContext"
 
 function CreateProfileModal({show,handleClose, handleShow}) {  
 const {emptyUserState, user} = useContext(UserContext)
-const [newUser, setNewUser] = useState(emptyUserState) 
+const [newUser, setNewUser] = useState({}) 
 
 const signupDate =  new Date;
 console.log(signupDate);
@@ -25,7 +25,7 @@ axios
   .post("http://localhost:5001/user/registerNewUser", newUser)
   .then((result)=>{
     console.log('L:23 frontend. The result of the post method is=',result);
-    setNewUser({emptyUserState})
+    setNewUser({})
   })
  }
 

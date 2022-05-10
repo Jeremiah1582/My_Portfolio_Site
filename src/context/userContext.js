@@ -25,8 +25,8 @@ const emptyUserState = {
   aboutUser: "",
   workExperience:[
     {
-      startDate:{},
-      endDate:{},
+      startDate:'',
+      endDate:'',
       companyName:'',
       position:'',
       responsibilities:''
@@ -36,7 +36,7 @@ const emptyUserState = {
 
 // setting Hooks-------------------------
 const [user, setUser] = useState(emptyUserState)
-const [msg,setMsg] = useState('')
+const [msg,setMsg] = useState({})
 
 // userEffect----------------------------
  useEffect(() => {
@@ -73,7 +73,7 @@ const [msg,setMsg] = useState('')
                     companyName:data.result.companyName,
                     position: data.result.position,
                     responsibilities: data.result.responsibilities
-                    },
+                    }
                 ] 
                         })
         })
@@ -81,7 +81,7 @@ const [msg,setMsg] = useState('')
   
   return (
 
-<UserContext.Provider value={{emptyUserState, user}}>
+<UserContext.Provider value={{emptyUserState, user, setUser}}>
 {children}
 </UserContext.Provider>
   )
