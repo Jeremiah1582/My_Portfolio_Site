@@ -6,7 +6,7 @@ import CodeStackPage from "./comps/CodeStackPage";
 import ExperiencePage from "./comps/ExperiencePage";
 import CVPage from "./comps/CVPage";
 import CreateProfileModal from "./comps/compFeatures/CreateProfileModal";
-import CMSPage from "./comps/CMS";
+import EditPage from "./comps/EditPage";
 import {BrowserRouter,
   Routes,
   Route,
@@ -31,7 +31,7 @@ const [show, setShow] = useState(false);
   <Route  path="/CodeStackPage" element={<CodeStackPage/> } />
   <Route  path="/ExperiencePage" element={<ExperiencePage/> } />
   <Route  path="/CVPage" element={<CVPage/> } />
-  <Route  path="/CMSPage" element={<CMSPage/> } />
+  <Route  path="/EditPage" element={<EditPage/> } />
   
 </Routes>
 <CreateProfileModal show={show} handleClose={handleClose} handleShow={handleShow} />

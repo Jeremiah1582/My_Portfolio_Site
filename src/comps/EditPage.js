@@ -1,11 +1,11 @@
 import React from 'react'
 
 
-export default function CMSPage() {
+export default function EditPage() {
   return (
     <div>
     
-   <h1>CMS page </h1>
+   <h1>Edit Page </h1>
     </div>
   )
 }

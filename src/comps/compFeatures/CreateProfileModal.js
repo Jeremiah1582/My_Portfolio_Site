@@ -7,12 +7,14 @@ function CreateProfileModal({show,handleClose, handleShow}) {
 const {emptyUserState, user} = useContext(UserContext)
 const [newUser, setNewUser] = useState(emptyUserState) 
 
+const signupDate =  new Date;
+console.log(signupDate);
 
 const handleInput=(e)=>{
   e.preventDefault()
   console.log(e.target.name, e.target.value);
   console.log(newUser);
-  setNewUser({...newUser,[e.target.name]: e.target.value  })
+  setNewUser({...newUser,[e.target.name]: e.target.value, signupDate})
 }
 
  const submitNewUser =(e)=>{

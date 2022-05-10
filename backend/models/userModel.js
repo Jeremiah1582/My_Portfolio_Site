@@ -1,18 +1,26 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const userSignupDate = new Date()
+console.log(userSignupDate);
+
+
 const UserSchema= new Schema({
   accountType: {
-      type:String
+      type:String, 
+      default: "user"
   },
   firstName: {
-      type:String
+      type:String,
+      default:""
   },
   lastName:{
-      type:String
+      type:String,
+      default:""
   }, 
   title:{
-      type:String
+      type:String,
+      default:""
   },
   email:{
       type:String,
@@ -20,42 +28,53 @@ const UserSchema= new Schema({
       lowercase: true
   },
   mobile: {
-      type:String
+      type:String,
+      default:""
   }, 
   location:{
-      type:String
+      type:String,
+      default:""
     },
   github:{
-      type:String
+      type:String,
+      default:"No GitHub Link"
   },
   linkedin:{
-      type:String
+      type:String,
+      default:"no Linkedin link"
   },
   facebook:{
-      type:String
+      type:String,
+      default:""
     }, 
   instagram:{
-      type:String
+      type:String,
+      default:""
     }, 
   otherSocials:{
-        type:String
+        type:String,
+        default:""
     }, 
   otherWebsites:[
       String
   ], 
   profilePic: {
-      type: String
+      type: String, 
+      default: ""
   },
   password: {
-      type: String
+      type: String,
+      required: true
   },
   signupDate:{
       type: Date,
-      default: Date.now()
+      default: userSignupDate
   },
   aboutUser: {
-      type:String
-    }
+      type:String,
+      default:""
+    },
+  workExperience:[]
     
 
 })
