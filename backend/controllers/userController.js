@@ -46,7 +46,13 @@ exports.logIn = (req,res)=>{
 }
 
 exports.editUserInfo = (req,res)=>{
+    const filter = {};
+    const updateDoc={};
+    const option ={};
 console.log('hello edit user information' );
+User.updateOne((filter, updateDoc, option)=>{
+
+})
     // Change, edit and update user information 
 }
 

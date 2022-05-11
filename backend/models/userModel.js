@@ -67,7 +67,7 @@ const UserSchema= new Schema({
       required: true
   },
   signupDate:{
-      type: Date,
+      type: String,
       default: userSignupDate
   },
   aboutUser: {

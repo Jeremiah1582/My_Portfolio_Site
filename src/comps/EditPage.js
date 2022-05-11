@@ -7,10 +7,11 @@ export default function EditPage() {
 const {user,setUser} = useContext(UserContext)
 const [changedInfo, setChangedInfo] = useState('')
 
-  const submitChange =()=>{
+  const submitChange =(e)=>{
+    e.preventDefault()
 axios
-    .post(`http://localhost:5001/user/editUserInfo`, )
-    .then(result=>{
+    .post(`http://localhost:5001/user/editUserInfo` )
+    .then((result)=>{
       //update document in database 
       //use SetUser to update User in the context api
     })
@@ -20,8 +21,8 @@ axios
   return (
     <div id="editPageContainer">
     <h1>edit page</h1>
-  <Form submit={submitChange}>
-  
+  <Form onSubmit={submitChange}>
+  {/* first name */}
     <Form.Group className="mb-3" controlId="formBasicEmail" >
     <Form.Label>first name </Form.Label>
     <Form.Control name='firstName' type="firstName" placeholder={user.firstName} value={changedInfo.firstName} default={user.firstName}/>
