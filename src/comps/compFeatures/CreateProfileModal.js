@@ -5,11 +5,14 @@ import {UserContext } from "../../context/userContext"
 
 function CreateProfileModal({show,handleClose, handleShow}) {  
 const {emptyUserState, user} = useContext(UserContext)
-const [newUser, setNewUser] = useState({}) 
-
+const [newUser, setNewUser] = useState({
+  email:"",
+  password:""
+}) 
+// generate sign up date
 const signupDate =  new Date;
-console.log(signupDate);
 
+// handle Functions 
 const handleInput=(e)=>{
   e.preventDefault()
   console.log(e.target.name, e.target.value);
@@ -17,15 +20,17 @@ const handleInput=(e)=>{
   setNewUser({...newUser,[e.target.name]: e.target.value, signupDate})
 }
 
- const submitNewUser =(e)=>{
-  e.preventDefault()
+ const handleFormSubmit =(e)=>{
    console.log("the newUser state is L:20 ",newUser);
-
+  // post to backend function
 axios
   .post("http://localhost:5001/user/registerNewUser", newUser)
   .then((result)=>{
     console.log('L:23 frontend. The result of the post method is=',result);
-    setNewUser({})
+    setNewUser({
+       email:"",
+      password:""
+    })
   })
  }
 
@@ -43,7 +48,7 @@ axios
           <Modal.Title>Create Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form onSubmit={submitNewUser}>
+        <Form onSubmit={handleFormSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control 
