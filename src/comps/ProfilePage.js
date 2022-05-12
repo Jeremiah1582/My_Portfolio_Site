@@ -11,7 +11,7 @@ function ProfilePage({children}) { //want to be able to add <sections/> dynamica
     
     <ProfileImgSec/>
 
-    <div id="flexContainer">
+    <div className="flexContainer">
       <ProfileInfoSec/>
       <AboutSec/>
       <AnimationSec/>

@@ -46,11 +46,15 @@ exports.logIn = (req,res)=>{
 }
 
 exports.editUserInfo = (req,res)=>{
+// find the document you wish to edit.
+console.log(req.body);
+// update the changes to the document
     const filter = {};
     const updateDoc={};
     const option ={};
 console.log('hello edit user information' );
-User.updateOne((filter, updateDoc, option)=>{
+const updatedUser = new User()
+updatedUser.updateOne((filter, updateDoc, option)=>{
 
 })
     // Change, edit and update user information 

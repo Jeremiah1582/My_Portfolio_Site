@@ -41,7 +41,7 @@ background-color: rgba(72, 72, 72, 0.659) ;
   
 }
 
-#flexContainer{
+.flexContainer{
 display: flex;
 justify-content: space-evenly;
 flex-wrap: wrap;
@@ -105,8 +105,9 @@ width: $section_width;
   min-width: 340px;
   width: $section_width;
   margin-bottom: 70px;
-  
+  border: dotted blue;
 }
+
 .list{
   :nth-child(even){
     background-color:$nthChildEvenColor;
@@ -142,5 +143,29 @@ width: $section_width;
    min-height: 140px;
    height: 200px
   }
+
+  // EditPage Styling 
+
+ Form .flexContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border:dotted pink;
+    
+  }
+   .editSectionA{ 
+    
+  }
+  .editSectionB{ 
+     
+  }
+  .editSectionC{ 
+     
+  }
+  .editSectionD{ 
+     
+  }
+
+  
 
   @import "~bootstrap/scss/bootstrap";
