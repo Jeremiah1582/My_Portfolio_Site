@@ -37,15 +37,15 @@ const emptyUserState = {
 // setting Hooks-------------------------
 const [user, setUser] = useState(emptyUserState)
 const [msg,setMsg] = useState({})
-
+console.log("useContext user after update", user);
+     
 // userEffect----------------------------
  useEffect(() => {
-
-      axios
+ axios
         .get("http://localhost:5001/user/readUser")
         .then(doc=>{
           const{data}=doc
-          console.log(data, "this is the data from UserContext");
+          console.log("this is the data from UserContext", data);
           setMsg(data.msg)
           setUser({
                 _id:data.result._id,

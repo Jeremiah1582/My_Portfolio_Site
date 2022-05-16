@@ -10,7 +10,7 @@ const [newUser, setNewUser] = useState({
   password:""
 }) 
 // generate sign up date
-const signupDate =  new Date;
+const signupDate = new Date;
 
 // handle Functions 
 const handleInput=(e)=>{
@@ -21,7 +21,7 @@ const handleInput=(e)=>{
 }
 
  const handleFormSubmit =(e)=>{
-   console.log("the newUser state is L:20 ",newUser);
+   console.log("the newUser state is L:20 ", newUser) ;
   // post to backend function
 axios
   .post("http://localhost:5001/user/registerNewUser", newUser)

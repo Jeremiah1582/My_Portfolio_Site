@@ -7,4 +7,7 @@ Next Steps! need to make the site completely dynamic :
   -->
 
 <!-- next Steps -->
-<!-- 21.04.2022-- CRUD  -->
+<!-- 21.04.2022-- CRUD --CRU are done -->
+<!-- Authorise User -->
+<!-- Media Upload -->
+<!-- useReducer to edit the work experience -->
