@@ -5,18 +5,24 @@ import {UserContext} from "../context/userContext"
 
 export default function EditPage() {
 const {user,setUser} = useContext(UserContext)
-const [changedInfo, setChangedInfo] = useState('')
+const [changedInfo, setChangedInfo] = useState({})
 
+const handleChange =(e)=>{
+console.log(e.target.value);
+setChangedInfo({...changedInfo, [e.target.name]:e.target.value})
+}
+
+console.log(changedInfo);
   const submitChange =(e)=>{
     e.preventDefault()
 axios
-    .post(`http://localhost:5001/user/editUserInfo` )
+    .post(`http://localhost:5001/user/editUserInfo`, changedInfo)
     .then((result)=>{
       //update document in database 
       //use SetUser to update User in the context api
     })
-  }
-  
+  }   
+
 
   return (
     <div >
@@ -25,24 +31,28 @@ axios
   <Form onSubmit={submitChange} className="flexContainer">
   {/* first name */}
   <div className="section editSectionA">
-    <Form.Group className="mb-3" controlId="formBasicName" >
-    
+    <Form.Group className="mb-3" controlId="formBasicFirstName">
     <Form.Control 
     name='firstName' 
     type="firstName" 
-    placeholder={user.firstName? user.firstName:"firstName" }
-    value={changedInfo.firstName} 
-    default={user.firstName}/>
+    placeholder={user.firstName? user.firstName:"firstName" } 
+    defaultValue={user.firstName}
+    onChange={handleChange}
+    />
+       
+
+
   </Form.Group>
   {/* lastName  */}
-    <Form.Group className="mb-3" controlId="formBasicName" >
+    <Form.Group className="mb-3" controlId="formBasicLastName" >
     
     <Form.Control 
     name='lastName' 
     type="lastName" 
     placeholder={user.lastName? user.lastName:"lastName" }
-    value={changedInfo.lastName} 
-    default={user.lastName}/>
+    onChange={handleChange}
+    defaultValue={user.lastName}/>
+    
   </Form.Group>
   {/* title  */}
     <Form.Group className="mb-3" controlId="formBasicJobTitle">
@@ -51,18 +61,19 @@ axios
     name='title' 
     type="title" 
     placeholder={user.title? user.title:"title" }
-    value={changedInfo.title} 
-    default={user.email}/>
+    onChange={handleChange}
+    defaultValue={user.title}/>
+    
   </Form.Group>
   {/* email  */}
     <Form.Group className="mb-3" controlId="formBasicEmail">
-    
     <Form.Control 
     name='email' 
     type="email" 
     placeholder={user.email? user.email:"email" }
-    value={changedInfo.email} 
-    default={user.email}/>
+    onChange={handleChange}
+    defaultValue={user.email}/>
+    
   </Form.Group>
   {/* mobile  */}
     <Form.Group className="mb-3" controlId="formBasicMobile">
@@ -71,8 +82,9 @@ axios
     name='mobile' 
     type="mobile" 
     placeholder={user.mobile? user.mobile:"mobile" }
-    value={changedInfo.mobile} 
-    default={user.email}/>
+    onChange={handleChange}
+    defaultValue={user.mobile}/>
+    
   </Form.Group>
   </div>
 
@@ -84,56 +96,63 @@ axios
     name='location' 
     type="location" 
     placeholder={user.location? user.location:"location" }
-    value={changedInfo.location} 
-    default={user.email}/>
+    onChange={handleChange}
+    defaultValue={user.location}/>
+    
   </Form.Group>
   {/* github  */}
-    <Form.Group className="mb-3" controlId="formBasicLink" >
+    <Form.Group className="mb-3" controlId="formBasicLink1" >
     
     <Form.Control 
     name='github' 
     type="github" 
     placeholder={user.github} 
-    value={changedInfo.github} 
-    default={user.email}/>
+    onChange={handleChange}
+    defaultValue={user.github}/>
+    
   </Form.Group>
   {/* linkedin  */}
-    <Form.Group className="mb-3" controlId="formBasicLink" >
+    <Form.Group className="mb-3" controlId="formBasicLink2" >
     
     <Form.Control 
     name='linkedin' 
     type="linkedin" 
-    placeholder={user.linkedin? user.linkedin:"Linkedin Link"} value={changedInfo.linkedin} 
-    default={user.linkedin} 
+    placeholder={user.linkedin? user.linkedin:"Linkedin Link"} 
+    onChange={handleChange}
+    defaultValue={user.linkedin}
+     
     />
   </Form.Group>
   {/* facebook  */}
-    <Form.Group className="mb-3" controlId="formBasicLink" >
+    <Form.Group className="mb-3" controlId="formBasicLink3" >
     
     <Form.Control 
     name='facebook' 
     type="facebook" 
     placeholder={user.facebook? user.facebook:"Facebook Link"} 
-    value={changedInfo.facebook} 
-    default={user.email}/>
+    onChange={handleChange}
+    defaultValue={user.facebook}/>
+    
   </Form.Group>
   {/* instagram  */}
-    <Form.Group className="mb-3" controlId="formBasicLink" >
-    
+  <Form.Group className="mb-3" controlId="formBasicLink5" >
+  
     <Form.Control 
     name='instagram' 
     type="instagram" 
     placeholder={user.instagram? user.instagram:"Instagram Link" }
-    value={changedInfo.instagram} 
-    default={user.email}/>
+    onChange={handleChange}
+    defaultValue={user.instagram}/>
+    
   </Form.Group>
   {/* otherSocials  */}
-    <Form.Group className="mb-3" controlId="formBasicLink" >
+  <Form.Group className="mb-3" controlId="formBasicLink6" >
     
     <Form.Control 
     name='otherSocials' 
     type="otherSocials" placeholder={user.otherSocials? user.otherSocials:"include other social links" }
-    value={changedInfo.otherSocials} default={user.email}/>
+    onChange={handleChange}
+    defaultValue={user.otherSocials}/>
   </Form.Group>
   </div>
   <div className="section editSectionC">
@@ -143,7 +162,10 @@ axios
     name='password' 
     type="password" 
     placeholder={user.password} 
-    value={changedInfo.password} default={user.email}/>
+    onChange={handleChange}
+    defaultValue={user.password}
+    autoComplete={user.password}
+    />
   </Form.Group>
 
   <div className="section editSectionD">
@@ -153,12 +175,10 @@ axios
     name="aboutSection"
     as="textarea" 
     aria-label="With textarea" 
-    value=""
-    size="lg"
-
-
-
-    />
+    placeholder={user.aboutUser? user.aboutUser: "write a short bio about yourself"}
+    onChange={handleChange}
+    defaultValue={user.aboutSection}
+    size="xxl"/>
   </InputGroup>
   </div>
 </div>
