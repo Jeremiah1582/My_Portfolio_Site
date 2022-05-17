@@ -3,8 +3,8 @@ const Schema = mongoose.Schema
 
 const WorkExpSchema= new Schema({
       
-      startDate: Date,
-      endDate: Date,
+      startDate: String,
+      endDate: String,
       companyName: String,
       position: String,
       responsibilities: String

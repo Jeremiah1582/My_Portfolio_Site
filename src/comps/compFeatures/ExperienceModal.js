@@ -23,14 +23,15 @@ const [show, setShow] = useState(false)
          ;
          setWorkExp({...workExp, [e.target.name]: e.target.value})
      }
-     console.log(workExp)
-     const handleExpSubmit =()=>{
-         
+
+     const handleExpSubmit =(e)=>{
+     e.preventDefault()
+     const userId = user.user._id
         axios
-          .post("http://localhost:5001/user/addWorkExp", workExp, user.user._id)
+          .post("http://localhost:5001/user/addWorkExp", {userId,workExp})
           .then((result) => {
             console.log("addWorkExp result from Bck=", result);
-            setMsg(result.data.msg);
+            setMsg(result.msg);
           });
      }
 

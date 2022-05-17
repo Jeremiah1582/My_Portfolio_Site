@@ -26,19 +26,33 @@ exports.registerNewUser = (req, res) => {
     });
   }
 };
-// addWorkExp
+// addWorkExp--------------------
 exports.addWorkExp = (req, res) => {
   console.log("add workExp backend function 2", req.body);
-  // find by Id and update
+  //!cant use finByIdAndUpdate here, it lets us add 1 obj and then next obj we add overwrites the first
+  User.findByIdAndUpdate(req.body.userId, {$push:{"workExperience": req.body.workExp}},(request, result)=>{
+    if(request){
+      console.log("this is the request from addWorkExp backend func...",request);
+    }else if(result){
+      console.log("this is the result of the to send back to theClient side", result);
+
+      res.status(200).json({msg:"Work Experience saved", result})
+    }else{
+      console.log("nothing was returned from the function addworkExp");
+    }
+
+  })
+
 };
-// READ Doc
+
+// READ Doc------------------------------
 exports.readUser = (req, res) => {
   // Access database information
   User.findOne({ email: "jeremiah.1582@googlemail.com" }).then((result) => {
     if (!result) {
       console.log("there was an error retrieving document from database");
     } else if (result) {
-      console.log("found document successfully in database ", result);
+      // console.log("found document successfully in database ", result);
       res.status(200).json({ msg: "from back readUser function!", result });
     } else {
       console.log("no err & no doc from the database");
