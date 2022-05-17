@@ -7,5 +7,6 @@ router.get("/readUser", userController.readUser )
 router.post("/registerNewUser", userController.registerNewUser )
 router.post("/editUserInfo", userController.editUserInfo )
 router.post("/deleteUser", userController.deleteUser )
+router.post("/addWorkExp", userController.addWorkExp);
 
 module.exports = router

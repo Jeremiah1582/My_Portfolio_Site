@@ -66,15 +66,7 @@ console.log("useContext user after update", user);
                 password: data.result.password,
                 signupDate: data.result.signupDate,
                 aboutUser: data.result.aboutUser, 
-                workExperience:[
-                    {
-                    startDate: data.result.startDate,
-                    endDate:data.result.endDate,
-                    companyName:data.result.companyName,
-                    position: data.result.position,
-                    responsibilities: data.result.responsibilities
-                    }
-                ] 
+                workExperience: data.result.workExperience
                         })
         })
     }, [])

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const WorkXpSchema= new Schema({
+const WorkExpSchema= new Schema({
       
       startDate: Date,
       endDate: Date,
@@ -11,5 +11,5 @@ const WorkXpSchema= new Schema({
 
 })
 
-const workExperience = mongoose.modal("workExperience", WorkXpSchema )
-module.exports = workExperience
+const WorkExp = mongoose.model("WorkExp", WorkExpSchema )
+module.exports = WorkExp

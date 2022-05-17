@@ -8,6 +8,7 @@ Next Steps! need to make the site completely dynamic :
 
 <!-- next Steps -->
 <!-- 21.04.2022-- CRUD --CRU are done -->
-<!-- Authorise User -->
-<!-- Media Upload -->
-<!-- useReducer to edit the work experience -->
+<!-- 16.05 implement a DELETE function -->
+<!-- 16.05 useReducer to edit the work experience -->
+<!-- 16.05 Authorise User -->
+<!-- 16.05 Media Upload -->

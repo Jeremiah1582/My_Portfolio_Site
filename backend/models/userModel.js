@@ -60,7 +60,7 @@ const UserSchema= new Schema({
   ], 
   profilePic: {
       type: String, 
-      default: ""
+      default: "no profile picture"
   },
   password: {
       type: String,

@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const WorkExp = require("../models/workExpModel");
 
 // CREATE Doc
 exports.registerNewUser = (req, res) => {
@@ -25,6 +26,11 @@ exports.registerNewUser = (req, res) => {
     });
   }
 };
+// addWorkExp
+exports.addWorkExp = (req, res) => {
+  console.log("add workExp backend function 2", req.body);
+  // find by Id and update
+};
 // READ Doc
 exports.readUser = (req, res) => {
   // Access database information
@@ -47,11 +53,11 @@ exports.logIn = (req, res) => {
 // UPDATE Doc
 exports.editUserInfo = (req, res) => {
   // find the document you wish to edit.
-  User.findByIdAndUpdate(req.body._id, req.body, async function(err, result){
+  User.findByIdAndUpdate(req.body._id, req.body, async function (err, result) {
     if (err) {
       console.log(
         "there was an ERR with findbyIdAndUpdate() method in controller",
-       await err
+        await err
       );
       res.send(err);
     } else if (result) {
@@ -61,9 +67,10 @@ exports.editUserInfo = (req, res) => {
       console.log("function called but not working");
     }
   });
-  // Change, edit and update user information
 };
 
+// DELETE Doc
 exports.deleteUser = (req, res) => {
+  console.log("delete user", req.body);
   // delete user
 };

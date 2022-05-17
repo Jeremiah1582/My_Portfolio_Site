@@ -1,8 +1,14 @@
-import React from 'react'
-
+import React, {useState, useReducer} from 'react'
+import {Form} from "react-bootstrap"
+import ExperienceModal from "./compFeatures/ExperienceModal"
 function ExperiencePage() {
   return (
-    <div> Experience</div>
+    <div> 
+    <ExperienceModal/>
+    
+    </div>
+
+
   )
 }
 
