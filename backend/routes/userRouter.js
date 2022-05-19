@@ -8,5 +8,6 @@ router.post("/registerNewUser", userController.registerNewUser )
 router.post("/editUserInfo", userController.editUserInfo )
 router.post("/deleteUser", userController.deleteUser )
 router.post("/addWorkExp", userController.addWorkExp);
+router.post("/removeWorkExp", userController.removeWorkExp);
 
 module.exports = router

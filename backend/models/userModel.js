@@ -74,7 +74,18 @@ const UserSchema= new Schema({
       type:String,
       default:""
     },
-  workExperience:[]
+  workExperience:[{
+      userId:{ type:Schema.Types.ObjectId, ref:"User"},
+      imageLink: String,
+      companyLink:String,
+      startDate: String,
+      endDate: String,
+      companyName: String,
+      position: String,
+      responsibilities: String,
+
+
+  } ]
     
 
 })

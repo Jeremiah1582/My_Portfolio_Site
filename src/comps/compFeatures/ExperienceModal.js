@@ -4,15 +4,19 @@ import axios from "axios"
 import {UserContext} from "../../context/userContext"
 
 function ExperienceModal() {
-    const user = useContext(UserContext)
+    const user = useContext(UserContext) 
+    const userId = user.user._id
     const [workExp, setWorkExp] = useState({
-        startDate:{},
-        endDate:{},
-        companyName:"",  
-        position:"",
-        responsibilities:""
-    })
+      imageLink: "",
+      companyLink: "",
+      startDate: {},
+      endDate: {},
+      companyName: "",
+      position: "",
+      responsibilities: ""
+    });
     const [msg, setMsg] = useState('')
+   
     
 const [show, setShow] = useState(false)
      const handleClose = () => setShow(false);
@@ -24,16 +28,16 @@ const [show, setShow] = useState(false)
          setWorkExp({...workExp, [e.target.name]: e.target.value})
      }
 
-     const handleExpSubmit =(e)=>{
-     e.preventDefault()
-     const userId = user.user._id
+     const handleAddExpSubmit =(e)=>{
+    //  e.preventDefault()
         axios
-          .post("http://localhost:5001/user/addWorkExp", {userId,workExp})
+          .post("http://localhost:5001/user/addWorkExp", {workExp, userId})
           .then((result) => {
             console.log("addWorkExp result from Bck=", result);
             setMsg(result.msg);
           });
      }
+     
 
   return (
     <>
@@ -47,7 +51,7 @@ const [show, setShow] = useState(false)
           <Modal.Title>Add Work Experience</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleExpSubmit} >
+          <Form userId={userId} onSubmit={handleAddExpSubmit}>
             <Form.Group className="mb-3 col-5" controlId="startDate">
               <Form.Label>Start Date</Form.Label>
               <Form.Control
@@ -55,18 +59,18 @@ const [show, setShow] = useState(false)
                 type="date"
                 placeholder="start date"
                 onChange={handleExpInput}
-                value={workExp.startDate} 
+                value={workExp.startDate}
                 autoFocus
               />
             </Form.Group>
             <Form.Group className="mb-3 col-5" controlId="endDate">
-              <Form.Label>Start Date</Form.Label>
+              <Form.Label>End Date</Form.Label>
               <Form.Control
                 name="endDate"
                 type="date"
                 placeholder="end date"
                 onChange={handleExpInput}
-                value={workExp.endDate} 
+                value={workExp.endDate}
                 autoFocus
               />
             </Form.Group>
@@ -78,7 +82,7 @@ const [show, setShow] = useState(false)
                 type="name"
                 placeholder="Company Name"
                 onChange={handleExpInput}
-                value={workExp.companyName} 
+                value={workExp.companyName}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="position">
@@ -88,9 +92,8 @@ const [show, setShow] = useState(false)
                 type="name"
                 placeholder="position"
                 onChange={handleExpInput}
-                value={workExp.position} 
+                value={workExp.position}
               />
-             
             </Form.Group>
             <Form.Group className="mb-3" controlId="responsibilities">
               <Form.Label>responsibilities</Form.Label>
@@ -101,20 +104,20 @@ const [show, setShow] = useState(false)
                 type="name"
                 placeholder="responsibilities"
                 onChange={handleExpInput}
-                value={workExp.responsibilities} />
+                value={workExp.responsibilities}
+              />
             </Form.Group>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" type="submit" onClick={handleClose}>
-           Add Exp
-          </Button>
-        </Modal.Footer>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" type="submit" onClick={handleClose}>
+                Add Exp
+              </Button>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
-       
       </Modal>
     </>
   );

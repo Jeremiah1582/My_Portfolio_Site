@@ -1,5 +1,5 @@
 const User = require("../models/userModel");
-const WorkExp = require("../models/workExpModel");
+
 
 // CREATE Doc
 exports.registerNewUser = (req, res) => {
@@ -26,29 +26,42 @@ exports.registerNewUser = (req, res) => {
     });
   }
 };
-// addWorkExp--------------------
+// CREATE - addWorkExp--------------------
 exports.addWorkExp = (req, res) => {
   console.log("add workExp backend function 2", req.body);
+ 
   //!cant use finByIdAndUpdate here, it lets us add 1 obj and then next obj we add overwrites the first
-  User.findByIdAndUpdate(req.body.userId, {$push:{"workExperience": req.body.workExp}},(request, result)=>{
+  User.findByIdAndUpdate(req.body.userId, {$push:{"workExperience": req.body.workExp}},  (request, result)=>{
     if(request){
       console.log("this is the request from addWorkExp backend func...",request);
     }else if(result){
       console.log("this is the result of the to send back to theClient side", result);
-
       res.status(200).json({msg:"Work Experience saved", result})
     }else{
       console.log("nothing was returned from the function addworkExp");
     }
-
   })
-
 };
+// REMOVE Document
+exports.removeWorkExp = async (req, res) => {
+      User.findByIdAndUpdate(req.body.userId, {$pull:{"workExperience": {"_id":req.body.itemId}}},async (err,result)=>{
+        console.log("item id",req.body);
+       if(err){
+        console.log("error deleting the item form workExperience Array",err);
+       }else if(result){
+        console.log("this is the result from WrkExperience Array",result);
+       }
+       console.log(err,result);
+  })
+  await res.status(200).json({msg:"WrkExp Deleted"})
+ 
+  };
+ 
 
 // READ Doc------------------------------
-exports.readUser = (req, res) => {
+exports.readUser = async (req, res) => {
   // Access database information
-  User.findOne({ email: "jeremiah.1582@googlemail.com" }).then((result) => {
+  await User.findOne({ email: "jeremiah.1582@googlemail.com" }).then((result) => {
     if (!result) {
       console.log("there was an error retrieving document from database");
     } else if (result) {
