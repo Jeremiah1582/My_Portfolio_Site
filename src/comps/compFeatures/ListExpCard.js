@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import { Card, Button, Figure } from "react-bootstrap";
+import { Card, Button, Figure, Alert } from "react-bootstrap";
 import axios from "axios";
 import RemoveExpButton from "./RemoveExpButton"
+import LrgWrkExpModal from "./LrgWrkExpModal"
+import EditWrkExp from "./EditWrkExp"
 
 function ListExpCard() {
   const user = useContext(UserContext);
@@ -14,24 +16,22 @@ const userId = user.user._id
 
 
 const handleRemoveExp = (data) => {
-console.log(data);
 const itemId = data._id;
-
   axios
     .post("http://localhost:5001/user/removeWorkExp", { itemId, userId })
     .then((result) => {
       console.log("addWorkExp result from Bck=", result);
-      //  setMsg(result.msg);
-        
+       setMsg(result.data.msg);
     });
-  
-  
 };
-
+console.log(msg);
   return (
-    <div  className="flexContainer">
+    <div  >
+    {msg!==''? <Alert variant='success'> {msg}</Alert>:''} 
+    <div className="flexContainer">
+
       {workExperience.map((data) => {
-          
+         
      console.log(data._id)
         return (
           <div key={data._id}>
@@ -52,13 +52,16 @@ const itemId = data._id;
                 </Card.Subtitle>
                 {data.position}
                 <Card.Text>{data.responsibilities}</Card.Text>
-                <Card.Link>more...</Card.Link>
+                <LrgWrkExpModal data={data}>more...</LrgWrkExpModal>
+                
+                <EditWrkExp data={data}>Edit</EditWrkExp>
               </Card.Body>
-              <Button onClick={handleRemoveExp(data)}>Remove</Button>
+              <Button onClick={(e)=>handleRemoveExp(data)}>Remove</Button>
             </Card>
           </div>
         );
       })}
+    </div>
     </div>
   );
 }

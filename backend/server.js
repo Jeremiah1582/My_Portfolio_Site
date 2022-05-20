@@ -13,6 +13,7 @@ const PORT = 5001
 // middleware settings
 app.use(cors());
 app.use(express.static(__dirname + "/public"));
+app.use(express.urlencoded({ extended: true }));
 // Data parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -1,7 +1,9 @@
 const User = require("../models/userModel");
 
 
-// CREATE Doc
+// ------------------------------------CREATE FUnctiONs-------------------------------
+
+// CREATE Doc----------------------------
 exports.registerNewUser = (req, res) => {
   console.log("reg new usser. user controller L:4 ", req.body);
   const { email, password } = req.body;
@@ -42,23 +44,11 @@ exports.addWorkExp = (req, res) => {
     }
   })
 };
-// REMOVE Document
-exports.removeWorkExp = async (req, res) => {
-      User.findByIdAndUpdate(req.body.userId, {$pull:{"workExperience": {"_id":req.body.itemId}}},async (err,result)=>{
-        console.log("item id",req.body);
-       if(err){
-        console.log("error deleting the item form workExperience Array",err);
-       }else if(result){
-        console.log("this is the result from WrkExperience Array",result);
-       }
-       console.log(err,result);
-  })
-  await res.status(200).json({msg:"WrkExp Deleted"})
- 
-  };
+
  
 
-// READ Doc------------------------------
+// --------------------------------------------READ FUNCTIOns------------------------------
+// READ Doc-----------------
 exports.readUser = async (req, res) => {
   // Access database information
   await User.findOne({ email: "jeremiah.1582@googlemail.com" }).then((result) => {
@@ -76,8 +66,8 @@ exports.readUser = async (req, res) => {
 exports.logIn = (req, res) => {
   // login
 };
-
-// UPDATE Doc
+// -------------------------------------UPDATE FUNCtions-----------------------------------------------
+// UPDATE Doc-------------------------
 exports.editUserInfo = (req, res) => {
   // find the document you wish to edit.
   User.findByIdAndUpdate(req.body._id, req.body, async function (err, result) {
@@ -96,8 +86,32 @@ exports.editUserInfo = (req, res) => {
   });
 };
 
-// DELETE Doc
+// UPDATE NESTED ARRAY IN MONGO Doc,workExperience Array-------
+exports.updateWorkExp =(req,res)=>{
+  User.findByIdAndUpdate({}, {$set: {"workExperience._id:{req.body.itemId}":req.body.item
+  
+  }})
+}
+
+// -------------------------------------DELETE FUnctions--------------------------------- 
+// DELETE Doc--------------
 exports.deleteUser = (req, res) => {
   console.log("delete user", req.body);
   // delete user
 };
+
+// REMOVE Document-------------------
+exports.removeWorkExp = async (req, res) => {
+
+      User.findByIdAndUpdate(req.body.userId, {$pull:{"workExperience": {"_id":req.body.itemId}}}, async (err,result)=>{
+        console.log("item id",req.body);
+       if(err){
+        console.log("error deleting the item form workExperience Array",err);
+       }else if(result){
+        console.log("this is the result from WrkExperience Array",result);
+       }
+       console.log(err,result);
+  })
+  await res.status(200).json({msg:"Deleted! refresh page to see changes"})
+ 
+  };

@@ -22,26 +22,24 @@ const [show, setShow] = useState(false);
   console.log('clcked handle show')};
 
   return (
-  <BrowserRouter>
-    <div className="App">
-      <Nav handleClose={handleClose} handleShow={handleShow}/>
+    <BrowserRouter>
+      <div className="App">
+        <Nav handleClose={handleClose} handleShow={handleShow} />
 
-<Routes>
-  <Route exact path="/" element={<ProfilePage/> } />
-  <Route  path="/CodeStackPage" element={<CodeStackPage/> } />
-  <Route  path="/ExperiencePage" element={<ExperiencePage/> } />
-  <Route  path="/CVPage" element={<CVPage/> } />
-  <Route  path="/editUserInfo" element={<EditPage/> } />
-  
-</Routes>
-<CreateProfileModal show={show} handleClose={handleClose} handleShow={handleShow} />
-  
-      
-    
-
-
-    </div>  
-</BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<ProfilePage />} />
+          <Route path="/user/CodeStackPage" element={<CodeStackPage />} />
+          <Route path="/user/ExperiencePage" element={<ExperiencePage />} />
+          <Route path="/user/CVPage" element={<CVPage />} />
+          <Route path="/user/editUserInfo" element={<EditPage />} />
+        </Routes>
+        <CreateProfileModal
+          show={show}
+          handleClose={handleClose}
+          handleShow={handleShow}
+        />
+      </div>
+    </BrowserRouter>
   );
 }
 
