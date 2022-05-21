@@ -14,7 +14,7 @@ function EditWrkExp({ data, children }) {
     responsibilities: data.responsibilities,
   });
 
-  console.log(data);
+  console.log(changedState);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -32,6 +32,9 @@ function EditWrkExp({ data, children }) {
 
   return (
     <div>
+      <a href="#" onClick={handleShow}>
+        {children}
+      </a>
       <div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -39,7 +42,7 @@ function EditWrkExp({ data, children }) {
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleFormSubmit}>
-              <Form.Group className="mb-3" controlId="formBasicExpcompanyName">
+              <Form.Group className="mb-3" controlid="formBasicExpCompanyName">
                 <Form.Label>Company Name</Form.Label>
                 <Form.Control
                   type="name"
@@ -48,7 +51,7 @@ function EditWrkExp({ data, children }) {
                   onChange={handleInput}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicExpPosition">
+              <Form.Group className="mb-3" controlid="formBasicExpPosition">
                 <Form.Label>Position</Form.Label>
                 <Form.Control
                   type="name"
@@ -57,7 +60,7 @@ function EditWrkExp({ data, children }) {
                   onChange={handleInput}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicExpStartDate">
+              <Form.Group className="mb-3" controlid="formBasicExpStartDate">
                 <Form.Label>Start Date</Form.Label>
                 <Form.Control
                   type="Date"
@@ -67,7 +70,7 @@ function EditWrkExp({ data, children }) {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicExpEndDate">
+              <Form.Group className="mb-3" controlid="formBasicExpEndDate">
                 <Form.Label>End date</Form.Label>
                 <Form.Control
                   type="Date"
@@ -80,7 +83,7 @@ function EditWrkExp({ data, children }) {
               <Form.Group>
                 <Form.Label>Responsibilities</Form.Label>
                 <Form.Control
-                  controlId="formBasicExpResponsibilities"
+                  controlid="formBasicExpResponsibilities"
                   style={{ height: "250px" }}
                   name="responsibilities"
                   as="textarea"
@@ -97,15 +100,12 @@ function EditWrkExp({ data, children }) {
               </Form.Group>
 
               <Button type="submit" variant="primary">
-               Update
+                Update
               </Button>
             </Form>
           </Modal.Body>
           <Modal.Footer></Modal.Footer>
         </Modal>
-        <a href="#" onClick={handleShow}>
-          {children}
-        </a>
       </div>
     </div>
   );

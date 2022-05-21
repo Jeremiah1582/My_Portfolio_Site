@@ -43,11 +43,11 @@ console.log("useContext user after update", user);
  useEffect(() => {
  axios
         .get("http://localhost:5001/user/readUser")
-        .then(doc=>{
-          const{data}=doc
+        .then(async doc=>{
+          const {data}=doc
           console.log("this is the data from UserContext", data);
-          setMsg(data.msg)
-          setUser({
+          await setMsg(data.msg)
+          await setUser({
                 _id:data.result._id,
                 accountType: data.result.accoutType,
                 firstName: data.result.firstName,

@@ -52,9 +52,13 @@ console.log(msg);
                 </Card.Subtitle>
                 {data.position}
                 <Card.Text>{data.responsibilities}</Card.Text>
-                <LrgWrkExpModal data={data}>more...</LrgWrkExpModal>
                 
+                <div style={{display:"flex", justifyContent:"space-evenly"}}>
+                <LrgWrkExpModal data={data}>more...</LrgWrkExpModal>
                 <EditWrkExp data={data}>Edit</EditWrkExp>
+                </div>
+               
+                
               </Card.Body>
               <Button onClick={(e)=>handleRemoveExp(data)}>Remove</Button>
             </Card>
