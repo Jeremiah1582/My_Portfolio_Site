@@ -8,8 +8,6 @@ function LrgWrkExpModal({ data, children }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
-
  return (
    <div>
      <a href="#" onClick={handleShow}>
@@ -23,13 +21,20 @@ function LrgWrkExpModal({ data, children }) {
          <Card>
            <Card.Img src={data.imageLink} />
            <Card.Header closeButton>
-             <Card.Title>{data.companyName}</Card.Title> <br />
+             <Card.Title>
+               {" "}
+               <a href={data.companyLink}>{data.companyName}</a>
+               
+             </Card.Title>{" "}
+             <br />
              <div>{data.position}</div>
+             <br />
+             <div>
+               start date: {data.startDate} <br />
+               end date: {data.endDate}
+             </div>
            </Card.Header>
-           <div>
-             start date:{data.startDate} <br />
-             end date:{data.endDate}
-           </div>
+
            <br />
            <Card.Body>{data.responsibilities}</Card.Body>
            <Card.Footer></Card.Footer>

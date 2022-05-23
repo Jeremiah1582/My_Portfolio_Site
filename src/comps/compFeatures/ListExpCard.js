@@ -51,16 +51,16 @@ console.log(msg);
                   end date: {data.endDate}
                 </Card.Subtitle>
                 {data.position}
-                <Card.Text>{data.responsibilities}</Card.Text>
-                
-                <div style={{display:"flex", justifyContent:"space-evenly"}}>
-                <LrgWrkExpModal data={data}>more...</LrgWrkExpModal>
-                <EditWrkExp data={data}>Edit</EditWrkExp>
+                <Card.Text>{data.responsibilities.slice(0,75).concat("...")}</Card.Text>
+
+                <div
+                  style={{ display: "flex", justifyContent: "space-evenly" }}
+                >
+                  <LrgWrkExpModal data={data}>more...</LrgWrkExpModal>
+                  <EditWrkExp data={data}>Edit</EditWrkExp>
                 </div>
-               
-                
               </Card.Body>
-              <Button onClick={(e)=>handleRemoveExp(data)}>Remove</Button>
+              <Button onClick={(e) => handleRemoveExp(data)}>Remove</Button>
             </Card>
           </div>
         );
