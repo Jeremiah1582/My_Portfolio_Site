@@ -9,7 +9,7 @@ import EditWrkExp from "./EditWrkExp"
 function ListExpCard() {
   const user = useContext(UserContext);
   const { workExperience } = user.user;
-  const [workExp, setWorkExp] = useState({});
+  const [workExp, setWorkExp] = useState(workExperience);
   const [msg, setMsg] = useState("");
 
 const userId = user.user._id
@@ -24,17 +24,15 @@ const itemId = data._id;
        setMsg(result.data.msg);
     });
 };
-console.log(msg);
   return (
     <div  >
     {msg!==''? <Alert variant='success'> {msg}</Alert>:''} 
     <div className="flexContainer">
 
       {workExperience.map((data) => {
-         
-     console.log(data._id)
+          console.log(data._id)
         return (
-          <div key={data._id}>
+          <div key={data._id} id={data._id}>
             <Card className="section" style={{ width: "18rem" }}>
               <Figure>
                 <Figure.Image
@@ -45,13 +43,15 @@ console.log(msg);
                 />
               </Figure>
               <Card.Body>
-                <Card.Title href="#">{data.companyName}</Card.Title>
+                <Card.Title href="#">{data.companyName.toUpperCase()}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
                   start date: {data.startDate} <br />
                   end date: {data.endDate}
                 </Card.Subtitle>
                 {data.position}
-                <Card.Text>{data.responsibilities.slice(0,75).concat("...")}</Card.Text>
+                <Card.Text>
+                  {data.responsibilities.slice(0, 75).concat("...")}
+                </Card.Text>
 
                 <div
                   style={{ display: "flex", justifyContent: "space-evenly" }}

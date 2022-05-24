@@ -1,31 +1,35 @@
 const User = require("../models/userModel");
 
 
-// ------------------------------------CREATE FUnctiONs-------------------------------
+// -----------------CREATE FUnctiONs-------------------------------
 
 // CREATE Doc----------------------------
 exports.registerNewUser = (req, res) => {
   console.log("reg new usser. user controller L:4 ", req.body);
   const { email, password } = req.body;
+  if(email && password){
+    if (req.body) {
+      const newUser = new User(req.body);
 
-  if (req.body) {
-    const newUser = new User(req.body);
-    newUser.save((err, doc) => {
-      if (err) {
-        console.log("there was an error L:13 usercontroller", err);
-        throw err;
-        //    console.log(err);
-      } else if (doc) {
-        console.log("L:18 controller", doc);
-        res.status(200).json({
-          msg: "New User Saved- msg froom backend saved function. userController L:16",
-        });
-      } else {
-        res.status().json({
-          msg: "there was a problem in the registerNewUser in the userController L:20",
-        });
-      }
-    });
+      newUser.save((err, doc) => {
+        if (err) {
+          console.log("there was an error L:13 usercontroller", err);
+          throw err;
+          //    console.log(err);
+        } else if (doc) {
+          console.log("L:18 controller", doc);
+          res.status(200).json({
+            msg: "New User Saved- msg froom backend saved function. userController L:16",
+          });
+        } else {
+          res.status().json({
+            msg: "there was a problem in the registerNewUser in the userController L:20",
+          });
+        }
+      });
+    }
+  }else{
+    res.status(500).json({msg:"email or password is missing"})
   }
 };
 // CREATE - addWorkExp--------------------
@@ -47,11 +51,11 @@ exports.addWorkExp = (req, res) => {
 
  
 
-// --------------------------------------------READ FUNCTIOns------------------------------
+// -------------------READ FUNCTIOns------------------------------
 // READ Doc-----------------
 exports.readUser = async (req, res) => {
   // Access database information
-  await User.findOne({ email: "jeremiah.1582@googlemail.com" }).then((result) => {
+  await User.findOne({ email: "david.1582@googlemail.com" }).then((result) => {
     if (!result) {
       console.log("there was an error retrieving document from database");
     } else if (result) {
@@ -66,7 +70,7 @@ exports.readUser = async (req, res) => {
 exports.logIn = (req, res) => {
   // login
 };
-// -------------------------------------UPDATE FUNCtions-----------------------------------------------
+// -----------------------UPDATE FUNCtions-------------------------
 // UPDATE Doc-------------------------
 exports.editUserInfo = (req, res) => {
   // find the document you wish to edit.
@@ -88,9 +92,32 @@ exports.editUserInfo = (req, res) => {
 
 // UPDATE NESTED ARRAY IN MONGO Doc,workExperience Array-------
 exports.updateWorkExp =(req,res)=>{
-  User.findByIdAndUpdate({}, {$set: {"workExperience._id:{req.body.itemId}":req.body.item
-  
-  }})
+  console.log("updateWorkExp req.body is..", req.body);
+const itemId = req.body.changedState.itemId
+const userId = req.body.changedState.userId
+ 
+User.find(
+    { _id: userId },
+    { workExperience:{ $elemMatch: {_id: itemId}}},(err, result) => {
+      if (err) {
+        console.log("this is the err from wrkexp update...",err);
+      }else{
+         console.log(" User.find wrkexp...", result[0])
+      }
+   ;
+  }
+  );
+// User.find(
+//     { _id: userId },
+//     { workExperience:{ $elemMatch: {_id: itemId}}},(err, result) => {
+//       if (err) {
+//         console.log("this is the err from wrkexp update...",err);
+//       }else{
+//          console.log(" User.find wrkexp...", result[0])
+//       }
+//    ;
+//   }
+//   );
 }
 
 // -------------------------------------DELETE FUnctions--------------------------------- 
