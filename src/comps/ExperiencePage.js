@@ -6,8 +6,10 @@ import ListExpCard from "./compFeatures/ListExpCard"
 function ExperiencePage() {
   return (
     <div> 
+  
+    <ListExpCard></ListExpCard>  
+      
     <ExperienceModal/>
-    <ListExpCard></ListExpCard>
     </div>
 
 

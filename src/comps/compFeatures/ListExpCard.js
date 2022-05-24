@@ -39,7 +39,7 @@ const itemId = data._id;
                   width={171}
                   height={180}
                   alt="171x180"
-                  src="holder.js/171x180"
+                  src={data.imageLink}
                 />
               </Figure>
               <Card.Body>

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSignupDate = new Date()
-console.log(userSignupDate);
+// console.log(userSignupDate);
 
 
 const UserSchema = new Schema({
