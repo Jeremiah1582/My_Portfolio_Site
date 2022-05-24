@@ -63,6 +63,7 @@ exports.readUser = async (req, res) => {
       res.status(200).json({ msg: "from back readUser function!", result });
     } else {
       console.log("no err & no doc from the database");
+      
     }
   });
 };
