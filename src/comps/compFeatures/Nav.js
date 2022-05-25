@@ -13,6 +13,9 @@ function Nav({handleClose, handleShow}) {
       <span></span>
       <nav id="navBar">
         <Link className="navLink" to="/">
+          Home
+        </Link>
+        <Link className="navLink" to="/user/ProfilePage">
           Profile
         </Link>
         <Link className="navLink" to="/user/CVPage">

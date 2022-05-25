@@ -1,6 +1,7 @@
 
 import React,{useState  } from "react";
 import Nav from "./comps/compFeatures/Nav";
+import HomePage from "./comps/HomePage";
 import ProfilePage from "./comps/ProfilePage";
 import CodeStackPage from "./comps/CodeStackPage";
 import ExperiencePage from "./comps/ExperiencePage";
@@ -14,12 +15,23 @@ import {BrowserRouter,
 
 
 
-
 function App() {
 const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => {setShow(true)
   console.log('clcked handle show')};
+
+  // window.onscroll= function(){
+  //   stickyNavFunction()
+  // }
+  // let sticky= Nav.offsetTop
+  // function stickyNavFunction (){
+  //   if (window.pageYOffset>=sticky) {
+  //     Nav.classList.add("sticky")     
+  //   }else{
+  //     Nav.classList.remove("sticky")
+  //   }
+  // }
 
   return (
     <BrowserRouter>
@@ -27,7 +39,8 @@ const [show, setShow] = useState(false);
         <Nav handleClose={handleClose} handleShow={handleShow} />
 
         <Routes>
-          <Route exact path="/" element={<ProfilePage />} />
+          <Route exact path="/" element={<HomePage />} />
+          <Route path="/user/ProfilePage" element={<ProfilePage />} />
           <Route path="/user/CodeStackPage" element={<CodeStackPage />} />
           <Route path="/user/ExperiencePage" element={<ExperiencePage />} />
           <Route path="/user/CVPage" element={<CVPage />} />

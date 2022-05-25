@@ -71,7 +71,7 @@ exports.addWorkExp = (req, res) => {
 // -------------------READ FUNCTIOns-------------------
 // READ Doc-----------------
 exports.readUser = async (req, res) => {
-  await User.findOne({ email: "david.1582@googlemail.com" }).then((result) => {
+  await User.findOne({ email: "jeremiah.1582@googlemail.com" }).then((result) => {
     if (!result) {
       console.log("there was an error retrieving document from database");
     } else if (result) {
@@ -158,18 +158,7 @@ exports.updateWorkExp = (req, res) => {
     }
   });
 };
-// TEST: $elemMatch to find specific object in nested array------
-// User.find(
-//     { _id: userId },
-//     { workExperience:{ $elemMatch: {_id: itemId}}},(err, result) => {
-//       if (err) {
-//         console.log("this is the err from wrkexp update...",err);
-//       }else{
-//          console.log(" User.find wrkexp...", result[0])
-//       }
-//    ;
-//   }
-//   );---------------------------------------
+
 
 // -------------------------------------DELETE FUnctions---------------------------------
 // DELETE Doc--------------
@@ -195,3 +184,18 @@ exports.removeWorkExp = async (req, res) => {
   );
   await res.status(200).json({ msg: "Deleted! refresh page to see changes" });
 };
+
+// -----------Example Function-------------
+// TEST: $elemMatch to find specific object in nested array------
+// User.find(
+//     { _id: userId },
+//     { workExperience:{ $elemMatch: {_id: itemId}}},(err, result) => {
+//       if (err) {
+//         console.log("this is the err from wrkexp update...",err);
+//       }else{
+//          console.log(" User.find wrkexp...", result[0])
+//       }
+//    ;
+//   }
+//   );---------------------------------------
+

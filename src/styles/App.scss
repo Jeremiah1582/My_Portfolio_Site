@@ -16,13 +16,15 @@ $nthChildEvenColor: rgba(218, 218, 218, 0.946);
 .App {
   text-align: center;
   background-color: whitesmoke;
+  height: 10%;
+  width: 100%;
 }
 #navContainer{
 width: 100%;  
 z-index: $foregroundIndex;
 display: flex;
 justify-content: flex-end;
-background-color: rgba(72, 72, 72, 0.659) ;
+// background-color: rgba(72, 72, 72, 0.102) ;
 
   #navBar{
     width: 100%;
@@ -30,6 +32,8 @@ background-color: rgba(72, 72, 72, 0.659) ;
     justify-content: space-evenly;
     padding: 1%;
     z-index: $foregroundIndex;
+    overflow: hidden;
+   
    .navLink{
       text-decoration: none;
       color: #ffff;
@@ -50,15 +54,13 @@ min-width: 393px;
 
 }
 
-
-#imgContainerProfile{
+.imgContainerProfile{
 height: $section_height;
 width: $section_width;
 // display: flex;
 // justify-content: center;
-
+}
 .backgroundImage{ 
-  
   width: 100%;
   height: $section_height;
   // z-index: $backgroundIndex;
@@ -79,6 +81,7 @@ width: $section_width;
   }
 }
 
+
   .profilePic{
     height: 175px;
     width: 175px;
@@ -97,7 +100,8 @@ width: $section_width;
       transition-duration: 1s;
     }
   }
-}
+
+
 
 .section{
   min-height: 200px;
@@ -106,6 +110,7 @@ width: $section_width;
   width: $section_width;
   margin-bottom: 70px;
   margin: 35px;
+  z-index: 1;
 }
 
 .list{
@@ -138,10 +143,17 @@ width: $section_width;
   }
 
   .footer{
-  bottom: 0px;
-   width: 100%;
-   min-height: 140px;
-   height: 200px
+//  position: absolute;
+ bottom: 0;
+  width: 100%;
+  min-height: 140px;
+  height: 200px;
+  background:  
+      linear-gradient(
+      rgba(7, 7, 7, 0.186), 
+      rgba(9, 9, 9, 0.308)
+    ),;
+
   }
 
   // EditPage Styling 
@@ -149,7 +161,10 @@ width: $section_width;
  Form .flexContainer{
     width: 100%;
     height: 100%;
+    bottom: 0;
+    border: black dotted;
     display: flex;
+
   }
    .editSectionA{ 
     
@@ -164,6 +179,66 @@ width: $section_width;
 
      
   }
+
+.homeHeaderContainer{
+  position: absolute;
+  top: 0;
+  // display: flex;
+  background-image: 
+      linear-gradient(
+      rgba(9, 9, 9, 0.655),
+      rgba(7, 7, 7, 0.186) 
+      
+    ),
+    /* header image */
+    url("../images/42174058_1133626796762326_7214894932375371776_n.jpg");
+
+background-position:center;
+min-height: 100vh;
+min-width: 100vw;
+border: solid black thin;
+background-size: cover;
+background-repeat: no-repeat;
+z-index: $backgroundIndex;
+}
+.headerContainer{
+  position: absolute;
+  top: 0;
+  // display: flex;
+  background-image: 
+      linear-gradient(
+      rgba(7, 7, 7, 0.722), 
+      rgba(9, 9, 9, 0.597)
+    ),
+    /* header image */
+    url("../images/the-matterhorn-as-seen-from-the-lauterbrunnen-valley-digitally-stitched-by-dominic-kamp.jpg");
+background-attachment: fixed;
+background-position: bottom;
+min-height: 100vh;
+min-width: 100vw;
+border: solid black thin;
+background-size: cover;
+background-repeat: no-repeat;
+z-index: $backgroundIndex;
+}
+.headerText1{
+text-align: center;
+top: 50%;
+left: 50%;
+transform: translate(-50%);
+position: absolute;
+
+color: whitesmoke;
+z-index: $foregroundIndex;
+animation: drop_down 3.5s ;
+
+}
+
+  @keyframes drop_down {
+  from { top: -10%}
+  to {top: 50%}}
+
+
 
   
 
