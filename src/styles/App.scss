@@ -80,7 +80,11 @@ width: $section_width;
     }
   }
 }
-
+.profilePageContainer{
+  display: grid;
+  width: 100%;
+  height: 100%;
+}
 
   .profilePic{
     height: 175px;
@@ -89,9 +93,10 @@ width: $section_width;
     background-color: rgb(128, 128, 128);
     box-shadow: 2px 2px 4px #3f3f3f83 ;
     z-index: $middlegroundIndex;
-    position: absolute;
-    top: 51px;
+    // position: absolute;
+    // top: 51px;
     left: 50%;
+    text-align: center;
     transform: translate(-50%);
     &:hover{
       height: 195px;
@@ -166,19 +171,7 @@ width: $section_width;
     display: flex;
 
   }
-   .editSectionA{ 
-    
-  }
-  .editSectionB{ 
-     
-  }
-  .editSectionC{ 
-     
-  }
-  .editSectionD{ 
 
-     
-  }
 
 .homeHeaderContainer{
   position: absolute;
@@ -204,6 +197,7 @@ z-index: $backgroundIndex;
 .headerContainer{
   position: absolute;
   top: 0;
+  padding: 20px;
   // display: flex;
   background-image: 
       linear-gradient(
@@ -231,12 +225,25 @@ position: absolute;
 color: whitesmoke;
 z-index: $foregroundIndex;
 animation: drop_down 3.5s ;
-
+}
+.signature{
+text-align: center;
+top: 65%;
+left: 50%;
+transform: translate(-50%);
+color: whitesmoke;
+font-size: "13px";
+position: absolute;
+  animation: pull_up 5s;
 }
 
   @keyframes drop_down {
   from { top: -10%}
   to {top: 50%}}
+
+  @keyframes pull_up {
+  from { top: 110%}
+  to {top: 65%}}
 
 
 

@@ -7,7 +7,7 @@ function ProfileImgSec({page, children}) {
 
   return (
     <div >
-      <img className={page==="HomePage"?"HomeprofilePic": "profilePic"} src={profilePic} alt="profile" ></img>
+      <img className={page==="HomePage"?"HomeprofilePic": "profilePic "} src={profilePic} alt="profile" ></img>
     </div>
   );
 }

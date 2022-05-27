@@ -3,6 +3,7 @@ import {Modal, Button, Form} from "react-bootstrap"
 import axios from "axios"
 import {UserContext } from "../../context/userContext"
 
+
 function CreateProfileModal({show,handleClose, handleShow}) {  
 const {emptyUserState, user} = useContext(UserContext)
 const [newUser, setNewUser] = useState({

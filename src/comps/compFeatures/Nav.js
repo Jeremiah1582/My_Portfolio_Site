@@ -7,7 +7,7 @@ import {
 
 
 
-function Nav({handleClose, handleShow}) {
+function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
   return (
     <div id="navContainer">
       <span></span>
@@ -34,9 +34,20 @@ function Nav({handleClose, handleShow}) {
           Edit Profile
         </Link>{" "}
         {/*must be signed in to edit profile */}
-        <Link className="navLink" to="#" onClick={handleShow}>
+        <Link 
+        className="navLink" 
+        to="#" 
+        onClick={handleShow}>
           {" "}
           Create Profile{" "}
+        </Link>
+        
+        <Link 
+        className="navLink" 
+        to="#" 
+        onClick={handleLoginShow}>
+          {" "}
+          Login{" "}
         </Link>
       </nav>
 

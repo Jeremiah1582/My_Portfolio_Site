@@ -70,6 +70,10 @@ exports.addWorkExp = (req, res) => {
 
 // -------------------READ FUNCTIOns-------------------
 // READ Doc-----------------
+exports.logIn = (req, res) => {
+console.log(req.body);
+};
+
 exports.readUser = async (req, res) => {
   await User.findOne({ email: "jeremiah.1582@googlemail.com" }).then((result) => {
     if (!result) {
@@ -81,6 +85,7 @@ exports.readUser = async (req, res) => {
     }
   });
 };
+
 
 // Test: Find Admin Users Function using $elemMatch ----
 exports.findAdmins = (req, res) => {
@@ -104,9 +109,7 @@ exports.findAdmins = (req, res) => {
   );
 }; //function is untested 
 
-exports.logIn = (req, res) => {
-  // login
-};
+
 // ---------UPDATE FUNCtions--------------------
 // UPDATE Doc-------------------------
 exports.editUserInfo = (req, res) => {

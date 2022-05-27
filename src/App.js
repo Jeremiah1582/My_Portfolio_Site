@@ -7,6 +7,7 @@ import CodeStackPage from "./comps/CodeStackPage";
 import ExperiencePage from "./comps/ExperiencePage";
 import CVPage from "./comps/CVPage";
 import CreateProfileModal from "./comps/compFeatures/CreateProfileModal";
+import LoginModal from "./comps/compFeatures/LoginModal"
 import EditPage from "./comps/EditPage";
 import {BrowserRouter,
   Routes,
@@ -17,9 +18,11 @@ import {BrowserRouter,
 
 function App() {
 const [show, setShow] = useState(false);
+const [loginShow, setLoginShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => {setShow(true)
-  console.log('clcked handle show')};
+  const handleLoginClose = () => setLoginShow(false);
+  const handleShow = () => setShow(true);
+  const handleLoginShow = () => setLoginShow(true);
 
   // window.onscroll= function(){
   //   stickyNavFunction()
@@ -36,7 +39,12 @@ const [show, setShow] = useState(false);
   return (
     <BrowserRouter>
       <div className="App">
-        <Nav handleClose={handleClose} handleShow={handleShow} />
+        <Nav
+          handleClose={handleClose}
+          handleShow={handleShow}
+          handleLoginClose={handleLoginClose}
+          handleLoginShow={handleLoginShow}
+        />
 
         <Routes>
           <Route exact path="/" element={<HomePage />} />
@@ -50,6 +58,11 @@ const [show, setShow] = useState(false);
           show={show}
           handleClose={handleClose}
           handleShow={handleShow}
+        />
+        <LoginModal
+          loginShow={loginShow}
+          handleLoginClose={handleLoginClose}
+          handleLoginShow={handleLoginShow}
         />
       </div>
     </BrowserRouter>

@@ -9,21 +9,21 @@ import AnimationSec from "./sections/AnimationSec";
 function ProfilePage({children}) { //want to be able to add <sections/> dynamically using a Content Management System (CSM). Props/Context is key here
   console.log(window);
   return (
-    <div>
-    <Header page="ProfilePage">
-    
-    </Header>
-   
+    <div >
+      <Header page="ProfilePage"></Header>
+      <div className="profilePageContainer">
+      <ProfileImgSec page="ProfilePage"></ProfileImgSec>
 
-    <div className="flexContainer">
-      <ProfileInfoSec/>
-      <AboutSec/>
-      <AnimationSec/>
+      <div className="flexContainer">
+        <ProfileInfoSec />
+       
+        <AboutSec />
+        <AnimationSec />
+      </div>
     </div>
-
-    <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }
 
 export default ProfilePage
