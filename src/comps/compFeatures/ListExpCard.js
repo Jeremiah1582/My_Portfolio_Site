@@ -31,6 +31,8 @@ const itemId = data._id;
 
       {workExperience.map((data) => {
           console.log(data._id)
+
+          {if(data._id){
         return (
           <div key={data._id} id={data._id}>
             <Card className="section" style={{ width: "18rem" }}>
@@ -64,7 +66,11 @@ const itemId = data._id;
             </Card>
           </div>
         );
-      })}
+      }else{
+        <h1>no work experience listed </h1>
+      }
+        }}
+      )}
     </div>
     </div>
   );

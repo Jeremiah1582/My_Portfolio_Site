@@ -1,17 +1,18 @@
 import React, {useState, useContext} from 'react'
-import {Modal, Button, Form} from "react-bootstrap"
+import {Modal, Button, Form, Alert} from "react-bootstrap"
 import axios from "axios"
 import {UserContext } from "../../context/userContext"
 
 
 function CreateProfileModal({show,handleClose, handleShow}) {  
 const {emptyUserState, user} = useContext(UserContext)
+const [msg, setMsg] = useState("")
 const [newUser, setNewUser] = useState({
   email:"",
   password:""
 }) 
 // generate sign up date
-const signupDate = new Date;
+const signupDate = new Date();
 
 // handle Functions 
 const handleInput=(e)=>{
@@ -22,6 +23,7 @@ const handleInput=(e)=>{
 }
 
  const handleFormSubmit =(e)=>{
+   e.preventDefault()
    console.log("the newUser state is L:20 ", newUser) ;
   // post to backend function
 axios
@@ -32,6 +34,13 @@ axios
        email:"",
       password:""
     })
+    setMsg(result.data.msg)
+
+    setTimeout(() => {
+      handleClose()
+      setMsg('')
+    }
+      , 5000);
   })
  }
 
@@ -39,58 +48,51 @@ axios
    if(show===true){
   return (
     <div>
- 
-  <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Create Profile</Modal.Title>
         </Modal.Header>
+        {msg !== "" ? <Alert variant="warning">{msg}</Alert> : ""}
         <Modal.Body>
-        <Form onSubmit={handleFormSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control 
-            type="email" 
-            placeholder="Enter email"
-            name="email"
-            value={newUser.email}
-            onChange={handleInput}
-            />
-            
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+          <Form onSubmit={handleFormSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                value={newUser.email}
+                onChange={handleInput}
+              />
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control 
-            type="password" 
-            placeholder="Password"
-            name="password"
-            onChange={handleInput}
-            value={newUser.password} />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
 
-           <Button type="submit" variant="primary" >
-            Create Profile
-          </Button>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={handleInput}
+                value={newUser.password}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+              <Form.Check type="checkbox" label="Check me out" />
+            </Form.Group>
 
-        </Form>         
-        </Modal.Body>    
-        <Modal.Footer>
-        
-         
-        </Modal.Footer>
+            <Button type="submit" variant="primary">
+              Create Profile
+            </Button>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     </div>
-  )
+  );
    }else{
      return (
        <div></div>

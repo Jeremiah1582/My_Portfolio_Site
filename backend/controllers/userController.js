@@ -1,4 +1,6 @@
 const User = require("../models/userModel");
+const jwt = require('jsonwebtoken')
+require("dotenv").config()
 
 const today= (new Date()).getDate()
 const month =(new Date()).getMonth() +1
@@ -15,31 +17,44 @@ const currentTime = Date();
 // CREATE Doc----------------------------
 exports.registerNewUser = (req, res) => {
   console.log("reg new usser. user controller L:4 ", req.body);
-  const { email, password } = req.body;
-  if (email && password) {
-    if (req.body) {
-      const newUser = new User(req.body);
+  const { 
+    email, 
+    password 
+  } = req.body;
+  //this is where we need to encrypt the password 
+  // check to see if Doc exists in database
+User.findOne({email:email}, (errRes,docRes)=>{
+  if(docRes){
+    res.json({msg:"this email already has an account", forgotPassword:false})
+  }else if(errRes){
+    res.json({msg: "there was an error creating new account", errRes})
+  }else if(!errRes && !docRes && email && password){
+          const newUser = new User(req.body);
+          newUser.save((err, doc) => {
+            if (err) {
+              console.log("there was an error L:13 usercontroller", err);
+              res.status(501).json(err);
+              throw err;
+              //    console.log(err);
+            } else if (doc) {
+              console.log("L:18 controller", doc);
+              res.status(200).json({
+                msg: "New User Saved- msg froom backend saved function. userController L:16",
+              });
+            } else {
+              res.status().json({
+                msg: "there was a problem in the registerNewUser in the userController L:20",
+              });
+            }
+          });
+        
+      } else {
+        res.status(500).json({ msg: "email or password is missing" });
+      }
+})
 
-      newUser.save((err, doc) => {
-        if (err) {
-          console.log("there was an error L:13 usercontroller", err);
-          throw err;
-          //    console.log(err);
-        } else if (doc) {
-          console.log("L:18 controller", doc);
-          res.status(200).json({
-            msg: "New User Saved- msg froom backend saved function. userController L:16",
-          });
-        } else {
-          res.status().json({
-            msg: "there was a problem in the registerNewUser in the userController L:20",
-          });
-        }
-      });
-    }
-  } else {
-    res.status(500).json({ msg: "email or password is missing" });
-  }
+
+
 };
 // CREATE - addWorkExp--------------------
 exports.addWorkExp = (req, res) => {
@@ -72,10 +87,32 @@ exports.addWorkExp = (req, res) => {
 // READ Doc-----------------
 exports.logIn = (req, res) => {
 console.log(req.body);
+const {email, password}=req.body.loginDetails
+User.findOne({email:email, password:password},async (err,result)=>{
+
+  if (!result && !err) {
+    res.send("email or password were incorrect- no result , no err ");
+  }else if(err){
+    res.send("there was an error accessing this information")
+    throw err 
+  }else if (result){
+    //add JWT token
+    const accessToken = jwt.sign({accountEmail:result.email}, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "1d", // 60*60*24
+      algorithm: "HS256", //setting the algorithm
+    }); //here accountEmail is becoming the payload of the JWT token. We are storing the token inside acessToken
+    await res.status(200).json({accessToken:accessToken});
+  } else {
+    console.log("there is a problem with login function");
+  }
+  }
+ 
+)
 };
 
+
 exports.readUser = async (req, res) => {
-  await User.findOne({ email: "jeremiah.1582@googlemail.com" }).then((result) => {
+  await User.findById("6290ca34e754858fb0f5ff98").then((result) => {
     if (!result) {
       console.log("there was an error retrieving document from database");
     } else if (result) {

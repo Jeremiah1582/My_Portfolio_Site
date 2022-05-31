@@ -36,13 +36,12 @@ justify-content: flex-end;
    
    .navLink{
       text-decoration: none;
-      color: #ffff;
+      color: rgb(175, 5, 5);
       &:hover{
         color: $difColor;
       }
     }
   }
-  
 }
 
 .flexContainer{
@@ -223,11 +222,12 @@ transform: translate(-50%);
 position: absolute;
 
 color: whitesmoke;
-z-index: $foregroundIndex;
+// z-index: $foregroundIndex;
 animation: drop_down 3.5s ;
 }
 .signature{
 text-align: center;
+margin-top: 5%;
 top: 65%;
 left: 50%;
 transform: translate(-50%);
@@ -245,7 +245,33 @@ position: absolute;
   from { top: 110%}
   to {top: 65%}}
 
+@media only screen and (min-width: 700px) {
+#navContainer{
+width: 100%;  
+z-index: $foregroundIndex;
+display: flex;
+justify-content: flex-end;
+// background-color: rgba(72, 72, 72, 0.102) ;
 
+  #navBar{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1%;
+    z-index: $foregroundIndex;
+    overflow: hidden;
+   
+   .navLink{
+      text-decoration: none;
+      color: #ffff;
+      &:hover{
+        color: $difColor;
+      }
+    }
+  }
+  
+}
+}
 
   
 

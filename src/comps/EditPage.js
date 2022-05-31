@@ -2,7 +2,10 @@ import React, { useContext, useState, useEffect, useReducer } from "react";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
-export default function EditPage() {
+import ExperienceModal from "./compFeatures/AddExperienceModal";
+
+
+ function EditPage() {
   const { user, setUser } = useContext(UserContext);
 
   const handleChange = (e) => {
@@ -24,6 +27,7 @@ export default function EditPage() {
 
   return (
     <div>
+      <ExperienceModal />
       <div>
         <Form onSubmit={handleSubmitChange} className="flexContainer">
           {/* first name */}
@@ -156,29 +160,31 @@ export default function EditPage() {
                 autoComplete={user.password}
               />
             </Form.Group>
-
             <div className="section editSectionD">
               <InputGroup>
                 <InputGroup.Text>About</InputGroup.Text>
                 <Form.Control
-                style={{height:"250px"}}
+                  style={{ height: "250px" }}
                   name="aboutUser"
                   as="textarea"
                   aria-label="With textarea"
-                  placeholder={user.aboutUser? user.aboutUser: "write a short bio about yourself"}
+                  placeholder={
+                    user.aboutUser
+                      ? user.aboutUser
+                      : "write a short bio about yourself"
+                  }
                   onChange={handleChange}
                   defaultValue={user.aboutUser}
                   size="xxl"
                 />
               </InputGroup>
-            </div> <Button variant="primary" type="submit">
-          Update Profile
-          </Button>
+            </div>{" "}
+            <Button variant="primary" type="submit">
+              Update Profile
+            </Button>
           </div>
-
-         
         </Form>
       </div>
     </div>
   );
-}
+}export default EditPage

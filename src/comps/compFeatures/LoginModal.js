@@ -1,35 +1,55 @@
-import React, {useContext, useState} from "react"
-import {Form, Modal, Button} from "react-bootstrap"
-import axios from "axios"
-function LoginModal({loginShow, handleLoginClose,handleLoginShow}) {
+import React, { useContext, useState } from "react";
+import { Form, Modal, Button, Alert } from "react-bootstrap";
+import { UserContext } from "../../context/userContext";
+import { Redirect, Route } from "react-router-dom";
+import axios from "axios";
 
-      const [loginDetails, setLoginDetails] = useState({
-          email:"", 
-          password:""
-        })
+import HomePage from "../HomePage";
+import ProfilePage from "../ProfilePage";
 
+function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
+  const { user, setUser } = useContext(UserContext);
+  const [isPending, setIsPending] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [loginDetails, setLoginDetails] = useState({
+    email: "",
+    password: "",
+  });
 
-      const handleInput =(e)=>{
-          setLoginDetails({...loginDetails, [e.target.name]: e.target.value})
-      }
-      const handleFormSubmit =(e)=>{
-        axios
-        .post("", {loginDetails})
-        .then((result)=>{
-            
-        })}
+  const handleInput = (e) => {
+    setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value });
+    console.log(loginDetails);
+  };
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setIsPending(true);
+    axios
+      .post("http://localhost:5001/user/login", { loginDetails })
+      .then((result) => {
+        console.log("login modal call results", result.data);
+        if (result.data.accessToken) {
+          console.log("you have a JWT TOKEN !!")
+        }
+        if (result.data.accessToken) {
+          setUser(result.data);
+          setIsPending(false);
+          handleLoginClose();
+          window.location.href="/user/ProfilePage"
+        } else {
+          setMsg(result.data);
+          setIsPending(false);
+        }
+      });
+  };
 
   return (
     <div>
       <div>
-        <Button variant="primary" onClick={handleLoginShow}>
-          Launch demo modal
-        </Button>
-
         <Modal show={loginShow} onHide={handleLoginClose}>
           <Modal.Header closeButton>
             <Modal.Title>Login Modal</Modal.Title>
           </Modal.Header>
+          {msg !== "" ? <Alert variant="warning">{msg}</Alert> : ""}
           <Modal.Body>
             <Form onSubmit={handleFormSubmit}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -61,9 +81,12 @@ function LoginModal({loginShow, handleLoginClose,handleLoginShow}) {
                 <Form.Check type="checkbox" label="Check me out" />
               </Form.Group>
 
-              <Button type="submit" variant="primary">
-               Login
-              </Button>
+              {!isPending && (
+                <Button type="submit" variant="primary">
+                  Login
+                </Button>
+              )}
+              {isPending && <Button disabled>Logging in ...</Button>}
             </Form>
           </Modal.Body>
           <Modal.Footer></Modal.Footer>
@@ -73,4 +96,4 @@ function LoginModal({loginShow, handleLoginClose,handleLoginShow}) {
   );
 }
 
-export default LoginModal
+export default LoginModal;

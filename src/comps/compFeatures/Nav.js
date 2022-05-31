@@ -11,6 +11,7 @@ function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
   return (
     <div id="navContainer">
       <span></span>
+      {/* <nav id="navBar"> */}
       <nav id="navBar">
         <Link className="navLink" to="/">
           Home
@@ -34,18 +35,11 @@ function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
           Edit Profile
         </Link>{" "}
         {/*must be signed in to edit profile */}
-        <Link 
-        className="navLink" 
-        to="#" 
-        onClick={handleShow}>
+        <Link className="navLink" to="#" onClick={handleShow}>
           {" "}
           Create Profile{" "}
         </Link>
-        
-        <Link 
-        className="navLink" 
-        to="#" 
-        onClick={handleLoginShow}>
+        <Link className="navLink " to="#" onClick={handleLoginShow}>
           {" "}
           Login{" "}
         </Link>

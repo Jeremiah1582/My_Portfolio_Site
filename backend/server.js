@@ -35,8 +35,10 @@ mongoose
 
 // Routes
 app.use("/", indexRoutes);
-app.use("/user", userRoutes);
-
+app.use("/user",  userRoutes);
+app.get("*", (req, res)=>{
+    res.status(404).send("Page not found. Check the link and try again")
+})
 
 app.listen(PORT, ()=>{
 console.log('you are connected to port '+ PORT);

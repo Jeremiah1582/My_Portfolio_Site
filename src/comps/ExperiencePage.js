@@ -2,7 +2,6 @@ import React, {useState, useReducer} from 'react'
 import {Form} from "react-bootstrap"
 import Header from "./sections/Header";
 
-import ExperienceModal from "./compFeatures/AddExperienceModal"
 import ListExpCard from "./compFeatures/ListExpCard"
 function ExperiencePage() {
   return (
@@ -10,7 +9,7 @@ function ExperiencePage() {
     <Header/>
     <ListExpCard></ListExpCard>  
 
-    <ExperienceModal/>
+    
     </div>
 
 
