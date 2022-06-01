@@ -27,7 +27,7 @@ function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
       .post("http://localhost:5001/user/login", { loginDetails })
       .then((result) => {
        console.log("clientSide: login result....", result);
-      
+
         if (result.data.token !==null) {
           window.localStorage.setItem("currentToken", result.data.token);
           // setUser(result.data.loggedinUser);

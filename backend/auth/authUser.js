@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 
 exports.authenticateToken = (req, res, next) => {
-    const bearerHeader = req.headers["Authorization"]; 
+    console.log("authUser: auth function fired .....", req.body);
+    const bearerHeader = req.headers["authorization"]; 
 if (typeof bearerHeader !== "undefined") {
     const bearer = bearerHeader.split(" ");
     const bearerToken = bearer[1];
@@ -12,11 +13,12 @@ if (typeof bearerHeader !== "undefined") {
        if (!err && !payload) {
          res.sendStatus(403);
        } else if (err) {
-         res.sendStatus(403).send(err);
+         res.status(403).send(err);
        } else if (payload) {
          req.jwtPayload = payload;
-         next();
-       }
+        next();
+       }  
+     
      });
    }
 };

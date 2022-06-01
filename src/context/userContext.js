@@ -48,7 +48,7 @@ console.log("useContext user after update", window);
  axios
    .get("http://localhost:5001/admin/getUser", {
      headers: {
-       Authorization: localStorage.getItem("currentToken"),
+       authorization: localStorage.getItem("currentToken"),
      },
    })
    .then((data) => {
