@@ -15,9 +15,9 @@ import ExperienceModal from "./compFeatures/AddExperienceModal";
 
   console.log(user);
   const handleSubmitChange = (e) => {
-
+e.preventDefault()
     axios
-      .post(`http://localhost:5001/user/editUserInfo`, user)
+      .post(`http://localhost:5001/admin/editUserInfo`, user)
       .then((result) => {
         console.log("result from handle submit is...", result);
         //update document in database

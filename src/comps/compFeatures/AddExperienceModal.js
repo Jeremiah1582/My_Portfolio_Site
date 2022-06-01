@@ -31,7 +31,7 @@ const [show, setShow] = useState(false)
      const handleAddExpSubmit =(e)=>{
     //  e.preventDefault()
         axios
-          .post("http://localhost:5001/user/addWorkExp", {workExp, userId})
+          .post("http://localhost:5001/admin/addWorkExp", {workExp, userId})
           .then((result) => {
             console.log("addWorkExp result from Bck=", result);
             setMsg(result.msg);

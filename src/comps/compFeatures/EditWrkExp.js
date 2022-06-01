@@ -25,7 +25,7 @@ const user = useContext(UserContext) //use context to get userId
 
  const  handleFormSubmit = async(e) => {
     await axios
-      .post("http://localhost:5001/user/updateWorkExp", {changedState})
+      .post("http://localhost:5001/admin/updateWorkExp", {changedState})
       .then(result=>{
           console.log('result from update WrkExp Func',result);
       });

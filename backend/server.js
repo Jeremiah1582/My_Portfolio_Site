@@ -3,11 +3,12 @@ const app = express()
 const mongoose =require("mongoose")
 const cors = require("cors")
 require("dotenv").config();
+const {authenticateToken} =require("./auth/authUser")
 
 // import Routes
 const indexRoutes = require("./routes/indexRoutes")
 const userRoutes = require("./routes/userRouter")
-const authUser = require("./auth/authUser")
+const adminRoutes = require("./routes/adminRouter")
 const PORT = 5001
 
 // middleware settings
@@ -35,7 +36,8 @@ mongoose
 
 // Routes
 app.use("/", indexRoutes);
-app.use("/user",  userRoutes);
+app.use("/user", userRoutes);
+app.use("/admin", authenticateToken, adminRoutes);
 app.get("*", (req, res)=>{
     res.status(404).send("Page not found. Check the link and try again")
 })

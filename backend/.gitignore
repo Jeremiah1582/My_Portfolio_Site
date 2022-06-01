@@ -1,3 +1,5 @@
 /node_modules
 .env
 yarn.lock
+server2.js
+test

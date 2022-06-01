@@ -8,7 +8,7 @@ import HomePage from "../HomePage";
 import ProfilePage from "../ProfilePage";
 
 function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
-  const { user, setUser } = useContext(UserContext);
+  const { getUser } = useContext(UserContext);
   const [isPending, setIsPending] = useState(false);
   const [msg, setMsg] = useState("");
   const [loginDetails, setLoginDetails] = useState({
@@ -21,22 +21,24 @@ function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
     console.log(loginDetails);
   };
   const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setIsPending(true);
+        e.preventDefault();
+        setIsPending(true);
     axios
       .post("http://localhost:5001/user/login", { loginDetails })
       .then((result) => {
-        console.log("login modal call results", result.data);
-        if (result.data.accessToken) {
-          console.log("you have a JWT TOKEN !!")
-        }
-        if (result.data.accessToken) {
-          setUser(result.data);
+       console.log("clientSide: login result....", result);
+      
+        if (result.data.token !==null) {
+          window.localStorage.setItem("currentToken", result.data.token);
+          // setUser(result.data.loggedinUser);
+          getUser()
+          // setMsg(result.data.msg);
           setIsPending(false);
           handleLoginClose();
-          window.location.href="/user/ProfilePage"
+          // window.location.href="/user/ProfilePage"
+
         } else {
-          setMsg(result.data);
+          setMsg(result.data.msg);
           setIsPending(false);
         }
       });

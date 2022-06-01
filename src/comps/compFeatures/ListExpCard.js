@@ -18,7 +18,7 @@ const userId = user.user._id
 const handleRemoveExp = (data) => {
 const itemId = data._id;
   axios
-    .post("http://localhost:5001/user/removeWorkExp", { itemId, userId })
+    .post("http://localhost:5001/admin/removeWorkExp", { itemId, userId })
     .then((result) => {
       console.log("addWorkExp result from Bck=", result);
        setMsg(result.data.msg);
