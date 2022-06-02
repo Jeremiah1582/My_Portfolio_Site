@@ -8,7 +8,7 @@ import HomePage from "../HomePage";
 import ProfilePage from "../ProfilePage";
 
 function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
-  const { getUser } = useContext(UserContext);
+  const { getUser, setUser } = useContext(UserContext);
   const [isPending, setIsPending] = useState(false);
   const [msg, setMsg] = useState("");
   const [loginDetails, setLoginDetails] = useState({
@@ -31,8 +31,8 @@ function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
         if (result.data.token !==null) {
           window.localStorage.setItem("currentToken", result.data.token);
           // setUser(result.data.loggedinUser);
-          getUser()
-          // setMsg(result.data.msg);
+          getUser(e)
+          setMsg(result.data.msg);
           setIsPending(false);
           handleLoginClose();
           // window.location.href="/user/ProfilePage"

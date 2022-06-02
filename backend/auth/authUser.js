@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 exports.authenticateToken = (req, res, next) => {
-    console.log("authUser: auth function fired .....", req.body);
+    console.log("authUser: auth function fired .....", req.token);
     const bearerHeader = req.headers["authorization"]; 
 if (typeof bearerHeader !== "undefined") {
     const bearer = bearerHeader.split(" ");
@@ -16,6 +16,7 @@ if (typeof bearerHeader !== "undefined") {
          res.status(403).send(err);
        } else if (payload) {
          req.jwtPayload = payload;
+
         next();
        }  
      
