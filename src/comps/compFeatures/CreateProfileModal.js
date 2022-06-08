@@ -24,24 +24,27 @@ const handleInput=(e)=>{
 
  const handleFormSubmit =(e)=>{
    e.preventDefault()
-   console.log("the newUser state is L:20 ", newUser) ;
+   console.log("the newUser state is L:20 ", {newUser}) ;
   // post to backend function
 axios
-  .post("http://localhost:5001/user/registerNewUser", newUser)
-  .then((result)=>{
-    console.log('L:23 frontend. The result of the post method is=',result);
+  .post("http://localhost:5001/user/registerNewUser", newUser, {
+    headers: {
+      authorization: "Bearer " + localStorage.getItem("currentToken"),
+    },
+  })
+  .then((result) => {
+    console.log("L:23 frontend. The result of the post method is=", result);
     setNewUser({
-       email:"",
-      password:""
-    })
-    setMsg(result.data.msg)
+      email: "",
+      password: "",
+    });
+    setMsg(result.data.msg);
 
     setTimeout(() => {
-      handleClose()
-      setMsg('')
-    }
-      , 5000);
-  })
+      handleClose();
+      setMsg("");
+    }, 5000);
+  });
  }
 
 

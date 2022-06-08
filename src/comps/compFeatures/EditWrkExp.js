@@ -4,7 +4,7 @@ import axios from "axios";
 import {  UserContext} from "../../context/userContext";
 
 function EditWrkExp({ data, children }) {
-const user = useContext(UserContext) //use context to get userId
+const {user} = useContext(UserContext) //use context to get userId
   const [show, setShow] = useState(false);
   const [changedState, setChangedState] = useState({
     userId: user.user._id,
@@ -25,7 +25,12 @@ const user = useContext(UserContext) //use context to get userId
 
  const  handleFormSubmit = async(e) => {
     await axios
-      .post("http://localhost:5001/admin/updateWorkExp", {changedState})
+      .post("http://localhost:5001/admin/updateWorkExp", {changedState},
+          {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("currentToken"),
+            },
+          })
       .then(result=>{
           console.log('result from update WrkExp Func',result);
       });

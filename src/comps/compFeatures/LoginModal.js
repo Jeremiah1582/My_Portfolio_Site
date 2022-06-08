@@ -8,7 +8,8 @@ import HomePage from "../HomePage";
 import ProfilePage from "../ProfilePage";
 
 function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
-  const { getUser, setUser } = useContext(UserContext);
+  const {  setUser, setIsVerified } = useContext(UserContext);
+  // const { getUser, setUser } = useContext(UserContext);
   const [isPending, setIsPending] = useState(false);
   const [msg, setMsg] = useState("");
   const [loginDetails, setLoginDetails] = useState({
@@ -28,10 +29,12 @@ function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
       .then((result) => {
        console.log("clientSide: login result....", result);
 
-        if (result.data.token !==null) {
+        if (result.data.token !==null ) {
+          console.log("result.data.token login func", result.data.token);
           window.localStorage.setItem("currentToken", result.data.token);
           // setUser(result.data.loggedinUser);
-          getUser(e)
+          // getUser(e)
+          setIsVerified(true);
           setMsg(result.data.msg);
           setIsPending(false);
           handleLoginClose();

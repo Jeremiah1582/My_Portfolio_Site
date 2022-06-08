@@ -12,6 +12,7 @@ const currentTime = Date();
 
 // READ---------------------------
  exports.getUser = async (req, res) => {
+
 console.log("getUser func. req.jwtPayload is...", req.jwtPayload);
  User.findById(req.jwtPayload).then((user)=>{
      if (! user) {res.sendStatus(401)}
@@ -41,7 +42,7 @@ exports.addWorkExp = (req, res) => {
   //!cant use finByIdAndUpdate here, it lets us add 1 obj and then next obj we add overwrites the first
   User.findByIdAndUpdate(
     req.jwtPayload,
-    { $push: { workExperience: req.body.workExp } },
+    { $push: { workExperience: req.body.changedState.workExp } },
     (err, result) => {
       if (err) {
         throw err;
@@ -60,9 +61,11 @@ exports.addWorkExp = (req, res) => {
 // UPDATE Doc-------------------------
 exports.editUserInfo = (req, res) => {
   // find the document you wish to edit.
+  console.log("editUser function body ",req.headers);
+  
   User.findByIdAndUpdate(
-    req.jwtPayload,
-    req.body,
+    req.jwtPayload._id,
+    req.body.user,
     async function (err, result) {
       if (err) {
         throw err;

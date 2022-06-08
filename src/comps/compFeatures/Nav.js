@@ -1,13 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Modal, Button} from "react-bootstrap"
 import {
   Outlet,
   Link
 } from "react-router-dom";
+import {UserContext} from "../../context/userContext"
+
 
 
 
 function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
+  const {isVerified, user} = useContext(UserContext)
   return (
     <div id="navContainer">
       <span></span>
@@ -39,10 +42,18 @@ function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
           {" "}
           Create Profile{" "}
         </Link>
-        <Link className="navLink " to="#" onClick={handleLoginShow}>
-          {" "}
-          Login{" "}
-        </Link>
+        
+        {isVerified ? (
+          <Link className="navLink " to="#">
+            {" "}
+            Logout{" "}
+          </Link>
+        ) : (
+          <Link className="navLink " to="#" onClick={handleLoginShow}>
+            {" "}
+            Login{" "}
+          </Link>
+        )}
       </nav>
 
       <Outlet />

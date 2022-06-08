@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect, useReducer } from "react";
-import { Form, Button, InputGroup } from "react-bootstrap";
+import { Form, Button, InputGroup, Alert } from "react-bootstrap";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
 import ExperienceModal from "./compFeatures/AddExperienceModal";
 
 
  function EditPage() {
-  const { user, setUser } = useContext(UserContext);
+   const [msg, setMsg] = useState({})
+  const { user, setUser, isAdmin } = useContext(UserContext);
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -16,13 +17,26 @@ import ExperienceModal from "./compFeatures/AddExperienceModal";
   console.log(user);
   const handleSubmitChange = (e) => {
 e.preventDefault()
-    axios
-      .post(`http://localhost:5001/admin/editUserInfo`, user)
-      .then((result) => {
-        console.log("result from handle submit is...", result);
-        //update document in database
-        //use SetUser to update User in the context api
-      });
+if (isAdmin===true) {
+      axios
+        .post(
+          `http://localhost:5001/admin/editUserInfo`,
+          { user },
+          {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("currentToken"),
+            },
+          }
+        )
+        .then((result) => {
+          console.log("result from handle submit is...", result);
+          //update document in database
+          //use SetUser to update User in the context api
+        });
+}else{
+  setMsg({status:false , msg:"You are not authorized to make these changes"})
+}
+
   };
 
   return (
@@ -183,6 +197,13 @@ e.preventDefault()
               Update Profile
             </Button>
           </div>
+          {msg.msg ? (
+              <Alert variant={msg.status === true ? "success" : "danger"}>
+                {msg.msg}
+              </Alert>
+            ) : (
+              ""
+            )}
         </Form>
       </div>
     </div>

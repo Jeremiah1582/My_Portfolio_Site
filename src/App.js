@@ -1,5 +1,5 @@
 
-import React,{useState  } from "react";
+import React,{useState, useContext  } from "react";
 import Nav from "./comps/compFeatures/Nav";
 import HomePage from "./comps/HomePage";
 import ProfilePage from "./comps/ProfilePage";
@@ -13,16 +13,19 @@ import {BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
+import {UserContext}from "./context/userContext"
 
 
 
 function App() {
+  // const {getUser} =useContext(UserContext)
+
 const [show, setShow] = useState(false);
 const [loginShow, setLoginShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleLoginClose = () => setLoginShow(false);
-  const handleShow = () => setShow(true);
-  const handleLoginShow = () => setLoginShow(true);
+const handleClose = () => setShow(false);
+const handleLoginClose = () => setLoginShow(false);
+const handleShow = () => setShow(true);
+const handleLoginShow = () => setLoginShow(true);
 
   // window.onscroll= function(){
   //   stickyNavFunction()
@@ -35,7 +38,7 @@ const [loginShow, setLoginShow] = useState(false);
   //     Nav.classList.remove("sticky")
   //   }
   // }
-
+    
   return (
     <BrowserRouter>
       <div className="App">

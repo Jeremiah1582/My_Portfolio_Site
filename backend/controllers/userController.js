@@ -56,7 +56,7 @@ exports.registerNewUser = (req, res) => {
     } else if (errRes) {
       res.json({ msg: "there was an error creating new account", errRes });
     } else if (!errRes && !docRes && email && password) {
-      const newUser = new User(req.body);
+      const newUser = new User(req.body.newUser);
       newUser.save((err, doc) => {
         if (err) {
           console.log("there was an error L:13 usercontroller", err);
