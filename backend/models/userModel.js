@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const encrypt = require("mongoose-encryption");
+// const encrypt = require("mongoose-encryption");
 const Schema = mongoose.Schema;
 
 
@@ -102,7 +102,7 @@ const UserSchema = new Schema({
 });
 
 // encryption:
-UserSchema.plugin(encrypt, { secret: process.env.MONGOOSE_SECRET , encryptedFields: ["password"]});
+// UserSchema.plugin(encrypt, { secret: process.env.MONGOOSE_SECRET , encryptedFields: ["password"]}); // password field encrypted here at the schema. //hashed the password instead with md5() 
 
 const User = mongoose.model("User", UserSchema)
 

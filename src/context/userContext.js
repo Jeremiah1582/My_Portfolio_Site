@@ -41,11 +41,11 @@ const [user, setUser] = useState(emptyUserState)
 const [msg,setMsg] = useState({})
 console.log("useContext user after update", user);
 
-if (isVerified===true && localStorage.setItem("currentToken") !== null) {
+if (isVerified === true && localStorage.getItem("currentToken")) {
   setTimeout(() => {
-  window.localStorage.setItem("currentToken","")
-  setIsVerified(false)
-}, 10000*1);
+    window.localStorage.setItem("currentToken", " ");
+    setIsVerified(false);
+  }, 10000 * 1);
 }
 
 console.log("isVerified is...",isVerified);

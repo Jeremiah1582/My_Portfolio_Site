@@ -1,6 +1,8 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const bcrypt = require("bcrypt")
+const saltRounds = 10;
 
 const today = new Date().getDate();
 const month = new Date().getMonth() + 1;
@@ -16,37 +18,44 @@ console.log(currentTime);
 
 exports.logIn = (req, res) => {
   const { email, password } = req.body.loginDetails; 
+  const hashedPassword = bcrypt.hash(password, saltRounds);
   try {
-  User.findOne({ email: email, password: password }, async (err, result) => {
+  User.findOne(
+    { email: email },
+    async (err, result) => {
       if (!result && !err) {
         res.send("email or password were incorrect");
       } else if (err) {
         res.send("error accessing this db information");
         throw err;
       } else if (result) {
-        const userId = { _id: result._id };
-        // const secret = "123";
-        jwt.sign(userId, "secret", { expiresIn: 60 }, (error, token) => {
-          // generating token with exp 60*60*24
-          if (token !== null) {
-            req.token = token;
-            res.status(200).json({ token });
-          } else if (error) res.json({ msg: "login failed" });
-        });
+        bcrypt.compare(password, result.password, (err, response)=>{
+          if (response ===true) {
+            const userId = { _id: result._id };
+            jwt.sign(userId, "secret", { expiresIn: 60 }, (error, token) => {
+              if (token !== null) {
+                req.token = token;
+                res.status(200).json({ token });
+              } else if (error) res.json({ msg: "login failed" });
+            });
+          }
+        })
+        
       } else {
         console.log("problem with login function");
         res.json({ msg: "system failure. We are working to fix it" });
       }
-   
-  }); 
+    }
+  ); 
 } catch (error) {}
 };
 //2 -----------------CREATE FUnctiONs-------------------------------
   
 exports.registerNewUser = (req, res) => {
-  const { email, password } = req.body;
-  //this is where we need to encrypt the password
-  // check to see if Doc exists in database
+  const { email, password } = req.body.newUser;
+
+  bcrypt.hash(password, saltRounds, function(err, hashedPassword){
+  console.log(hashedPassword);
   User.findOne({ email: email }, (errRes, docRes) => {
     if (docRes) {
       res.json({
@@ -54,9 +63,12 @@ exports.registerNewUser = (req, res) => {
         forgotPassword: false,
       });
     } else if (errRes) {
-      res.json({ msg: "there was an error creating new account", errRes });
+      res.json({ msg: "there was an error in the findOne function in reg func", errRes });
     } else if (!errRes && !docRes && email && password) {
-      const newUser = new User(req.body.newUser);
+      const newUser = new User({
+        email: email,
+        password: hashedPassword,
+      });
       newUser.save((err, doc) => {
         if (err) {
           console.log("there was an error L:13 usercontroller", err);
@@ -64,15 +76,18 @@ exports.registerNewUser = (req, res) => {
           throw err;
           //    console.log(err);
         } else if (doc) {
-          res.status(200).json({msg: "new user created successfully"});
+          res.status(200).json({ msg: "new user created successfully" });
         } else {
-          res.status(500).json({msg: "problem in the registerNewUser in the userController L:20",
-          });
+          res
+            .status(500)
+            .json({
+              msg: "problem in the registerNewUser in the userController L:81",
+            });
         }
       });
-    } else {
-      res.status(403).json({ msg: "email or password is missing" });
-    }
+    } 
+  });
+  
   });
 };
 

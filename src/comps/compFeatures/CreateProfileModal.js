@@ -27,11 +27,7 @@ const handleInput=(e)=>{
    console.log("the newUser state is L:20 ", {newUser}) ;
   // post to backend function
 axios
-  .post("http://localhost:5001/user/registerNewUser", newUser, {
-    headers: {
-      authorization: "Bearer " + localStorage.getItem("currentToken"),
-    },
-  })
+  .post("http://localhost:5001/user/registerNewUser", {newUser})
   .then((result) => {
     console.log("L:23 frontend. The result of the post method is=", result);
     setNewUser({
