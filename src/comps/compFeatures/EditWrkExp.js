@@ -7,7 +7,7 @@ function EditWrkExp({ data, children }) {
 const {user} = useContext(UserContext) //use context to get userId
   const [show, setShow] = useState(false);
   const [changedState, setChangedState] = useState({
-    userId: user.user._id,
+    userId: user._id,
     itemId: data._id,
     imageLink: data.imageLink,
     companyLink: data.companyLink,
@@ -17,8 +17,7 @@ const {user} = useContext(UserContext) //use context to get userId
     position: data.position,
     responsibilities: data.responsibilities,
   });
-
-  ;
+console.log(window);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

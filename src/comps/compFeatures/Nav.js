@@ -4,6 +4,7 @@ import {
   Outlet,
   Link
 } from "react-router-dom";
+import LogoutButton from "./LogoutButton"
 import {UserContext} from "../../context/userContext"
 
 
@@ -19,21 +20,21 @@ function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
         <Link className="navLink" to="/">
           Home
         </Link>
-        <Link className="navLink" to="/user/ProfilePage">
+        <Link className="navLink" to="/ProfilePage">
           Profile
         </Link>
-        <Link className="navLink" to="/user/CVPage">
+        <Link className="navLink" to="/CVPage">
           CV{" "}
         </Link>
-        <Link className="navLink" to="/user/ExperiencePage">
+        <Link className="navLink" to="/ExperiencePage">
           {" "}
           Experience
         </Link>
-        <Link className="navLink" to="/user/CodeStackPage">
+        <Link className="navLink" to="/CodeStackPage">
           {" "}
           Code Stack{" "}
         </Link>
-        <Link className="navLink" to="/user/editUserInfo">
+        <Link className="navLink" to="/EditUserInfoPage">
           {" "}
           Edit Profile
         </Link>{" "}
@@ -42,16 +43,15 @@ function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
           {" "}
           Create Profile{" "}
         </Link>
-        
         {isVerified ? (
           <Link className="navLink " to="#">
             {" "}
-            Logout{" "}
+            <LogoutButton />{" "}
           </Link>
         ) : (
           <Link className="navLink " to="#" onClick={handleLoginShow}>
             {" "}
-            Login{" "}
+            Login {" "}
           </Link>
         )}
       </nav>

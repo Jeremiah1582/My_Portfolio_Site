@@ -1,5 +1,5 @@
 
-import React,{useState, useContext  } from "react";
+import React,{useState, useContext, useEffect  } from "react";
 import Nav from "./comps/compFeatures/Nav";
 import HomePage from "./comps/HomePage";
 import ProfilePage from "./comps/ProfilePage";
@@ -13,19 +13,24 @@ import {BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
+import {Alert,Modal} from "react-bootstrap"
 import {UserContext}from "./context/userContext"
 
 
 
 function App() {
-  // const {getUser} =useContext(UserContext)
-
+// const {getUser} =useContext(UserContext)
+const {contextMsg, isVerified} = useContext(UserContext)
 const [show, setShow] = useState(false);
 const [loginShow, setLoginShow] = useState(false);
 const handleClose = () => setShow(false);
 const handleLoginClose = () => setLoginShow(false);
 const handleShow = () => setShow(true);
 const handleLoginShow = () => setLoginShow(true);
+
+// useEffect(() => {
+//  getUser()
+// }, [])
 
   // window.onscroll= function(){
   //   stickyNavFunction()
@@ -38,7 +43,7 @@ const handleLoginShow = () => setLoginShow(true);
   //     Nav.classList.remove("sticky")
   //   }
   // }
-    
+    console.log(contextMsg);
   return (
     <BrowserRouter>
       <div className="App">
@@ -51,11 +56,11 @@ const handleLoginShow = () => setLoginShow(true);
 
         <Routes>
           <Route exact path="/" element={<HomePage />} />
-          <Route path="/user/ProfilePage" element={<ProfilePage />} />
-          <Route path="/user/CodeStackPage" element={<CodeStackPage />} />
-          <Route path="/user/ExperiencePage" element={<ExperiencePage />} />
-          <Route path="/user/CVPage" element={<CVPage />} />
-          <Route path="/user/editUserInfo" element={<EditPage />} />
+          <Route path="/ProfilePage" element={<ProfilePage />} />
+          <Route path="/CodeStackPage" element={<CodeStackPage />} />
+          <Route path="/ExperiencePage" element={<ExperiencePage />} />
+          <Route path="/CVPage" element={<CVPage />} />
+          <Route path="/EditUserInfoPage" element={<EditPage />} />
         </Routes>
         <CreateProfileModal
           show={show}
@@ -67,6 +72,18 @@ const handleLoginShow = () => setLoginShow(true);
           handleLoginClose={handleLoginClose}
           handleLoginShow={handleLoginShow}
         />
+
+        {
+          contextMsg == undefined? "": (
+          <Alert style={{
+            left:"50%",
+            top:"50px",
+            transform:"translate(-50%)",
+            width:"80%"}} variant="success">
+  <Alert.Heading>{contextMsg}</Alert.Heading>
+</Alert>
+        )}
+       
       </div>
     </BrowserRouter>
   );

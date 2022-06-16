@@ -1,15 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Form, Modal, Button, Alert } from "react-bootstrap";
 import { UserContext } from "../../context/userContext";
-import { Redirect, Route } from "react-router-dom";
 import axios from "axios";
 
-import HomePage from "../HomePage";
-import ProfilePage from "../ProfilePage";
-
 function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
-  const {  setUser, setIsVerified } = useContext(UserContext);
-  // const { getUser, setUser } = useContext(UserContext);
+  const { setUser, getUser, setIsVerified } = useContext(UserContext);
+
   const [isPending, setIsPending] = useState(false);
   const [msg, setMsg] = useState("");
   const [loginDetails, setLoginDetails] = useState({
@@ -21,30 +17,39 @@ function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
     setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value });
     console.log(loginDetails);
   };
+
   const handleFormSubmit = (e) => {
-        e.preventDefault();
-        setIsPending(true);
-    axios
-      .post("http://localhost:5001/user/login", { loginDetails })
-      .then((result) => {
-       console.log("clientSide: login result....", result);
-
-        if (result.data.token !==null ) {
-          console.log("result.data.token login func", result.data.token);
-          window.localStorage.setItem("currentToken", result.data.token);
-          // setUser(result.data.loggedinUser);
-          // getUser(e)
-          setIsVerified(true);
-          setMsg(result.data.msg);
-          setIsPending(false);
-          handleLoginClose();
-          // window.location.href="/user/ProfilePage"
-
-        } else {
-          setMsg(result.data.msg);
-          setIsPending(false);
-        }
-      });
+    e.preventDefault();
+    setIsPending(true);
+    try {
+      axios
+        .post("http://localhost:5001/user/login", { loginDetails })
+        .then((result) => {
+          if (result) {
+            const auth = result.data.auth;
+            const msg = result.data.msg;
+            if (auth === true) {
+              const user = result.data.user;
+              const token = result.data.token;
+              localStorage.setItem("currentToken", token);
+              setIsVerified(true);
+              getUser();
+              setIsPending(false);
+              // console.log("result....", result);
+              setMsg(msg);
+              // window.location.href = "/user/ProfilePage";
+              handleLoginClose();
+            } else if (auth === false) {
+              setMsg(msg);
+              setIsPending(false);
+            } else {
+              console.log("loginModal: user/login error");
+            }
+          }
+        });
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (

@@ -11,37 +11,46 @@ const time = hour + ":" + mins;
 const currentTime = Date();
 
 // READ---------------------------
- exports.getUser = async (req, res) => {
+exports.getUser = async (req, res) => {
+  console.log("getUser func. req.session is...", req.session);
+  const userId = await req.session.jwtPayload.userId;
+  const sessToken = await req.session.token;
+  try {
+    User.findById(userId).then((user) => {
+      console.log("getUser func: user is...", user);
+      if (!user) {
+        res.sendStatus(401);
+      }
+      res
+        .status(200)
+        .json({
+          auth: true,
+          result: user,
+          msg: "logged in successfully",
+          token: sessToken,
+        });
+    });
+  } catch (error) {
+    throw error
+  }
+};
 
-console.log("getUser func. req.jwtPayload is...", req.jwtPayload);
- User.findById(req.jwtPayload).then((user)=>{
-     if (! user) {res.sendStatus(401)}
-     res.status(200).json({result:user, msg:"logged in successfully"})
- })
-
-
- }
- exports.testFunc = async (req, res) => {
-     console.log("test");
-     res.json({msg:"adminController: test function is firing"})
- }
-
-
-
-
-
-
-
-
+exports.testFunc = async (req, res) => {
+  console.log("req.session.token", req.session.token);
+  // console.log("testfunc", req);
+  res.json({
+    token: req.token,
+    msg: "adminController: test function is firing",
+  });
+};
 
 //1 CREATE - addWorkExp--------------------
 exports.addWorkExp = (req, res) => {
- console.log("getUser func. req.jwtPayload is...", req.jwtPayload);
+  console.log("getUser func. req.body is...", req.body);
   console.log("add workExp backend function 2", req.body);
-
   //!cant use finByIdAndUpdate here, it lets us add 1 obj and then next obj we add overwrites the first
   User.findByIdAndUpdate(
-    req.jwtPayload,
+    req.body,
     { $push: { workExperience: req.body.changedState.workExp } },
     (err, result) => {
       if (err) {
@@ -55,16 +64,14 @@ exports.addWorkExp = (req, res) => {
   );
 };
 
-
-
-//2 ---------UPDATE FUNCtions--------------------
+//2 ---------UPDATE FUNCtions------------------
 // UPDATE Doc-------------------------
 exports.editUserInfo = (req, res) => {
   // find the document you wish to edit.
-  console.log("editUser function body ",req.headers);
-  
+  console.log("editUser function body ", req.body);
+
   User.findByIdAndUpdate(
-    req.jwtPayload._id,
+    req.body.user._id,
     req.body.user,
     async function (err, result) {
       if (err) {
@@ -81,7 +88,8 @@ exports.editUserInfo = (req, res) => {
 //3 UPDATE NESTED ARRAY IN MONGO Doc,workExperience Array-------
 exports.updateWorkExp = (req, res) => {
   const itemId = req.body.changedState.itemId;
-  
+  const userId = req.body.changedState.userId;
+  console.log(" req.body  changedState...", req.body);
   const updatedWrkExp = {
     imageLink: req.body.changedState.imageLink,
     companyLink: req.body.changedState.companyLink,
@@ -92,16 +100,17 @@ exports.updateWorkExp = (req, res) => {
     responsibilities: req.body.changedState.responsibilities,
   };
 
-
   console.log("updatedWrkExp is..", updatedWrkExp);
 
   User.updateOne(
-    { _id: req.jwtPayload, "workExperience._id": itemId }, // query
+    { _id: userId, "workExperience._id": itemId }, // query
     { $set: { "workExperience.$": updatedWrkExp } } // update
   ).then((result) => {
     if (result) {
+      console.log("successful update wrkexp");
       res.json({ msg: "update successful " });
     } else {
+       console.log("no result");
       res.json({ msg: "update failed " });
     }
   });
@@ -117,7 +126,7 @@ exports.deleteUser = (req, res) => {
 //5 REMOVE Document-------------------
 exports.removeWorkExp = async (req, res) => {
   User.findByIdAndUpdate(
-    req.jwtPayload,
+    req.body,
     { $pull: { workExperience: { _id: req.body.itemId } } },
     async (err, result) => {
       console.log("item id", req.body);

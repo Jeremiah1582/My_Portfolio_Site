@@ -7,12 +7,13 @@ import LrgWrkExpModal from "./LrgWrkExpModal"
 import EditWrkExp from "./EditWrkExp"
 
 function ListExpCard() {
-  const user = useContext(UserContext);
-  const { workExperience } = user.user;
+  const {user} = useContext(UserContext);
+  console.log(user);
+  const { workExperience } = user;
   const [workExp, setWorkExp] = useState(workExperience);
   const [msg, setMsg] = useState("");
 
-const userId = user.user._id
+const userId = user._id
 
 
 const handleRemoveExp = (data) => {
@@ -21,9 +22,10 @@ const itemId = data._id;
     .post("http://localhost:5001/admin/removeWorkExp", { itemId, userId },
           {
             headers: {
-              authorization: "Bearer " + localStorage.getItem("currentToken"),
+              authorization: localStorage.getItem("currentToken"),
             },
-          })
+          }
+          )
     .then((result) => {
       console.log("addWorkExp result from Bck=", result);
        setMsg(result.data.msg);
@@ -35,7 +37,7 @@ const itemId = data._id;
     <div className="flexContainer">
 
       {workExperience.map((data) => {
-          console.log(data._id)
+          console.log(data)
 
           {if(data._id){
         return (

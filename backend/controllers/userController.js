@@ -1,8 +1,10 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+const {generateToken} = require("../auth/jwtTokens")
 require("dotenv").config();
 const bcrypt = require("bcrypt")
 const saltRounds = 10;
+
 
 const today = new Date().getDate();
 const month = new Date().getMonth() + 1;
@@ -17,37 +19,37 @@ console.log(currentTime);
 //1 login Func
 
 exports.logIn = (req, res) => {
-  const { email, password } = req.body.loginDetails; 
-  const hashedPassword = bcrypt.hash(password, saltRounds);
-  try {
-  User.findOne(
-    { email: email },
-    async (err, result) => {
-      if (!result && !err) {
-        res.send("email or password were incorrect");
-      } else if (err) {
-        res.send("error accessing this db information");
-        throw err;
-      } else if (result) {
-        bcrypt.compare(password, result.password, (err, response)=>{
-          if (response ===true) {
-            const userId = { _id: result._id };
-            jwt.sign(userId, "secret", { expiresIn: 60 }, (error, token) => {
-              if (token !== null) {
-                req.token = token;
-                res.status(200).json({ token });
-              } else if (error) res.json({ msg: "login failed" });
-            });
-          }
-        })
-        
-      } else {
-        console.log("problem with login function");
-        res.json({ msg: "system failure. We are working to fix it" });
-      }
-    }
-  ); 
-} catch (error) {}
+// console.log(req.body.loginDetails);
+const email= req.body.loginDetails.email
+const password = req.body.loginDetails.password
+
+User.findOne({email:email}).then((result)=>{
+  const dbPassword = result.password
+  bcrypt.compare(password, dbPassword, (err, passMatch)=>{
+   if(passMatch ===true){
+     const userId =result._id
+  const userToken = generateToken(userId) //jwt comes from here
+    req.token = userToken; //present
+    //  if (req.token) {
+       
+       res.status(200).json({
+       auth:true, 
+       user:result,
+       msg: "Welcome", 
+       token: userToken })
+    //  }else {
+    //    console.log("token was not stored to req.session.token");
+    //  }
+   }else {
+      res.status(200).json({
+        auth: false,
+        user: "",
+        msg: "access denied",
+      });
+   }
+  });
+  ;
+})
 };
 //2 -----------------CREATE FUnctiONs-------------------------------
   

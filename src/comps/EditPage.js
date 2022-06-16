@@ -7,7 +7,7 @@ import ExperienceModal from "./compFeatures/AddExperienceModal";
 
  function EditPage() {
    const [msg, setMsg] = useState({})
-  const { user, setUser, isAdmin } = useContext(UserContext);
+  const { user, setUser, isAdmin, getUser } = useContext(UserContext);
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -21,8 +21,7 @@ if (isAdmin===true) {
       axios
         .post(
           `http://localhost:5001/admin/editUserInfo`,
-          { user },
-          {
+          { user },{
             headers: {
               authorization: "Bearer " + localStorage.getItem("currentToken"),
             },
@@ -32,6 +31,7 @@ if (isAdmin===true) {
           console.log("result from handle submit is...", result);
           //update document in database
           //use SetUser to update User in the context api
+          getUser()
         });
 }else{
   setMsg({status:false , msg:"You are not authorized to make these changes"})

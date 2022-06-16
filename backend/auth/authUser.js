@@ -1,22 +1,27 @@
 const jwt = require("jsonwebtoken");
+const secret = process.env.ACCESS_TOKEN_SECRET;
+const refreshSecret = process.env.REFRESH_TOKEN_SECRET;
 
 exports.authenticateToken = (req, res, next) => {
-    console.log("authUser: auth function fired .....", req.token);
+    console.log("authUser: auth function fired .....", req.headers);
     const bearerHeader = req.headers["authorization"]; 
 if (typeof bearerHeader !== "undefined") {
     const bearer = bearerHeader.split(" ");
     const bearerToken = bearer[1];
-    req.token= bearerToken
-    console.log("authenticateToken func", bearerToken);
-     jwt.verify(req.token, "secret", (err, payload) => {
-       console.log("jwt.verify return is...", payload);
+    req.session.token = bearerToken
+    
+     jwt.verify(req.session.token, secret, (err, payload) => {
+      //  console.log("jwt.verify return is...", payload);
        if (!err && !payload) {
-         res.sendStatus(403);
+         console.log("authUser: !err && !payload");
+         console.log("403: unauthorised access");
        } else if (err) {
+         console.log("authUser: err", err);
+      
          res.status(403).send(err);
        } else if (payload) {
-         req.jwtPayload = payload;
-
+         req.session.jwtPayload = payload;
+ console.log("authUser",req.session.jwtPayload);
         next();
        }  
      
@@ -24,26 +29,6 @@ if (typeof bearerHeader !== "undefined") {
    }
 };
 
-//    try {
-//    const authHeader = await req.headers["authorization"];
-//     const token = authHeader && authHeader.split(' ')[1]
-//     console.log("authUser: req.headers is ...",req.headers[1]);
-//     console.log("authUser, authHeader is...", authHeader);
-//     console.log("authUser: req.header is ...",req.header);
-//     console.log("authUser: token is ...",token);
-//      console.log(req.body);
-// // if (authHeader) {
-// //     const token = authHeader.split(' ')[1]
-//     if (token==null) {console.log("token == null");
-//         return res.sendStatus(401)};
+exports.authUser=()=>{
 
-//     await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, userResult) => {
-//         if (err)return res.sendStatus(403); //403 = access denied invalid token
-//         req.user = userResult;
-//         console.log("req.user is ", userResult);
-// next();
-// });
-// }
-//    } catch (error) {
-//        throw error
-//    }
+}
