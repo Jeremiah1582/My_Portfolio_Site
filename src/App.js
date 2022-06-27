@@ -1,6 +1,6 @@
-
 import React,{useState, useContext, useEffect  } from "react";
 import Nav from "./comps/compFeatures/Nav";
+import NavAdmin from "./comps/compFeatures/NavAdmin";
 import HomePage from "./comps/HomePage";
 import ProfilePage from "./comps/ProfilePage";
 import CodeStackPage from "./comps/CodeStackPage";
@@ -20,7 +20,7 @@ import {UserContext}from "./context/userContext"
 
 function App() {
 // const {getUser} =useContext(UserContext)
-const {contextMsg, isVerified} = useContext(UserContext)
+const {contextMsg, isVerified, isAdmin} = useContext(UserContext)
 const [show, setShow] = useState(false);
 const [loginShow, setLoginShow] = useState(false);
 const handleClose = () => setShow(false);
@@ -28,10 +28,9 @@ const handleLoginClose = () => setLoginShow(false);
 const handleShow = () => setShow(true);
 const handleLoginShow = () => setLoginShow(true);
 
-// useEffect(() => {
-//  getUser()
-// }, [])
-
+  // useEffect(() => {
+  //  getUser()
+  // }, [])
   // window.onscroll= function(){
   //   stickyNavFunction()
   // }
@@ -43,16 +42,26 @@ const handleLoginShow = () => setLoginShow(true);
   //     Nav.classList.remove("sticky")
   //   }
   // }
+
     console.log(contextMsg);
   return (
     <BrowserRouter>
       <div className="App">
-        <Nav
-          handleClose={handleClose}
-          handleShow={handleShow}
-          handleLoginClose={handleLoginClose}
-          handleLoginShow={handleLoginShow}
-        />
+        {isAdmin ? (
+          <NavAdmin
+            handleClose={handleClose}
+            handleShow={handleShow}
+            handleLoginClose={handleLoginClose}
+            handleLoginShow={handleLoginShow}
+          />
+        ) : (
+          <Nav
+            handleClose={handleClose}
+            handleShow={handleShow}
+            handleLoginClose={handleLoginClose}
+            handleLoginShow={handleLoginShow}
+          />
+        )}
 
         <Routes>
           <Route exact path="/" element={<HomePage />} />
@@ -73,17 +82,19 @@ const handleLoginShow = () => setLoginShow(true);
           handleLoginShow={handleLoginShow}
         />
 
-        {
-          contextMsg == undefined? "": (
-          <Alert style={{
-            left:"50%",
-            top:"50px",
-            transform:"translate(-50%)",
-            width:"80%"}} variant="success">
-  <Alert.Heading>{contextMsg}</Alert.Heading>
-</Alert>
+        {contextMsg === "" ? null : (
+          <Alert
+            style={{
+              left: "50%",
+              top: "50px",
+              transform: "translate(-50%)",
+              width: "80%",
+            }}
+            variant="success"
+          >
+            <Alert.Heading>{contextMsg}</Alert.Heading>
+          </Alert>
         )}
-       
       </div>
     </BrowserRouter>
   );

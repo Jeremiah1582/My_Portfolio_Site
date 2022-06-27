@@ -4,7 +4,8 @@ import { UserContext } from "../../context/userContext";
 import axios from "axios";
 
 function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
-  const { setUser, getUser, setIsVerified } = useContext(UserContext);
+  const { setUser, getUser, setIsVerified } =
+    useContext(UserContext);
 
   const [isPending, setIsPending] = useState(false);
   const [msg, setMsg] = useState("");
@@ -32,7 +33,6 @@ function LoginModal({ loginShow, handleLoginClose, handleLoginShow }) {
               const user = result.data.user;
               const token = result.data.token;
               localStorage.setItem("currentToken", token);
-              setIsVerified(true);
               getUser();
               setIsPending(false);
               // console.log("result....", result);

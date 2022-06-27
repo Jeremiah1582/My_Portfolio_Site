@@ -36,7 +36,7 @@ app.use(
 // Database settings
 
 const DB_NAME= process.env.DB_NAME;
-const MONGO_LINK = process.env.MONGO_LINK;
+const MONGO_LINK = process.env.ONLINE_MONGO_LINK;
 
 mongoose
     .connect( MONGO_LINK + DB_NAME)

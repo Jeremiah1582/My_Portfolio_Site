@@ -36,11 +36,12 @@ const emptyUserState = {
     },
   ]
 }
-   console.log(localStorage);
+   console.log(contextMsg);
 // setting Hooks-------------------------
 const [user, setUser] = useState(emptyUserState)
 const [msg,setMsg] = useState({})
 console.log("useContext user after update", user);
+
 
 if (isVerified=== true) {
   setTimeout(() => {
@@ -52,6 +53,8 @@ if (isVerified=== true) {
 }
 
 console.log("isVerified is...",isVerified);
+
+console.log(localStorage.currentToken);
 
 // userEffect----------------------------
 const controller = new AbortController()
@@ -78,8 +81,9 @@ console.log("controller log",controller);
            setMsg(msg);
            setUser(result);
            setIsAdmin(true);
+           setIsVerified(true)
          } else {
-           console.log("token probably didnt match");
+           console.log("token probably didn't match");
          }
        });
    }
@@ -102,7 +106,10 @@ console.log("controller log",controller);
         isVerified,
         isAdmin,
         setIsVerified,
-        getUser
+        getUser,
+        contextMsg, 
+        setContextMsg
+       
       }}
     >
       {children}

@@ -8,9 +8,7 @@ import LogoutButton from "./LogoutButton"
 import {UserContext} from "../../context/userContext"
 
 
-
-
-function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
+function NavAdmin({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
   const {isVerified, user} = useContext(UserContext)
   return (
     <div id="navContainer">
@@ -34,6 +32,15 @@ function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
           {" "}
           Code Stack{" "}
         </Link>
+        <Link className="navLink" to="/EditUserInfoPage">
+          {" "}
+          Edit Profile
+        </Link>{" "}
+        {/*must be signed in to edit profile */}
+        <Link className="navLink" to="#" onClick={handleShow}>
+          {" "}
+          Create Profile{" "}
+        </Link>
         {isVerified ? (
           <Link className="navLink " to="#">
             {" "}
@@ -52,4 +59,4 @@ function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
   );
 }
 
-export default Nav
+export default NavAdmin
