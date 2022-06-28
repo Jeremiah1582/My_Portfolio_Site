@@ -9,11 +9,13 @@ import CVPage from "./comps/CVPage";
 import CreateProfileModal from "./comps/compFeatures/CreateProfileModal";
 import LoginModal from "./comps/compFeatures/LoginModal"
 import EditPage from "./comps/EditPage";
+import SendMsgModal from "./comps/compFeatures/SendMsgModal"
+import MsgButton from "./comps/compFeatures/MsgButton"
 import {BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
-import {Alert,Modal} from "react-bootstrap"
+import {Alert,Modal, Button} from "react-bootstrap"
 import {UserContext}from "./context/userContext"
 
 
@@ -23,10 +25,17 @@ function App() {
 const {contextMsg, isVerified, isAdmin} = useContext(UserContext)
 const [show, setShow] = useState(false);
 const [loginShow, setLoginShow] = useState(false);
-const handleClose = () => setShow(false);
-const handleLoginClose = () => setLoginShow(false);
+const [msgModalShow, setMsgModalShow] = useState(false);
+
 const handleShow = () => setShow(true);
 const handleLoginShow = () => setLoginShow(true);
+const handleMsgModalShow = () => setMsgModalShow(true);
+
+const handleClose = () => setShow(false);
+const handleLoginClose = () => setLoginShow(false);
+const handleMsgModalClose = () => setMsgModalShow(false);
+
+
 
   // useEffect(() => {
   //  getUser()
@@ -81,7 +90,18 @@ const handleLoginShow = () => setLoginShow(true);
           handleLoginClose={handleLoginClose}
           handleLoginShow={handleLoginShow}
         />
-
+        <SendMsgModal
+          msgModalShow={msgModalShow}
+          handleMsgModalShow={handleMsgModalShow}
+          handleMsgModalClose={handleMsgModalClose}
+        />
+        <MsgButton
+          variant="success"
+         
+          onClick={handleMsgModalShow}
+        >
+          Send Jeremiah a Message
+        </MsgButton>
         {contextMsg === "" ? null : (
           <Alert
             style={{

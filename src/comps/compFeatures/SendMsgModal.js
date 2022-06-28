@@ -3,9 +3,10 @@ import { Modal, Alert, Form , Button } from "react-bootstrap";
 
 
 function SendMsgModal({
-  showMsgModal,setShowMsgModal
+  handleMsgModalShow,
+  handleMsgModalClose,
+  msgModalShow,
 }) {
-    
   const [msg, setmMsg] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [msgDetails, setMsgDetails] = useState({
@@ -15,15 +16,6 @@ function SendMsgModal({
     company: "",
     message: "",
   });
-  
-
-   const handleMsgModalShow = () => {
-     setShowMsgModal(true);
-   };
-
-   const handleMsgModalClose = () => {
-     setShowMsgModal(false);
-   };
 
   const handleInput = () => {};
 
@@ -31,11 +23,9 @@ function SendMsgModal({
 
   return (
     <div>
-      <Button variant="primary" onClick={handleMsgModalShow}>
-        Send Jeremiah a Message
-      </Button>
+      
 
-      <Modal show={showMsgModal} onHide={handleMsgModalClose}>
+      <Modal show={msgModalShow} onHide={handleMsgModalClose}>
         <Modal.Header closeButton>
           <Modal.Title>Message Modal</Modal.Title>
         </Modal.Header>
@@ -44,7 +34,6 @@ function SendMsgModal({
           <Form onSubmit={handleFormSubmit}>
             {/* subject */}
             <Form.Group className="mb-3" controlId="formBasicSubject">
-              
               <Form.Control
                 type="text"
                 placeholder="what is the subject of your message"
@@ -56,7 +45,6 @@ function SendMsgModal({
 
             {/* Author */}
             <Form.Group className="mb-3" controlId="formBasicAuthor">
-        
               <Form.Control
                 type="text"
                 placeholder="please enter your name"
@@ -68,7 +56,6 @@ function SendMsgModal({
 
             {/* company */}
             <Form.Group className="mb-3" controlId="formBasicCompany">
-           
               <Form.Control
                 type="text"
                 placeholder="Enter company"
@@ -80,7 +67,6 @@ function SendMsgModal({
 
             {/* Email  */}
             <Form.Group className="mb-3" controlId="formBasicEmail">
-         
               <Form.Control
                 type="email"
                 placeholder="Enter email"
