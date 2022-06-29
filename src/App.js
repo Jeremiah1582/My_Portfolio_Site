@@ -95,11 +95,8 @@ const handleMsgModalClose = () => setMsgModalShow(false);
           handleMsgModalShow={handleMsgModalShow}
           handleMsgModalClose={handleMsgModalClose}
         />
-        <MsgButton
-          variant="success"
-         
-          onClick={handleMsgModalShow}
-        >
+        <MsgButton variant="success" 
+        handleMsgModalShow={handleMsgModalShow}>
           Send Jeremiah a Message
         </MsgButton>
         {contextMsg === "" ? null : (

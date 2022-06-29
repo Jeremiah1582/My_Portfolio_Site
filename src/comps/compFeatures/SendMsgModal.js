@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Modal, Alert, Form , Button } from "react-bootstrap";
+import axios from "axios"
+import ProfileImgSec from "../sections/ProfileImgSec"
 
 
 function SendMsgModal({
@@ -12,42 +14,46 @@ function SendMsgModal({
   const [msgDetails, setMsgDetails] = useState({
     title: "",
     author: "",
-    authorEmail: "",
+    email: "",
     company: "",
     message: "",
   });
 
-  const handleInput = () => {};
+  const handleInput = (e) => {
+    setMsgDetails({...msgDetails,[e.target.name]:e.target.value})
+  };
 
-  const handleFormSubmit = () => {};
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+    console.log("submit button was pressed");
+
+  };
 
   return (
     <div>
-      
-
       <Modal show={msgModalShow} onHide={handleMsgModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Message Modal</Modal.Title>
+        <Modal.Header
+          closeButton
+          style={{ backgroundColor: "#76cc7a", color: "white" }}
+        >
+        
+        <ProfileImgSec style={{height:"20px"}}/>
+          
+        
+          <Modal.Title>Send Jeremiah a WhatsApp message </Modal.Title>
         </Modal.Header>
-        {msg !== "" ? <Alert variant="warning">{msg}</Alert> : ""}
-        <Modal.Body>
-          <Form onSubmit={handleFormSubmit}>
-            {/* subject */}
-            <Form.Group className="mb-3" controlId="formBasicSubject">
-              <Form.Control
-                type="text"
-                placeholder="what is the subject of your message"
-                name="subject"
-                value={msgDetails.subject}
-                onChange={handleInput}
-              />
-            </Form.Group>
-
+        <Form onSubmit={handleFormSubmit}>
+          {msg !== "" ? <Alert variant="warning">{msg}</Alert> : ""}
+          <Modal.Body id="msgModalBody">
             {/* Author */}
-            <Form.Group className="mb-3" controlId="formBasicAuthor">
+            <Form.Group
+              className="m-1 msgModalInput "
+              controlId="formBasicAuthor"
+              style={{ width: "50%" }}
+            >
               <Form.Control
                 type="text"
-                placeholder="please enter your name"
+                placeholder="your name"
                 name="author"
                 value={msgDetails.author}
                 onChange={handleInput}
@@ -55,10 +61,14 @@ function SendMsgModal({
             </Form.Group>
 
             {/* company */}
-            <Form.Group className="mb-3" controlId="formBasicCompany">
+            <Form.Group
+              className="m-1 msgModalInput "
+              controlId="formBasicCompany"
+              style={{ width: "50%" }}
+            >
               <Form.Control
                 type="text"
-                placeholder="Enter company"
+                placeholder="company name"
                 name="company"
                 value={msgDetails.company}
                 onChange={handleInput}
@@ -66,21 +76,39 @@ function SendMsgModal({
             </Form.Group>
 
             {/* Email  */}
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group
+              className="m-1 msgModalInput "
+              controlId="formBasicEmail"
+            >
               <Form.Control
                 type="email"
-                placeholder="Enter email"
+                placeholder="email"
                 name="email"
                 value={msgDetails.email}
                 onChange={handleInput}
               />
-
-              {/* message */}
-              <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicMessage">
+            {/* subject */}
+            <Form.Group
+              className="m-1 msgModalInput "
+              controlId="formBasicSubject"
+            >
               <Form.Control
+                type="text"
+                placeholder="subject of your message"
+                name="subject"
+                value={msgDetails.subject}
+                onChange={handleInput}
+              />
+            </Form.Group>
+            {/* message */}
+            <Form.Text className="text-muted"></Form.Text>
+            <Form.Group
+              className="mb-3 msgModalInput "
+              controlId="formBasicMessage"
+            >
+              <Form.Control
+                style={{ height: "120px" }}
                 type="textArea"
                 placeholder="Message"
                 name="message"
@@ -88,7 +116,12 @@ function SendMsgModal({
                 value={msgDetails.message}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          </Modal.Body>
+          <Modal.Footer style={{ backgroundColor: "#ececec" }}>
+            <Form.Group
+              className="mb-3 msgModalInput "
+              controlId="formBasicCheckbox"
+            >
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
 
@@ -99,9 +132,8 @@ function SendMsgModal({
             ) : (
               <Button disabled>sending ...</Button>
             )}
-          </Form>
-        </Modal.Body>
-        <Modal.Footer></Modal.Footer>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </div>
   );

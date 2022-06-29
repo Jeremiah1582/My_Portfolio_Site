@@ -2,23 +2,16 @@ import React from 'react'
 import button from  "../../images/whatsappIcon.png"
 import {Card} from "react-bootstrap"
 
-function MsgButton() {
-
+function MsgButton({ handleMsgModalShow }) {
   return (
-    <div style={{ zIndex: 500 }}>
-      <Card 
-style={{
-height:"100px", 
-width:"100px",
-position:"absolute",
-background:"transparent",
-border:"0px"
-}}>
-      <a href="#">
-        <img src={button} alt="whatsApp icon" />
-      </a>
-    </Card>
-    </div>
+    <button
+      style={{ zIndex: 500 }}
+      onClick={handleMsgModalShow}
+      
+    >
+        <img id="sendMsgButton" src={button} alt="whatsApp icon" />
+     
+    </button>
   );
 }
 

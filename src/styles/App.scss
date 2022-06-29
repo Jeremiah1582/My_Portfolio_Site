@@ -18,6 +18,18 @@ $nthChildEvenColor: rgba(218, 218, 218, 0.946);
   background-color: whitesmoke;
   height: 10%;
   width: 100%;
+
+}
+#sendMsgButton{
+  position: absolute;
+  right: 5%;
+  bottom: 2%;
+}
+#msgModalBody{
+  background-image: url("../images/whatsappBackground-Classic.png");
+}
+.msgModalInput input{
+background-color: rgba(209, 201, 201, 0.507);
 }
 #navContainer{
 width: 100%;  
