@@ -7,7 +7,7 @@ import LrgWrkExpModal from "./LrgWrkExpModal"
 import EditWrkExp from "./EditWrkExp"
 
 function ListExpCard() {
-  const {user} = useContext(UserContext);
+  const {user, isAdmin} = useContext(UserContext);
   console.log(user);
   const { workExperience } = user;
   const [workExp, setWorkExp] = useState(workExperience);
@@ -39,8 +39,7 @@ const itemId = data._id;
       {workExperience.map((data) => {
           console.log(data)
 
-          {if(data._id){
-        return (
+          {data._id? (
           <div key={data._id} id={data._id}>
             <Card className="section" style={{ width: "18rem" }}>
               <Figure>
@@ -52,7 +51,9 @@ const itemId = data._id;
                 />
               </Figure>
               <Card.Body>
-                <Card.Title href="#">{data.companyName.toUpperCase()}</Card.Title>
+                <Card.Title href="#">
+                  {data.companyName.toUpperCase()}
+                </Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
                   start date: {data.startDate} <br />
                   end date: {data.endDate}
@@ -66,16 +67,18 @@ const itemId = data._id;
                   style={{ display: "flex", justifyContent: "space-evenly" }}
                 >
                   <LrgWrkExpModal data={data}>more...</LrgWrkExpModal>
-                  <EditWrkExp data={data}>Edit</EditWrkExp>
+                  {isAdmin===true? (<EditWrkExp data={data}>Edit</EditWrkExp>):null}
+                  
                 </div>
               </Card.Body>
-              <Button onClick={(e) => handleRemoveExp(data)}>Remove</Button>
+              {isAdmin === true ? (
+                <Button onClick={(e) => handleRemoveExp(data)}>Remove</Button>
+              ) : null}
             </Card>
           </div>
-        );
-      }else{
-        <h1>no work experience listed </h1>
-      }
+        ):(<h1>no work experience listed </h1>)
+        
+      
         }}
       )}
     </div>

@@ -66,6 +66,15 @@ console.log("controller log",controller);
    try {
    if (currentToken === null) {
      console.log(" you are probably logged out/ no user set");
+     axios.get("http://localhost:5001/user/defaultGetUser")
+     .then((data)=>{ 
+       console.log(data);
+       const {user, msg, auth, token} = data.data
+      setUser(user)
+      setMsg(msg);
+      setIsAdmin(auth);
+      setIsVerified(auth);
+     });
      
    } else {
      axios
@@ -93,7 +102,6 @@ console.log("controller log",controller);
  }
     }
   useEffect(() => {
-
     getUser()
   }, [])
   

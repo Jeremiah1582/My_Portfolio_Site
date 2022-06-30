@@ -21,7 +21,7 @@ import {UserContext}from "./context/userContext"
 
 
 function App() {
-// const {getUser} =useContext(UserContext)
+
 const {contextMsg, isVerified, isAdmin} = useContext(UserContext)
 const [show, setShow] = useState(false);
 const [loginShow, setLoginShow] = useState(false);
@@ -36,28 +36,13 @@ const handleLoginClose = () => setLoginShow(false);
 const handleMsgModalClose = () => setMsgModalShow(false);
 
 
-
-  // useEffect(() => {
-  //  getUser()
-  // }, [])
-  // window.onscroll= function(){
-  //   stickyNavFunction()
-  // }
-  // let sticky= Nav.offsetTop
-  // function stickyNavFunction (){
-  //   if (window.pageYOffset>=sticky) {
-  //     Nav.classList.add("sticky")     
-  //   }else{
-  //     Nav.classList.remove("sticky")
-  //   }
-  // }
-
     console.log(contextMsg);
   return (
     <BrowserRouter>
       <div className="App">
         {isAdmin ? (
           <NavAdmin
+           
             handleClose={handleClose}
             handleShow={handleShow}
             handleLoginClose={handleLoginClose}
@@ -97,7 +82,7 @@ const handleMsgModalClose = () => setMsgModalShow(false);
         />
         <MsgButton variant="success" 
         handleMsgModalShow={handleMsgModalShow}>
-          Send Jeremiah a Message
+         
         </MsgButton>
         {contextMsg === "" ? null : (
           <Alert

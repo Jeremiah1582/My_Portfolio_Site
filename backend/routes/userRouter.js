@@ -4,7 +4,7 @@ const { authenticateToken } = require("../auth/authUser");
 
 
 router.post("/logIn", userController.logIn);
-router.get("/viewOnly/Jeremiah", userController.viewOnly);
+router.get("/defaultGetUser", userController.defaultGetUser);
 router.post("/registerNewUser", userController.registerNewUser )
 
 

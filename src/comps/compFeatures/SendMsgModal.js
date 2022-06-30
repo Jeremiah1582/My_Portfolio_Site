@@ -31,18 +31,20 @@ function SendMsgModal({
 
   return (
     <div>
-      <Modal show={msgModalShow} onHide={handleMsgModalClose}>
+      <Modal show={msgModalShow}  onHide={handleMsgModalClose}> 
+    
         <Modal.Header
           closeButton
           style={{ backgroundColor: "#76cc7a", color: "white" }}
         >
+          <ProfileImgSec />
         
-        <ProfileImgSec style={{height:"20px"}}/>
-          
-        
+      
           <Modal.Title>Send Jeremiah a WhatsApp message </Modal.Title>
+         
+          
         </Modal.Header>
-        <Form onSubmit={handleFormSubmit}>
+        <Form onSubmit={handleFormSubmit} >
           {msg !== "" ? <Alert variant="warning">{msg}</Alert> : ""}
           <Modal.Body id="msgModalBody">
             {/* Author */}

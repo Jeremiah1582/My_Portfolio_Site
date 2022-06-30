@@ -1,10 +1,9 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
-const {generateToken} = require("../auth/jwtTokens")
+const { generateToken } = require("../auth/jwtTokens");
 require("dotenv").config();
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
-
 
 const today = new Date().getDate();
 const month = new Date().getMonth() + 1;
@@ -17,98 +16,92 @@ const currentTime = Date();
 console.log(currentTime);
 
 //1 login Func
-
 exports.logIn = (req, res) => {
-// console.log(req.body.loginDetails);
-const email= req.body.loginDetails.email
-const password = req.body.loginDetails.password
+ 
+  const email = req.body.loginDetails.email;
+  const password = req.body.loginDetails.password;
 
-User.findOne({email:email}).then((result)=>{
-  const dbPassword = result.password
-  bcrypt.compare(password, dbPassword, (err, passMatch)=>{
-   if(passMatch ===true){
-     const userId =result._id
-  const userToken = generateToken(userId) //jwt comes from here
-    req.token = userToken; //present
-    //  if (req.token) {
-       
-       res.status(200).json({
-       auth:true, 
-       user:result,
-       msg: "Welcome", 
-       token: userToken })
-    //  }else {
-    //    console.log("token was not stored to req.session.token");
-    //  }
-   }else {
-      res.status(200).json({
-        auth: false,
-        user: "",
-        msg: "access denied",
-      });
-   }
+  User.findOne({ email: email }).then((result) => {
+    const dbPassword = result.password;
+    bcrypt.compare(password, dbPassword, (err, passMatch) => {
+      if (passMatch === true) {
+        const userId = result._id;
+        const userToken = generateToken(userId); //jwt comes from here
+        req.token = userToken; //present
+
+        res.status(200).json({
+          auth: true,
+          user: result,
+          msg: "Welcome",
+          token: userToken,
+        });
+      
+      } else {
+        res.status(200).json({
+          auth: false,
+          user: "",
+          msg: "access denied",
+        });
+      }
+    });
   });
-  ;
-})
 };
 //2 -----------------CREATE FUnctiONs-------------------------------
-  
+
 exports.registerNewUser = (req, res) => {
   const { email, password } = req.body.newUser;
 
-  bcrypt.hash(password, saltRounds, function(err, hashedPassword){
-  console.log(hashedPassword);
-  User.findOne({ email: email }, (errRes, docRes) => {
-    if (docRes) {
-      res.json({
-        msg: "this email already has an account",
-        forgotPassword: false,
-      });
-    } else if (errRes) {
-      res.json({ msg: "there was an error in the findOne function in reg func", errRes });
-    } else if (!errRes && !docRes && email && password) {
-      const newUser = new User({
-        email: email,
-        password: hashedPassword,
-      });
-      newUser.save((err, doc) => {
-        if (err) {
-          console.log("there was an error L:13 usercontroller", err);
-          res.status(501).json(err);
-          throw err;
-          //    console.log(err);
-        } else if (doc) {
-          res.status(200).json({ msg: "new user created successfully" });
-        } else {
-          res
-            .status(500)
-            .json({
+  bcrypt.hash(password, saltRounds, function (err, hashedPassword) {
+    console.log(hashedPassword);
+    User.findOne({ email: email }, (errRes, docRes) => {
+      if (docRes) {
+        res.json({
+          msg: "this email already has an account",
+          forgotPassword: false,
+        });
+      } else if (errRes) {
+        res.json({
+          msg: "there was an error in the findOne function in reg func",
+          errRes,
+        });
+      } else if (!errRes && !docRes && email && password) {
+        const newUser = new User({
+          email: email,
+          password: hashedPassword,
+        });
+        newUser.save((err, doc) => {
+          if (err) {
+            console.log("there was an error L:13 usercontroller", err);
+            res.status(501).json(err);
+            throw err;
+          } else if (doc) {
+            res.status(200).json({ msg: "new user created successfully" });
+          } else {
+            res.status(500).json({
               msg: "problem in the registerNewUser in the userController L:81",
             });
-        }
-      });
-    } 
-  });
-  
+          }
+        });
+      }
+    });
   });
 };
 
 // -------------------READ FUNCTIOns-------------------
 
-
-exports.viewOnly = async (req, res) => {
-  if (req.user) {
-    console.log(
-      "UController: this is req.user in readUser function...",
-      req.adminUser
-    );
-  }
-  console.log("Ucontroller: req.user is now ...", req.adminUser);
-  await User.findById("627a578b73b83221db777e18").then((result) => {
+exports.defaultGetUser = async (req, res) => {
+ console.log("DGU: function is being called ");
+  await User.findById("6284d203e313af05096598a3").then((result) => {
     if (!result) {
       console.log("there was an error retrieving document from database");
     } else if (result) {
-      // res.status(200).json({ msg: "from back readUser function!", result });
+      console.log(result);
+      res.status(200).json({
+        auth: false,
+        user: result,
+        msg: "you are viewing a default Profile",
+        token: null,
+      });
     } else {
       console.log("no err & no doc from the database");
     }
