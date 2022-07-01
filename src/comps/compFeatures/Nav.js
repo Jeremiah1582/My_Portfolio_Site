@@ -1,40 +1,88 @@
-import React, {useState, useContext} from 'react'
+import React, { useState, useContext } from "react";
 import { Modal, Button, Offcanvas, Navbar } from "react-bootstrap";
-import {
-  Outlet,
-  Link
-} from "react-router-dom";
-import LogoutButton from "./LogoutButton"
-import {UserContext} from "../../context/userContext"
+import { Outlet, Link } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
+import LogoutButton from "./LogoutButton";
 
+function Nav({ handleClose, handleShow, handleLoginClose, handleLoginShow }) {
+  const { isVerified, user, isAdmin } = useContext(UserContext);
 
+  const mobileNav = () => {
+    if (window.innerWidth <= 700) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const links = [
+    {
+      linkName: "Home",
+      to: "/",
+      className: "navLink",
+      adminView: false,
+    },
+    {
+      linkName: "Profile",
+      to: "/ProfilePage",
+      className: "navLink",
+      adminView: false,
+    },
+    {
+      linkName: "CV",
+      to: "/CVPage",
+      className: "navLink",
+      adminView: false,
+    },
+    {
+      linkName: "Experience",
+      to: "/ExperiencePage",
+      className: "navLink",
+      adminView: false,
+    },
+    {
+      linkName: "CodeStack",
+      to: "/CodeStackPage",
+      className: "navLink",
+      adminView: false,
+    },
+    {
+      linkName: "Edit User",
+      to: "/EditUserInfoPage",
+      className: "navLink",
+      adminView: true,
+    },
+    {
+      linkName: "Create User",
+      to: "#",
+      className: "navLink",
+      adminView: true,
+      function: handleShow,
+    },
+  ];
+  const unauthLinks = links.filter((link) => {
+    return link.adminView === false;
+  });
+  console.log(unauthLinks);
 
-
-function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
-  const {isVerified, user} = useContext(UserContext)
   return (
     <div id="navContainer">
       <span></span>
-      {/* <nav id="navBar"> */}
-      {/* {window.innerWidth < 700 ? ( */}
+
+      {isAdmin ? (
         <Navbar id="navBar">
-          <Link className="navLink" to="/">
-            Home
-          </Link>
-          <Link className="navLink" to="/ProfilePage">
-            Profile
-          </Link>
-          <Link className="navLink" to="/CVPage">
-            CV{" "}
-          </Link>
-          <Link className="navLink" to="/ExperiencePage">
-            {" "}
-            Experience
-          </Link>
-          <Link className="navLink" to="/CodeStackPage">
-            {" "}
-            Code Stack{" "}
-          </Link>
+          {links.map((link) => {
+            console.log(link);
+            // ADMIN Nav
+            return (
+              <Link
+                className={link.className}
+                to={link.to}
+                onClick={link.function ? link.function : ""}
+              >
+                {link.linkName}
+              </Link>
+            );
+          })}
           {isVerified ? (
             <Link className="navLink " to="#">
               {" "}
@@ -47,46 +95,31 @@ function Nav({ handleClose, handleShow, handleLoginClose , handleLoginShow}) {
             </Link>
           )}
         </Navbar>
-      {/* ) : (
-        <Navbar.Offcanvas id="navBar">
-        <Offcanvas.Body>
-          <Link className="navLink" to="/">
-            Home
-          </Link>
-          <Link className="navLink" to="/ProfilePage">
-            Profile
-          </Link>
-          <Link className="navLink" to="/CVPage">
-            CV{" "}
-          </Link>
-          <Link className="navLink" to="/ExperiencePage">
-            {" "}
-            Experience
-          </Link>
-          <Link className="navLink" to="/CodeStackPage">
-            {" "}
-            Code Stack{" "}
-          </Link>
-          {isVerified ? (
-            <Link className="navLink " to="#">
-              {" "}
-              <LogoutButton />{" "}
-            </Link>
-          ) : (
-            <Link className="navLink " to="#" onClick={handleLoginShow}>
-              {" "}
-              Login{" "}
-            </Link>
-          )}
+      ) : (
+        //UserNAV
+        <Navbar id="navBar">
+          {unauthLinks.map((link) => {
+            return (
+              <Link
+                className={link.className}
+                to={link.to}
+                onClick={link.function ? link.function : ""}
+              >
+                {link.linkName}
+              </Link>
+            );
+          })}
 
-        </Offcanvas.Body>
-          
-        </Navbar.Offcanvas>
-      )} */}
+          <Link className="navLink " to="#" onClick={handleLoginShow}>
+            {" "}
+            Login{" "}
+          </Link>
+        </Navbar>
+      )}
 
       <Outlet />
     </div>
   );
 }
 
-export default Nav
+export default Nav;

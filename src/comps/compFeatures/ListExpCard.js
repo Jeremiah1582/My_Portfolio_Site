@@ -8,9 +8,9 @@ import EditWrkExp from "./EditWrkExp"
 
 function ListExpCard() {
   const {user, isAdmin} = useContext(UserContext);
-  console.log(user);
-  const { workExperience } = user;
-  const [workExp, setWorkExp] = useState(workExperience);
+  
+  const  {workExperience}  = user;
+  console.log(workExperience);
   const [msg, setMsg] = useState("");
 
 const userId = user._id
@@ -33,6 +33,7 @@ const itemId = data._id;
 };
   return (
     <div  >
+    exp
     {msg!==''? <Alert variant='success'> {msg}</Alert>:''} 
     <div className="flexContainer">
 

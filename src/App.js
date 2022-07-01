@@ -1,6 +1,6 @@
 import React,{useState, useContext, useEffect  } from "react";
 import Nav from "./comps/compFeatures/Nav";
-import NavAdmin from "./comps/compFeatures/NavAdmin";
+
 import HomePage from "./comps/HomePage";
 import ProfilePage from "./comps/ProfilePage";
 import CodeStackPage from "./comps/CodeStackPage";
@@ -40,22 +40,14 @@ const handleMsgModalClose = () => setMsgModalShow(false);
   return (
     <BrowserRouter>
       <div className="App">
-        {isAdmin ? (
-          <NavAdmin
-           
-            handleClose={handleClose}
-            handleShow={handleShow}
-            handleLoginClose={handleLoginClose}
-            handleLoginShow={handleLoginShow}
-          />
-        ) : (
+        
           <Nav
             handleClose={handleClose}
             handleShow={handleShow}
             handleLoginClose={handleLoginClose}
             handleLoginShow={handleLoginShow}
           />
-        )}
+     
 
         <Routes>
           <Route exact path="/" element={<HomePage />} />
@@ -80,10 +72,10 @@ const handleMsgModalClose = () => setMsgModalShow(false);
           handleMsgModalShow={handleMsgModalShow}
           handleMsgModalClose={handleMsgModalClose}
         />
-        <MsgButton variant="success" 
-        handleMsgModalShow={handleMsgModalShow}>
-         
-        </MsgButton>
+        <MsgButton
+          variant="success"
+          handleMsgModalShow={handleMsgModalShow}
+        ></MsgButton>
         {contextMsg === "" ? null : (
           <Alert
             style={{
