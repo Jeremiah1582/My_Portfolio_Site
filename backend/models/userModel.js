@@ -87,6 +87,16 @@ const UserSchema = new Schema({
       responsibilities: String,
     },
   ],
+  messagesReceived: [
+    {
+      userId:{ type: Schema.Types.ObjectId, ref: "User" },
+      author:String,
+      email:String,
+      company: String,     
+      subject: String,
+      message:String,
+     },
+  ],
   projects: [
     {
       userId: { type: Schema.Types.ObjectId, ref: "User" },

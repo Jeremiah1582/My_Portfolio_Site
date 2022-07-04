@@ -6,6 +6,7 @@ const { authenticateToken } = require("../auth/authUser");
 router.post("/logIn", userController.logIn);
 router.get("/defaultGetUser", userController.defaultGetUser);
 router.post("/registerNewUser", userController.registerNewUser )
+router.post("/sendWhatsappMsg", userController.sendWhatsappMsg )
 
 
 

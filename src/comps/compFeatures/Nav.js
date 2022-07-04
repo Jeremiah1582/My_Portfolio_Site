@@ -3,7 +3,6 @@ import { Modal, Button, Offcanvas, Navbar } from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import LogoutButton from "./LogoutButton";
-
 function Nav({ handleClose, handleShow, handleLoginClose, handleLoginShow }) {
   const { isVerified, user, isAdmin } = useContext(UserContext);
 
@@ -69,34 +68,27 @@ function Nav({ handleClose, handleShow, handleLoginClose, handleLoginShow }) {
       <span></span>
 
       {isAdmin ? (
-        <Navbar id="navBar">
-          {links.map((link) => {
-            console.log(link);
-            // ADMIN Nav
-            return (
-              <Link
-                className={link.className}
-                to={link.to}
-                onClick={link.function ? link.function : ""}
-              >
-                {link.linkName}
-              </Link>
-            );
-          })}
-          {isVerified ? (
+          <Navbar id="navBar">
+            {links.map((link) => {
+              console.log(link);
+              // ADMIN Nav
+              return (
+                <Link
+                  className={link.className}
+                  to={link.to}
+                  onClick={link.function ? link.function : ""}
+                >
+                  {link.linkName}
+                </Link>
+              );
+            })}
             <Link className="navLink " to="#">
               {" "}
               <LogoutButton />{" "}
             </Link>
-          ) : (
-            <Link className="navLink " to="#" onClick={handleLoginShow}>
-              {" "}
-              Login{" "}
-            </Link>
-          )}
-        </Navbar>
-      ) : (
-        //UserNAV
+          </Navbar>
+        
+      ) : ( //UserNAV
         <Navbar id="navBar">
           {unauthLinks.map((link) => {
             return (

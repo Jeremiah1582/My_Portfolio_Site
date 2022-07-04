@@ -25,7 +25,11 @@ function SendMsgModal({
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    console.log("submit button was pressed");
+    axios.post("http://localhost:5001/user/sendWhatsappMsg", {msgDetails})
+    .then(result=>{
+      console.log(result);
+    });
+   
 
   };
 

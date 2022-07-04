@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 const { generateToken } = require("../auth/jwtTokens");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
+const me = "6284d203e313af05096598a3"
+
+
 const saltRounds = 10;
 
 const today = new Date().getDate();
@@ -91,7 +94,7 @@ exports.registerNewUser = (req, res) => {
 
 exports.defaultGetUser = async (req, res) => {
  console.log("DGU: function is being called ");
-  await User.findById("6284d203e313af05096598a3").then((result) => {
+  await User.findById(me).then((result) => {
     if (!result) {
       console.log("there was an error retrieving document from database");
     } else if (result) {
@@ -128,18 +131,33 @@ exports.findAdmins = (req, res) => {
       },
     }
   );
-}; //function is untested
+}; 
+// SendEWhatapp Msg
+exports.sendWhatsappMsg=(req,res)=>{
+const accountSid = process.env.SENDGRID_ACCOUNT_SID;
+const authToken = process.env.SENDGRID_AUTH_TOKEN;
+const client = require("twilio")(accountSid, authToken);
 
-// -----------Example Function-------------
-// TEST: $elemMatch to find specific object in nested array------
-// User.find(
-//     { _id: userId },
-//     { workExperience:{ $elemMatch: {_id: itemId}}},(err, result) => {
-//       if (err) {
-//         console.log("this is the err from wrkexp update...",err);
-//       }else{
-//          console.log(" User.find wrkexp...", result[0])
-//       }
-//    ;
-//   }
-//   );---------------------------------------
+
+const {message, author, email , company}=req.body.msgDetails;
+client.messages
+  .create({
+    body: `
+    From: ${author} 
+    Company Name: ${company}.
+    Message: ${message}
+    Contact email: ${email}`,
+
+    from: "whatsapp:+14155238886",
+    to: "whatsapp:+491782822679",
+  })
+  .then((message) => {
+    User.findOneAndUpdate(
+      { _id: me },
+      { $set: { messagesReceived: req.body.msgDetails } }
+    ).then(console.log("message has been saved to Jeremiah's message list"));
+    res.status(200).json({msg:" your message wass successfully sent"})
+  })
+  .done();
+
+}
