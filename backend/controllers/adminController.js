@@ -125,8 +125,9 @@ exports.deleteUser = (req, res) => {
 
 //5 REMOVE Document-------------------
 exports.removeWorkExp = async (req, res) => {
+  console.log("removeWrk Exp...",req.body);
   User.findByIdAndUpdate(
-    req.body,
+    req.body.userId,
     { $pull: { workExperience: { _id: req.body.itemId } } },
     async (err, result) => {
       console.log("item id", req.body);

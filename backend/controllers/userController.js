@@ -93,7 +93,7 @@ exports.registerNewUser = (req, res) => {
 // -------------------READ FUNCTIOns-------------------
 
 exports.defaultGetUser = async (req, res) => {
- console.log("DGU: function is being called ");
+ console.log("DefaultGetUser func: is being called ");
   await User.findById(me).then((result) => {
     if (!result) {
       console.log("there was an error retrieving document from database");
@@ -154,7 +154,7 @@ client.messages
   .then((message) => {
     User.findOneAndUpdate(
       { _id: me },
-      { $set: { messagesReceived: req.body.msgDetails } }
+      { $push: { messagesReceived: req.body.msgDetails } }
     ).then(console.log("message has been saved to Jeremiah's message list"));
     res.status(200).json({msg:" your message wass successfully sent"})
   })

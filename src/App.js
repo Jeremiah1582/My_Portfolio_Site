@@ -9,6 +9,7 @@ import CVPage from "./comps/CVPage";
 import CreateProfileModal from "./comps/compFeatures/CreateProfileModal";
 import LoginModal from "./comps/compFeatures/LoginModal"
 import EditPage from "./comps/EditPage";
+import MessagesPage from "./comps/MessagesPage"
 import SendMsgModal from "./comps/compFeatures/SendMsgModal"
 import MsgButton from "./comps/compFeatures/MsgButton"
 import {BrowserRouter,
@@ -56,6 +57,7 @@ const handleMsgModalClose = () => setMsgModalShow(false);
           <Route path="/ExperiencePage" element={<ExperiencePage />} />
           <Route path="/CVPage" element={<CVPage />} />
           <Route path="/EditUserInfoPage" element={<EditPage />} />
+          <Route path="/MessagesPage" element={<MessagesPage />} />
         </Routes>
         <CreateProfileModal
           show={show}

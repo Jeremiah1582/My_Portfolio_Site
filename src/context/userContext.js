@@ -49,7 +49,7 @@ if (isVerified=== true) {
     window.location.href= "/"
     setIsVerified(false);
     setContextMsg("you have been logged out")
-  }, 10000 * 6);
+  }, 300000 * 5);//5mins //to avoid err, JWT token must not exceed this time in the back end 
 }
 
 console.log("isVerified is...",isVerified);

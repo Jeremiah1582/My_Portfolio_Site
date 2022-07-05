@@ -22,7 +22,7 @@ const itemId = data._id;
     .post("http://localhost:5001/admin/removeWorkExp", { itemId, userId },
           {
             headers: {
-              authorization: localStorage.getItem("currentToken"),
+              authorization: "Bearer " + localStorage.getItem("currentToken"),
             },
           }
           )
@@ -39,8 +39,7 @@ const itemId = data._id;
 
       {workExperience.map((data) => {
           console.log(data)
-
-          {data._id? (
+return ( data._id? (
           <div key={data._id} id={data._id}>
             <Card className="section" style={{ width: "18rem" }}>
               <Figure>
@@ -80,7 +79,8 @@ const itemId = data._id;
         ):(<h1>no work experience listed </h1>)
         
       
-        }}
+        )
+         }
       )}
     </div>
     </div>

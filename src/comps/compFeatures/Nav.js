@@ -1,8 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Modal, Button, Offcanvas, Navbar } from "react-bootstrap";
+import { Modal, Button, Offcanvas, Navbar, Badge } from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import LogoutButton from "./LogoutButton";
+import MessagePage from "../MessagesPage"
+
+
 function Nav({ handleClose, handleShow, handleLoginClose, handleLoginShow }) {
   const { isVerified, user, isAdmin } = useContext(UserContext);
 
@@ -51,6 +54,14 @@ function Nav({ handleClose, handleShow, handleLoginClose, handleLoginShow }) {
       adminView: true,
     },
     {
+      linkName: "Messages",
+      to: "/MessagesPage",
+      className: "navLink",
+      adminView: true,
+      quantifiable: true 
+     
+    },
+    {
       linkName: "Create User",
       to: "#",
       className: "navLink",
@@ -79,6 +90,9 @@ function Nav({ handleClose, handleShow, handleLoginClose, handleLoginShow }) {
                   onClick={link.function ? link.function : ""}
                 >
                   {link.linkName}
+                  {link.quantifiable ? (
+                    <Badge bg="danger">{user.messagesReceived.length}</Badge>
+                  ) : null}
                 </Link>
               );
             })}

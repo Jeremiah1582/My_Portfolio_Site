@@ -2,11 +2,8 @@ const mongoose = require("mongoose");
 // const encrypt = require("mongoose-encryption");
 const Schema = mongoose.Schema;
 
-
-const userSignupDate = new Date()
-// console.log(userSignupDate);
-
-
+const creationDate = new Date();
+console.log(creationDate);
 
 const UserSchema = new Schema({
   accountType: {
@@ -69,7 +66,7 @@ const UserSchema = new Schema({
   },
   signupDate: {
     type: String,
-    default: userSignupDate,
+    default: creationDate,
   },
   aboutUser: {
     type: String,
@@ -89,32 +86,35 @@ const UserSchema = new Schema({
   ],
   messagesReceived: [
     {
-      userId:{ type: Schema.Types.ObjectId, ref: "User" },
-      author:String,
-      email:String,
-      company: String,     
+      userId: { type: Schema.Types.ObjectId, ref: "User" },
+      author: String,
+      email: String,
+      company: String,
       subject: String,
-      message:String,
-     },
+      message: String,
+      dateReceived: {
+        type: String,
+        default: creationDate,
+      },
+    },
   ],
+
   projects: [
     {
       userId: { type: Schema.Types.ObjectId, ref: "User" },
-      projectLink: String, 
-      projectImg:String,
-      projectName:String, 
-      projectDescription:String,    
-      projectStatus: String, 
-      dateOfCompletion: Date, 
-            
+      projectLink: String,
+      projectImg: String,
+      projectName: String,
+      projectDescription: String,
+      projectStatus: String,
+      dateOfCompletion: Date,
     },
   ],
 });
 
 // encryption:
-// UserSchema.plugin(encrypt, { secret: process.env.MONGOOSE_SECRET , encryptedFields: ["password"]}); // password field encrypted here at the schema. //hashed the password instead with md5() 
+// UserSchema.plugin(encrypt, { secret: process.env.MONGOOSE_SECRET , encryptedFields: ["password"]}); // password field encrypted here at the schema. //hashed the password instead with md5()
 
-const User = mongoose.model("User", UserSchema)
+const User = mongoose.model("User", UserSchema);
 
-module.exports= User 
-
+module.exports = User;

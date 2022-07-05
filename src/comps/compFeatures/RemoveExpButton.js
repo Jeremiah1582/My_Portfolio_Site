@@ -4,10 +4,10 @@ import { Card, Button, Figure } from "react-bootstrap";
 import axios from "axios";
 
 function RemoveExpButton(props) {
-  const user = useContext(UserContext);
+  const {user} = useContext(UserContext);
   
   const speak =()=>{
-      console.log("i can speak");
+      console.log("remove button licked ");
   }
 
   return (
