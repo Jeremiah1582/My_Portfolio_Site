@@ -89,7 +89,8 @@ function Nav({ handleClose, handleShow, handleLoginClose, handleLoginShow }) {
                   to={link.to}
                   onClick={link.function ? link.function : ""}
                 >
-                  {link.linkName}
+                  {link.linkName} {" "}
+
                   {link.quantifiable ? (
                     <Badge bg="danger">{user.messagesReceived.length}</Badge>
                   ) : null}

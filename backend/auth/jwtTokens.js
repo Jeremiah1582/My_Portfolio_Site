@@ -4,7 +4,7 @@ const refreshSecret = process.env.REFRESH_TOKEN_SECRET;
 
 exports.generateToken = (userId) => {
 
-  return jwt.sign({userId}, secret, { expiresIn: "300s" });
+  return jwt.sign({ userId }, secret, { expiresIn: 300000 * 5 });
  
 };
 

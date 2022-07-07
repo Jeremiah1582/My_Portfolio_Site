@@ -3,15 +3,16 @@ import { UserContext } from "../context/userContext";
 import { Card, Button, Figure, Alert } from "react-bootstrap";
 
 function MessagesPage() {
-  const { user, isVerified, isAdmin } = useContext(UserContext);
-  const inBox = user.messagesReceived;
-  console.log(inBox);
+  const { user, isVerified, isAdmin, getUser } = useContext(UserContext);
+//   const inBox = ;
+//   console.log(inBox);
   return (
     <div>
       
       {/* {msg !== "" ? <Alert variant="success"> {msg}</Alert> : ""} */}
       <div className="flexContainer">
-        {inBox.map((data) => {
+        { user.messagesReceived?.map((data) =>{
+           
           console.log(data);
           return data._id ? (
             <div key={data._id} id={data._id}>
@@ -19,11 +20,11 @@ function MessagesPage() {
                
                 <Card.Body>
                   <Card.Title href="#">
-                    you received a message from {data.company.toUpperCase()}
+                   Message from: {data.company.toUpperCase()}
                   </Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">
-                   received: {data.dateReceived}
-                   from {data.author} <br />
+                   received: {data.dateReceived.slice(0,22)} <br />
+                   sender: {data.author} <br />
                     
                   </Card.Subtitle>
                   {data.position}

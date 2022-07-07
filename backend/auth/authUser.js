@@ -14,9 +14,9 @@ if (typeof bearerHeader !== "undefined") {
       //  console.log("jwt.verify return is...", payload);
        if (!err && !payload) {
          console.log("authUser: !err && !payload");
-         console.log("403: unauthorised access");
+         console.log("403: authUser L:17: unauthorised access");
        } else if (err) {
-         console.log("authUser: err", err);
+         console.log("authUser L:19: err", err);
       
          res.status(403).send(err);
        } else if (payload) {
