@@ -47,7 +47,7 @@ export const codingLanguages = [
   },
   {
     name: "MongoDB Atlas",
-    icon: "https://g.foolcdn.com/editorial/images/635884/atlas_icon_blk_stackedlarge.png",
+    icon: "https://www.svgviewer.dev/static-svgs/34566/mongodb.svg",
     type: "database, NoSQL database program",
     WrittenIn: "C++, JavaScript, Python",
     info: "MongoDB Atlas is a fully-managed cloud database that handles all the complexity of deploying, managing, and healing your deployments on the cloud service provider of your choice (AWS , Azure, and GCP). ",

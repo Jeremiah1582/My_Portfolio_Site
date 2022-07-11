@@ -1,16 +1,14 @@
-
 // variables--------------------
-$textC:pink;
+$textC: pink;
 $section_height: 250px;
 $section_width: 393px;
 $backgroundIndex: 0;
 $foregroundIndex: 2;
 $middlegroundIndex: 1;
 $difColor: rgb(9, 199, 126);
-$nthChildOddColor:  rgb(255, 255, 255);
-$nthChildOddColorOpacity:  rgba(255, 255, 255, 0.892);
+$nthChildOddColor: rgb(255, 255, 255);
+$nthChildOddColorOpacity: rgba(255, 255, 255, 0.892);
 $nthChildEvenColor: rgba(218, 218, 218, 0.946);
-
 
 // --------------------
 .App {
@@ -18,115 +16,174 @@ $nthChildEvenColor: rgba(218, 218, 218, 0.946);
   background-color: whitesmoke;
   height: 10%;
   width: 100%;
-
 }
-#sendMsgButton{
-  position:fixed;
+#sendMsgButton {
+  position: fixed;
   right: 3%;
   bottom: 3%;
   opacity: 0.7;
-  height:15%;
+  height: 15%;
   z-index: $foregroundIndex;
-  &:hover{
+  &:hover {
     opacity: 1;
     transform: scale(1.2);
     transition-duration: 1s;
   }
 }
-#msgModalBody{
+#msgModalBody {
   background-image: url("../images/whatsappBackground-Classic.png");
 }
-.msgModalInput input{
-background-color: rgba(209, 201, 201, 0.507);
+.msgModalInput input {
+  background-color: rgba(209, 201, 201, 0.507);
 }
-#navContainer{
-width: 100%;  
-z-index: $foregroundIndex;
-display: flex;
-justify-content: flex-end;
-background-color: rgba(72, 72, 72, 0.102) ;
+#navContainer {
+  width: 100%;
+  z-index: $foregroundIndex;
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgba(72, 72, 72, 0.102);
 
-  #navBar{
+  #navBar {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     padding: 1%;
     z-index: $foregroundIndex;
     overflow: hidden;
-   
-   .navLink{
+
+    .navLink {
       text-decoration: none;
       color: rgb(175, 5, 5);
-      &:hover{
+      &:hover {
         color: $difColor;
       }
     }
   }
 }
 
-.flexContainer{
-display: flex;
-justify-content: space-evenly;
-flex-wrap: wrap;
-width: 100%;
-min-width: 393px;
-
+.flexContainer {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 393px;
 }
 
-.imgContainerProfile{
-height: $section_height;
-width: $section_width;
-// display: flex;
-// justify-content: center;
+.imgContainerProfile {
+  height: $section_height;
+  width: $section_width;
+
 }
-.backgroundImage{ 
+.backgroundImage {
   width: 100%;
   height: $section_height;
-  // z-index: $backgroundIndex;
-  image-resolution:inherit;
-  clip-path: ellipse(76% 68% at 50% 15%);
-   position: fixed;
-  background-size:cover;
-  background-repeat: no-repeat;
  
+  image-resolution: inherit;
+  clip-path: ellipse(76% 68% at 50% 15%);
+  position: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+
   animation: drop_down 3s;
   animation-fill-mode: forwards;
 
   @keyframes drop_down {
-  from { top: -400px;}
-  to {top: 0px;
-  background-image: url("../images/the-matterhorn-as-seen-from-the-lauterbrunnen-valley-digitally-stitched-by-dominic-kamp.jpg");
+    from {
+      top: -400px;
+    }
+    to {
+      top: 0px;
+      background-image: url("../images/the-matterhorn-as-seen-from-the-lauterbrunnen-valley-digitally-stitched-by-dominic-kamp.jpg");
     }
   }
 }
-.profilePageContainer{
+.profilePageContainer {
   display: grid;
   width: 100%;
   height: 100%;
 }
 
-  .profilePic{
-  
-    max-height: 175px;
-    border-radius: 50%;
-    background-color: rgb(128, 128, 128);
-    box-shadow: 2px 2px 4px #3f3f3f83 ;
-    z-index: $middlegroundIndex;
-    left: 50%;
-    transform: translate(-50%);
-   ;
-    &:hover{
-         transform: scale(1.2); 
-        //  transform: translate(-60%);
-         transition-duration: 1s;
-         cursor: pointer;
-    
-    }
+.profilePic {
+  max-height: 175px;
+  border-radius: 50%;
+  background-color: rgb(128, 128, 128);
+  box-shadow: 2px 2px 4px #3f3f3f83;
+  z-index: $middlegroundIndex;
+  left: 50%;
+  transform: translate(-50%);
+  &:hover {
+    transform: scale(1.2);
+    transition-duration: 1s;
+    cursor: pointer;
+  }
+}
+// CARD slide Effects
+.myCard {
+  position: block;
+  margin: 20px;
+  transition: 2.5s;
+  height: 300px;
+  width: 300px;
+  border: none;
+  z-index: 5;
+
+  &:hover {
+    margin-bottom: 400px;
+    transition: 0.9s;
   }
 
+  .icon {
+    height: 300px;
+    z-index: $foregroundIndex;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  .card-body {
+    background: #d8d6d6;
+    z-index: $backgroundIndex;
+    position: relative;
+    border-radius: 5px;
+  }
+  .slide {
+    width: inherit;
+    height: inherit;
+    transition: 0.5s;
+  }
 
+  .slide.slide2 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.8s;
+    transform: translateY(-100%);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    .content {
+      visibility: hidden;
+      transition: 0.1s;
+    }
+  }
+  &:hover .slide.slide2 {
+    transform: translateY(20px);
+    display: block;
+    z-index: $foregroundIndex;
+    transition-delay: 0.5s;
+    .content {
+      transition-delay: 0.8s;
+      visibility: visible;
+    }
 
-.section{
+    &:hover {
+      margin-bottom: 400px;
+    }
+  }
+}
+
+.section {
   min-height: 200px;
   height: max-content;
   min-width: 340px;
@@ -135,163 +192,154 @@ width: $section_width;
   margin: 35px;
   z-index: 1;
 }
+ 
+.contentSec{
+height:75vh;
 
-.list{
-  :nth-child(even){
-    background-color:$nthChildEvenColor;
+}
+
+.list {
+  :nth-child(even) {
+    background-color: $nthChildEvenColor;
   }
 }
-.aboutSectionContainer{
+.aboutSectionContainer {
   z-index: $foregroundIndex;
   min-height: 200px;
   height: 40%;
   min-width: 340px;
   margin-bottom: 10px;
-  border-radius: 5px ;
+  border-radius: 5px;
   background-color: $nthChildOddColorOpacity;
 
-  h5{
-
+  h5 {
   }
-  p{
-
+  p {
   }
 }
 
-.infoSec{
+.infoSec {
   padding: 5px;
-   :nth-child(odd){
+  :nth-child(odd) {
     background-color: $nthChildOddColor;
-   }
   }
+}
 
-  .footer{
-//  position: absolute;
- bottom: 0;
+.footer {
+  //  position: absolute;
+  bottom: 0;
   width: 100%;
   min-height: 140px;
   height: 200px;
-  background:  
-      linear-gradient(
-      rgba(7, 7, 7, 0.186), 
-      rgba(9, 9, 9, 0.308)
-    ),;
+  background: linear-gradient(rgba(7, 7, 7, 0.186), rgba(9, 9, 9, 0.308));
+}
 
-  }
+// EditPage Styling
 
-  // EditPage Styling 
+Form .flexContainer {
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  border: black dotted;
+  display: flex;
+}
 
- Form .flexContainer{
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    border: black dotted;
-    display: flex;
-
-  }
-
-
-.homeHeaderContainer{
+.homeHeaderContainer {
   position: absolute;
   top: 0;
   // display: flex;
-  background-image: 
-      linear-gradient(
-      rgba(9, 9, 9, 0.655),
-      rgba(7, 7, 7, 0.186) 
-      
-    ),
+  background-image: linear-gradient(rgba(9, 9, 9, 0.655), rgba(7, 7, 7, 0.186)),
     /* header image */
-    url("../images/42174058_1133626796762326_7214894932375371776_n.jpg");
+      url("../images/42174058_1133626796762326_7214894932375371776_n.jpg");
 
-background-position:center;
-min-height: 100vh;
-min-width: 100vw;
-border: solid black thin;
-background-size: cover;
-background-repeat: no-repeat;
-z-index: $backgroundIndex;
+  background-position: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  border: solid black thin;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: $backgroundIndex;
 }
-.headerContainer{
+.headerContainer {
   position: absolute;
   top: 0;
   padding: 20px;
-  // display: flex;
-  background-image: 
-      linear-gradient(
-      rgba(7, 7, 7, 0.722), 
-      rgba(9, 9, 9, 0.597)
-    ),
+  background-image: linear-gradient(rgba(7, 7, 7, 0.722), rgba(9, 9, 9, 0.597)),
     /* header image */
-    url("../images/the-matterhorn-as-seen-from-the-lauterbrunnen-valley-digitally-stitched-by-dominic-kamp.jpg");
-background-attachment: fixed;
-background-position: bottom;
-min-height: 100vh;
-min-width: 100vw;
-border: solid black thin;
-background-size: cover;
-background-repeat: no-repeat;
-z-index: $backgroundIndex;
+      url("../images/the-matterhorn-as-seen-from-the-lauterbrunnen-valley-digitally-stitched-by-dominic-kamp.jpg");
+  background-attachment: fixed;
+  background-position: bottom;
+  min-height: 100vh;
+  min-width: 100vw;
+  border: solid black thin;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: $backgroundIndex;
 }
-.headerText1{
-text-align: center;
-top: 50%;
-left: 50%;
-transform: translate(-50%);
-position: absolute;
+.headerText1 {
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  position: absolute;
 
-color: whitesmoke;
-// z-index: $foregroundIndex;
-animation: drop_down 3.5s ;
+  color: whitesmoke;
+  animation: drop_down 3.5s;
 }
-.signature{
-text-align: center;
-margin-top: 5%;
-top: 65%;
-left: 50%;
-transform: translate(-50%);
-color: whitesmoke;
-font-size: "13px";
-position: absolute;
+.signature {
+  text-align: center;
+  margin-top: 5%;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%);
+  color: whitesmoke;
+  font-size: "13px";
+  position: absolute;
   animation: pull_up 5s;
 }
 
-  @keyframes drop_down {
-  from { top: -10%}
-  to {top: 50%}}
+@keyframes drop_down {
+  from {
+    top: -10%;
+  }
+  to {
+    top: 50%;
+  }
+}
 
-  @keyframes pull_up {
-  from { top: 110%}
-  to {top: 65%}}
+@keyframes pull_up {
+  from {
+    top: 110%;
+  }
+  to {
+    top: 65%;
+  }
+}
 
 @media only screen and (min-width: 700px) {
-#navContainer{
-width: 100%;  
-z-index: $foregroundIndex;
-display: flex;
-justify-content: flex-end;
-// background-color: rgba(72, 72, 72, 0.102) ;
-
-  #navBar{
+  #navContainer {
     width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    padding: 1%;
     z-index: $foregroundIndex;
-    overflow: hidden;
-   
-   .navLink{
-      text-decoration: none;
-      color: #ffff;
-      &:hover{
-        color: $difColor;
+    display: flex;
+    justify-content: flex-end;
+
+    #navBar {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      padding: 1%;
+      z-index: $foregroundIndex;
+      overflow: hidden;
+
+      .navLink {
+        text-decoration: none;
+        color: #ffff;
+        &:hover {
+          color: $difColor;
+        }
       }
     }
   }
-  
-}
 }
 
-  
-
-  @import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
