@@ -3,7 +3,10 @@ const jwt = require("jsonwebtoken");
 const { generateToken } = require("../auth/jwtTokens");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
-const me = "6284d203e313af05096598a3"
+const me = "6284d203e313af05096598a3";
+const multer = require("multer");
+const upload = multer({ dest: 'uploads/' })
+const ImageModel = require("../models/imgModel")
 
 
 const saltRounds = 10;
@@ -93,12 +96,10 @@ exports.registerNewUser = (req, res) => {
 // -------------------READ FUNCTIOns-------------------
 
 exports.defaultGetUser = async (req, res) => {
- console.log("DefaultGetUser func: is being called ");
   await User.findById(me).then((result) => {
     if (!result) {
       console.log("there was an error retrieving document from database");
     } else if (result) {
-      console.log(result);
       res.status(200).json({
         auth: false,
         user: result,
@@ -132,7 +133,7 @@ exports.findAdmins = (req, res) => {
     }
   );
 }; 
-// SendEWhatapp Msg
+//--------------------- SendEWhatapp Msg-------------------
 exports.sendWhatsappMsg=(req,res)=>{
 const accountSid = process.env.SENDGRID_ACCOUNT_SID;
 const authToken = process.env.SENDGRID_AUTH_TOKEN;
@@ -161,3 +162,36 @@ client.messages
   .done();
 
 }
+
+// //  Storage uploadCV function
+//   const FileStorage = multer.diskStorage({
+//     destination: function (req, file, cb){
+//       cb(null, "../uploads");
+//     },
+//     filename:function(req,file, cb){
+    
+//     }
+//   });
+//   const uploadedFiles = multer({
+//     storage: FileStorage,
+//   }).single("testImage");
+// // UploadFiles---------------
+
+// exports.uploadCV=(req,res,)=>{ // Request users email address first, then send CV to email address.
+// console.log(req.file);
+
+//     const newImage = new ImageModel ({
+//       name:req.body.name, 
+//       image: {
+//         data: req.file.name,
+//         contentType: 'image/jpg'
+//       }
+//     })
+//     newImage.save().then(()=>{
+//       res.send("successful upload").catch( 
+//         console.log("file did not save")
+//       )
+//     })
+// }
+
+

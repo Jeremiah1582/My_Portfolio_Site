@@ -110,6 +110,25 @@ const UserSchema = new Schema({
       dateOfCompletion: Date,
     },
   ],
+  files:[{
+    CVs: [{
+      fileName:String, 
+      file:String
+    }],
+    references:[{
+      referenceName:String, 
+      file:String
+    }],
+    qualifications:[{
+      qualificationName:String, 
+      institutionName:String, 
+      file:String
+    }],
+    profilePics:{
+      name: String,
+      image: {data:Buffer, contentType:String}
+    }
+  }]
 });
 
 // encryption:

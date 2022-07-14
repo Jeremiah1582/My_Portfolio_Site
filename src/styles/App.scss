@@ -182,7 +182,7 @@ $nthChildEvenColor: rgba(218, 218, 218, 0.946);
     }
   }
 }
-
+// ---sections------------
 .section {
   min-height: 200px;
   height: max-content;
@@ -193,10 +193,25 @@ $nthChildEvenColor: rgba(218, 218, 218, 0.946);
   z-index: 1;
 }
  
-.contentSec{
-height:75vh;
+.largeContentSec{
 
+display: flex;
+justify-content: space-evenly;
+contain: content;
+.children{
+    top: 50%;
+    font-size: 40px;
+    position: absolute;
 }
+.imgContent{
+  width:50%;
+  height: 80%;
+.mainImage{
+  max-height: 400px;
+}
+}
+}
+
 
 .list {
   :nth-child(even) {

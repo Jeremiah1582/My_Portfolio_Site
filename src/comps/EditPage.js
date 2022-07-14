@@ -3,6 +3,7 @@ import { Form, Button, InputGroup, Alert } from "react-bootstrap";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
 import ExperienceModal from "./compFeatures/AddExperienceModal";
+import UploadFile from "./compFeatures/UploadFile";
 
 
  function EditPage() {
@@ -42,6 +43,7 @@ if (isAdmin===true) {
   return (
     <div>
       <ExperienceModal />
+      <UploadFile/>
       <div>
         <Form onSubmit={handleSubmitChange} className="flexContainer">
           {/* first name */}

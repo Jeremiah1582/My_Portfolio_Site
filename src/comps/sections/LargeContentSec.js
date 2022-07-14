@@ -7,13 +7,13 @@ const [show, setShow] = useState(false)
     const showModal= ()=>{setShow(true)}
 
   return (
-    <div className="contentSec">
+    <div className="largeContentSec">
       <div className="children">{children}</div>
 
       <div>
         {image ? (
-          <div>
-            <img onClick={showModal} style={{ height: "400px" }} src={image} />
+          <div className="imgContent">
+            <img className="mainImage" onClick={showModal} src={image} />
             <Modal
               show={show}
               fullscreen={fullscreen}
@@ -22,9 +22,7 @@ const [show, setShow] = useState(false)
               <Modal.Header closeButton>
                 <Modal.Title>{children}</Modal.Title>
               </Modal.Header>
-              <Modal.Body
-              style={{display:"flex", 
-              justifyContent:"center"}}>
+              <Modal.Body style={{ display: "flex", justifyContent: "center" }}>
                 <img
                   className="img1"
                   style={{ height: "200%" }}

@@ -12,12 +12,10 @@ const currentTime = Date();
 
 // READ---------------------------
 exports.getUser = async (req, res) => {
-  console.log("getUser func. req.session is...", req.session);
   const userId = await req.session.jwtPayload.userId;
   const sessToken = await req.session.token;
   try {
     User.findById(userId).then((user) => {
-      console.log("getUser func: user is...", user);
       if (!user) {
         res.sendStatus(401);
       }

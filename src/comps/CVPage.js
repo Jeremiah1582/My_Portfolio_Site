@@ -6,7 +6,6 @@ function CVPage() {
   return <div className="flexContainer">
   
   <LargeContentSec 
-  className="img1"
   image={Image1}> 
   Web Dev CV  
   </LargeContentSec>
