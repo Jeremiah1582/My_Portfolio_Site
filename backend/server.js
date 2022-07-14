@@ -64,7 +64,7 @@ const fileStorageEngine = multer.diskStorage({
 });
 
 // ---multer file upload destination
-const upload = multer({ dest: "./uploads" });
+const upload = multer({ storage: fileStorageEngine });
 
 // Routes
 app.use("/", indexRoutes);

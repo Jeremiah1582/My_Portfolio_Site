@@ -3,15 +3,17 @@ import axios from "axios"
 import {Button, Form} from "react-bootstrap"
 
 function UploadFile() {
+ 
+
     const [file, setFile] = useState({
-      fileName: "uploaded_file",
       file: null,
     });
 
     const handleInput =(e)=>{
         e.preventDefault()
-        setFile({...file, file:e.target.files[0]});
+        setFile({ ...file, file: e.target.files[0] });
      console.log(file);
+
    
    
     }
@@ -19,33 +21,25 @@ const submitUpload= async (e)=>{
     e.preventDefault()  
     console.log(e);
 const formData = new FormData();
-    formData.append("fileName", file.fileName)
-    formData.append("file", file.file)
-
-const config = {
-        headers:{
-            accept:'application/json',
-           'content-type': 'multipart/form-data'
-        }
-    }
+    formData.append("uploaded_file", file.file);
 
 
     console.log("upload submit pressed frontend " , formData);
     await axios
-        .post("http://localhost:5001/upload", formData,  
-        {headers:{
-            accept:'application/json',
-           'content-type': 'multipart/form-data'
-        }} )
-        .then((res)=>{
-                console.log(res);
-        });
+      .post("http://localhost:5001/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
 }
 
   return (
     <div>
       <Form
-        onSubmit={(e) => submitUpload(e)}
+        onSubmit={submitUpload}
         action="http://localhost:5001/upload"
         method="post"
         single
